@@ -9,36 +9,38 @@ import {
 } from "./store";
 
 export interface MusicAppState {
-  currentUser: {
+  currentUserState: {
     firstName: string;
     lastName: string;
     userID: string;
     password: string;
     id: { timestamp: number | null; date: number | null };
   };
+  searchInputState: string;
 }
 
 const initialState: MusicAppState = {
-  currentUser: {
+  currentUserState: {
     firstName: "",
     lastName: "",
     userID: "",
     password: "",
     id: { timestamp: null, date: null },
   },
+  searchInputState: "",
 };
 
 export const musicAppSlice = createSlice({
   name: "musicApp",
   initialState,
   reducers: {
-    setCurrentUser: (state, action) => {
+    setCurrentUserState: (state, action) => {
       console.log("action", action);
       console.log("action.payload", action.payload);
-      state.currentUser = { ...state.currentUser, ...action.payload };
+      state.currentUserState = { ...state.currentUserState, ...action.payload };
     },
-    resetCurrentUser: (state) => {
-      state.currentUser = {
+    resetCurrentUserState: (state) => {
+      state.currentUserState = {
         firstName: "",
         lastName: "",
         userID: "",
@@ -46,10 +48,14 @@ export const musicAppSlice = createSlice({
         id: { timestamp: null, date: null },
       };
     },
+    setSearchInputState: (state, action) => {
+      state.currentUserState = action.payload;
+    },
   },
 });
 
-export const { setCurrentUser, resetCurrentUser } = musicAppSlice.actions;
+export const { setCurrentUserState, resetCurrentUserState, setSearchInputState } =
+  musicAppSlice.actions;
 
 export const selectMusicApp = (state: RootState) => state.musicApp;
 

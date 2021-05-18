@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-const AddSongToFavoritesButton = () => {
+const AddToFavoritesButton = () => {
   const saveToFavorites = () => {
     // Perform call to Database here.  Save the Currently Selected song
     // to the current user's favorites.
@@ -24,4 +24,4 @@ const AddSongToFavoritesButton = () => {
   );
 };
 
-export default AddSongToFavoritesButton;
+export default AddToFavoritesButton;

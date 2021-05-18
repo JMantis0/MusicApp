@@ -1,5 +1,4 @@
 import React from "react";
-import { Counter } from "./features/counter/Counter";
 import "./MusicApp.module.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserHome from "./pages/UserHome";
