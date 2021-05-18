@@ -1,0 +1,74 @@
+[33mcommit 9ffefd176024417b8b45fd99636eb783676a1fc4[m[33m ([m[1;36mHEAD -> [m[1;32mrepairing_project_structure[m[33m, [m[1;31morigin/repairing_project_structure[m[33m)[m
+Author: JMan <60026263+JMantis0@users.noreply.github.com>
+Date:   Tue May 18 14:37:53 2021 -0700
+
+    ghosts
+
+[33mcommit 879c9148fae9765d9a3fa1a4fbce79d83cfe5840[m
+Author: JMan <60026263+JMantis0@users.noreply.github.com>
+Date:   Tue May 18 14:31:38 2021 -0700
+
+    Removed bad project and added a good one
+
+[33mcommit 0257ae8f149d700246dc67e2059ad5c1d01bea0b[m[33m ([m[1;31morigin/jesse_creating_components[m[33m, [m[1;32mjesse_creating_components[m[33m)[m
+Author: JMan <60026263+JMantis0@users.noreply.github.com>
+Date:   Tue May 18 12:49:56 2021 -0700
+
+    Fixed some names, adding SearchInput component and linking it to state
+
+[33mcommit 2c1537568849bd69babc479ef1e6d6a1bce19a2d[m[33m ([m[1;31morigin/renaming_files[m[33m, [m[1;32mrenaming_files[m[33m)[m
+Author: JMan <60026263+JMantis0@users.noreply.github.com>
+Date:   Tue May 18 12:04:12 2021 -0700
+
+    Renamed some files with App title to MusicApp.  Created a Router in MusicApp and added a redux directory with a slice, hooks, and store
+
+[33mcommit 990e4fbc12838586d888490a430e9af072f19a2c[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Merge: 91e9b6f c205f72
+Author: Jesse Mazur <60026263+JMantis0@users.noreply.github.com>
+Date:   Tue May 18 09:51:10 2021 -0700
+
+    Merge pull request #3 from JMantis0/restructure_client_directory
+    
+    placed all the frontend files in a client directory
+
+[33mcommit c205f7266621604b48c9063013bc21ff7b2bd527[m[33m ([m[1;31morigin/restructure_client_directory[m[33m, [m[1;32mrestructure_client_directory[m[33m)[m
+Author: JMan <60026263+JMantis0@users.noreply.github.com>
+Date:   Tue May 18 09:48:07 2021 -0700
+
+    placed all the frontend files in a client directory
+
+[33mcommit 91e9b6f089c0592a62d7f711735c2452dbf852c8[m
+Merge: e92cfff 11ad3f6
+Author: Stephen <39101603+scbarnard@users.noreply.github.com>
+Date:   Tue May 18 11:33:34 2021 -0400
+
+    Merge pull request #2 from JMantis0/gradle_project
+    
+    Added gradle project in backend directory.  Contains the whole java b…
+
+[33mcommit 11ad3f6c1d782b02c49097e9d68484a6d7ede8bd[m[33m ([m[1;31morigin/gradle_project[m[33m, [m[1;32mgradle_project[m[33m)[m
+Author: JMan <60026263+JMantis0@users.noreply.github.com>
+Date:   Tue May 18 08:27:05 2021 -0700
+
+    Added gradle project in backend directory.  Contains the whole java backend
+
+[33mcommit e92cfff1cd77c1a3e110a2269c3389fcc576c148[m
+Merge: 417c158 b5cc366
+Author: cowelch1 <73080062+cowelch1@users.noreply.github.com>
+Date:   Tue May 18 11:20:17 2021 -0400
+
+    Merge pull request #1 from JMantis0/initial_react_redux_typescript
+    
+    React Base
+
+[33mcommit b5cc366739d85c0fbeab9db61075ef9da242bc49[m[33m ([m[1;31morigin/initial_react_redux_typescript[m[33m, [m[1;32minitial_react_redux_typescript[m[33m, [m[1;32mJesse_Mazur[m[33m)[m
+Author: JMan <60026263+JMantis0@users.noreply.github.com>
+Date:   Tue May 18 08:06:04 2021 -0700
+
+    React Base
+
+[33mcommit 417c1587d5ba8242983031a117638fa5aa384831[m
+Author: Jesse Mazur <60026263+JMantis0@users.noreply.github.com>
+Date:   Tue May 18 07:50:59 2021 -0700
+
+    Initial commit
