@@ -9,6 +9,8 @@ import {
 } from "./store";
 
 export interface MusicAppState {
+
+  
   currentUserState: {
     firstName: string;
     lastName: string;
@@ -35,8 +37,6 @@ export const musicAppSlice = createSlice({
   initialState,
   reducers: {
     setCurrentUserState: (state, action) => {
-      console.log("action", action);
-      console.log("action.payload", action.payload);
       state.currentUserState = { ...state.currentUserState, ...action.payload };
     },
     resetCurrentUserState: (state) => {
@@ -49,7 +49,7 @@ export const musicAppSlice = createSlice({
       };
     },
     setSearchInputState: (state, action) => {
-      state.currentUserState = action.payload;
+      state.searchInputState = action.payload;
     },
   },
 });
