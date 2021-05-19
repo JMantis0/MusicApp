@@ -12,3 +12,12 @@
 	height: 2px;	
 	margin-bottom: 40px;   
 }
+
+.fitViewHeight {
+  height: 100vh;
+  overflow: auto;
+}
+
+.blackBackground {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.836), black);
+}
