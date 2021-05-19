@@ -16,7 +16,7 @@ export interface MusicAppState {
     password: string;
     id: { timestamp: number | null; date: number | null };
   };
-  currentUserFavorites: Array<{}>,
+  favoritesState: Array<{}>;
   searchInputState: string;
 }
 
@@ -28,7 +28,7 @@ const initialState: MusicAppState = {
     password: "",
     id: { timestamp: null, date: null },
   },
-  currentUserFavorites: [],
+  favoritesState: [],
   searchInputState: "",
 };
 
@@ -51,11 +51,18 @@ export const musicAppSlice = createSlice({
     setSearchInputState: (state, action) => {
       state.searchInputState = action.payload;
     },
+    setFavoritesState: (state, action) => {
+      state.favoritesState = {...state.favoritesState, ...action.payload}
+    },
   },
 });
 
-export const { setCurrentUserState, resetCurrentUserState, setSearchInputState } =
-  musicAppSlice.actions;
+export const {
+  setCurrentUserState,
+  resetCurrentUserState,
+  setSearchInputState,
+  setFavoritesState,
+} = musicAppSlice.actions;
 
 export const selectMusicApp = (state: RootState) => state.musicApp;
 
