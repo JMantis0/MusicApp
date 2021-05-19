@@ -18,9 +18,11 @@ export interface MusicAppState {
   };
   favoritesState: Array<{}>;
   searchInputState: string;
+  loginFormState: { userID: string; password: string };
 }
 
 const initialState: MusicAppState = {
+  loginFormState: { userID: "", password: "" },
   currentUserState: {
     firstName: "",
     lastName: "",
@@ -36,6 +38,15 @@ export const musicAppSlice = createSlice({
   name: "musicApp",
   initialState,
   reducers: {
+    setLoginFormState: (state, action) => {
+      const fieldName = action.payload.fieldName;
+      const value = action.payload.value;
+      state.loginFormState = { ...state.loginFormState, [fieldName]: value };
+    },
+    resetLoginFormState: (state) => {
+      state.loginFormState.userID = "";
+      state.loginFormState.password = "";
+    },
     setCurrentUserState: (state, action) => {
       state.currentUserState = { ...state.currentUserState, ...action.payload };
     },
@@ -52,7 +63,7 @@ export const musicAppSlice = createSlice({
       state.searchInputState = action.payload;
     },
     setFavoritesState: (state, action) => {
-      state.favoritesState = {...state.favoritesState, ...action.payload}
+      state.favoritesState = { ...state.favoritesState, ...action.payload };
     },
   },
 });
@@ -62,6 +73,8 @@ export const {
   resetCurrentUserState,
   setSearchInputState,
   setFavoritesState,
+  setLoginFormState,
+  resetLoginFormState,
 } = musicAppSlice.actions;
 
 export const selectMusicApp = (state: RootState) => state.musicApp;
