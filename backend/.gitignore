@@ -1,8 +1,3 @@
 .gradle
-.idea
+.idea/**
 *.iml
-
-java_backend/.idea
-java_backend/.idea/**
-java_backend/.gradle
-java_backend/*.iml
