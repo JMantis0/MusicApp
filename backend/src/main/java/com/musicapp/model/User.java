@@ -1,13 +1,12 @@
 package com.musicapp.model;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Component;
 
 @Data
-@Component("user")
 public class User {
+    @Id
     String userId;
     String firstName;
     String lastName;
