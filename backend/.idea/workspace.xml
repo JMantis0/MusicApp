@@ -4,43 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46fbcb15-bf16-401d-852a-1529ebde04d6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/MusicApp.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/.idea/libraries-with-intellij-classes.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/src/main/java/com/Ghost.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/src/main/java/com/GhostController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/src/main/java/com/GhostService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/src/main/resources/todo.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/src/main/webapp/WEB-INF/application-context.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/src/main/webapp/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/src/main/webapp/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/src/test/java/com/GhostTest.java" beforeDir="false" />
-    </list>
+    <list default="true" id="46fbcb15-bf16-401d-852a-1529ebde04d6" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
