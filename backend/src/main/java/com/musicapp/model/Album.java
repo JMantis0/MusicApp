@@ -1,5 +1,10 @@
 package com.musicapp.model;
 
+import lombok.Data;
+import org.springframework.stereotype.Component;
+
+@Data
+@Component("album")
 public class Album {
     String albumId;
     String title;
