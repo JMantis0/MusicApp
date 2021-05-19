@@ -36,7 +36,8 @@ const Login = () => {
       .catch((err) => {
         console.log("There was an error");
         dispatch(resetLoginFormState());
-        history.push("/bad_login");
+        //  For now a bad login redirects to user home anyways
+        history.push("/user_home");
       });
   };
 
