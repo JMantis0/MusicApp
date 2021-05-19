@@ -8,16 +8,26 @@ const UserHome = () => {
     <div>
       <header>
         <Grid container>
-          <Grid xs={10} item className={style.center}>
-            <h1 >User Home</h1>
+          <Grid className={style.center} xs={10} item >
+            <h1>User Home</h1>
           </Grid>
-
-          <Grid xs={2} item className={style.center}>
+          <Grid className={style.center} xs={2} item >
             <button>Logout</button>
           </Grid>
         </Grid>
       </header>
-      <SearchInput />
+
+      <div className={style.horizontalLine}></div>
+      <body>
+        <Grid container >
+          <Grid className={style.center} item xs={10}>
+            <SearchInput />
+          </Grid>
+          <Grid className={style.center} item xs={2}>
+            side section
+          </Grid>
+        </Grid>
+      </body>
     </div>
   );
 };
