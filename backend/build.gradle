@@ -2,7 +2,7 @@ plugins {
     id 'war'
 }
 
-group 'com.ex'
+group 'org.example'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -13,26 +13,14 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 
-    // spring
-    implementation 'org.springframework:spring-context:4.3.27.RELEASE'
     implementation 'javax.servlet:javax.servlet-api:3.1.0'
+    implementation 'org.springframework:spring-context:4.3.27.RELEASE'
     implementation 'org.springframework:spring-webmvc:4.3.27.RELEASE'
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.3'
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.12.3'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.12.3'
-    // https://mvnrepository.com/artifact/org.projectlombok/lombok
-    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
-
-    implementation('org.springframework.boot:spring-boot-starter-web'){
-        exclude module: 'spring-boot-starter-tomcat'
-    }
-    // https://mvnrepository.com/artifact/org.mongodb/bson
-    implementation group: 'org.mongodb', name: 'bson', version: '4.2.3'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'org.springframework.boot:spring-boot-starter-jetty'
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
 }
 
