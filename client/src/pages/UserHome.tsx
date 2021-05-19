@@ -2,6 +2,7 @@ import React from "react";
 import SearchInput from "../components/SearchInput";
 import Grid from "@material-ui/core/Grid";
 import style from "../MusicApp.module.css";
+import LogoutButton from "../components/LogoutButton";
 
 const UserHome = () => {
   return (
@@ -12,12 +13,13 @@ const UserHome = () => {
             <h1>User Home</h1>
           </Grid>
           <Grid className={style.center} xs={2} item >
-            <button>Logout</button>
+            <LogoutButton />
           </Grid>
         </Grid>
       </header>
 
       <div className={style.horizontalLine}></div>
+
       <body>
         <Grid container >
           <Grid className={style.center} item xs={10}>
