@@ -4,10 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94363066-38ba-441e-8f23-367b44df4aff" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_backend/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/java_backend/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="46fbcb15-bf16-401d-852a-1529ebde04d6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/MusicApp.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/.idea/libraries-with-intellij-classes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/settings.gradle" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/java_backend/src/main/java/com/Ghost.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/src/main/java/com/GhostController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/src/main/java/com/GhostService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/src/main/resources/todo.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/src/main/webapp/WEB-INF/application-context.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/src/main/webapp/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java_backend/src/main/webapp/index.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/java_backend/src/test/java/com/GhostTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,33 +51,54 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="1sj4huFlhOmjrwbeNJYLIUg2oGJ" />
+  <component name="ProjectId" id="1sj6ZiinSYjmIXWT1wvQZcG74KO" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.23606557" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Jeremy\source\repos\MusicApp\MusicApp\backend\java_backend\src\main\java\WEB-INF" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Jeremy\source\repos\MusicApp\MusicApp\backend\src" />
+      <recent name="C:\Users\Jeremy\source\repos\MusicApp\MusicApp\backend\java_backend\src\main\webapp" />
+      <recent name="C:\Users\Jeremy\source\repos\MusicApp\MusicApp\backend\java_backend\src\main\java\webapp\WEB-INF" />
+      <recent name="C:\Users\Jeremy\source\repos\MusicApp\MusicApp\backend\java_backend\src\main\java\webapp" />
+      <recent name="C:\Users\Jeremy\source\repos\MusicApp\MusicApp\backend\java_backend\src\main\java\com" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="94363066-38ba-441e-8f23-367b44df4aff" name="Default Changelist" comment="" />
-      <created>1621372787265</created>
+      <changelist id="46fbcb15-bf16-401d-852a-1529ebde04d6" name="Default Changelist" comment="" />
+      <created>1621373708595</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1621372787265</updated>
+      <updated>1621373708595</updated>
     </task>
     <servers />
   </component>
@@ -61,5 +113,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/../.." />
+    </ignored-roots>
   </component>
 </project>
