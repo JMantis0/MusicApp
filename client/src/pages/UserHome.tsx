@@ -1,10 +1,36 @@
 import React from "react";
-import SearchInput from "../components/SearchInput"
-
+import SearchInput from "../components/SearchInput";
+import Grid from "@material-ui/core/Grid";
+import style from "../MusicApp.module.css";
+import LogoutButton from "../components/LogoutButton";
 
 const UserHome = () => {
-  return <div>This will be the home page
-<SearchInput />
-  </div>;
+  return (
+    <div>
+      <header>
+        <Grid container>
+          <Grid className={style.center} xs={10} item >
+            <h1>User Home</h1>
+          </Grid>
+          <Grid className={style.center} xs={2} item >
+            <LogoutButton />
+          </Grid>
+        </Grid>
+      </header>
+
+      <div className={style.horizontalLine}></div>
+
+      <body>
+        <Grid container >
+          <Grid className={style.center} item xs={10}>
+            <SearchInput />
+          </Grid>
+          <Grid className={style.center} item xs={2}>
+            side section
+          </Grid>
+        </Grid>
+      </body>
+    </div>
+  );
 };
 export default UserHome;

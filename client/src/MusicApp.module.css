@@ -1,0 +1,36 @@
+.center {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.horizontalLine {
+	content: " ";
+	display: block;
+	width: 100%;
+	background: #001d39;
+	height: 2px;	
+	margin-bottom: 40px;   
+}
+
+.fitViewHeight {
+  height: 100vh;
+  overflow: auto;
+}
+
+.blackBackground {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.836), black);
+}
+
+
+.white {
+  color: white;
+}
+
+.paperPadding {
+  padding: 0 10px 10px;
+}
+
+.marginTop {
+  margin-top: 10px!important;
+}
