@@ -1,13 +1,13 @@
 package com.musicapp.model;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-import org.springframework.stereotype.Component;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Component("user")
+@Document(collection = "users")
 public class User {
+    @Id
     String userId;
     String firstName;
     String lastName;
