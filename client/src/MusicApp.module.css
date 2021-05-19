@@ -3,3 +3,12 @@
  justify-content: center;
  align-items: center;
 }
+
+.horizontalLine {
+	content: " ";
+	display: block;
+	width: 100%;
+	background: #001d39;
+	height: 2px;	
+	margin-bottom: 40px;   
+}
