@@ -9,8 +9,6 @@ import {
 } from "./store";
 
 export interface MusicAppState {
-
-  
   currentUserState: {
     firstName: string;
     lastName: string;
@@ -18,6 +16,7 @@ export interface MusicAppState {
     password: string;
     id: { timestamp: number | null; date: number | null };
   };
+  currentUserFavorites: Array<{}>,
   searchInputState: string;
 }
 
@@ -29,6 +28,7 @@ const initialState: MusicAppState = {
     password: "",
     id: { timestamp: null, date: null },
   },
+  currentUserFavorites: [],
   searchInputState: "",
 };
 
