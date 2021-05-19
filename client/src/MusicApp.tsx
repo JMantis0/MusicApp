@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserHome from "./pages/UserHome";
 import Support from "./pages/Support";
 import Landing from "./pages/Landing";
+import Login from "./pages/Login";
 
 function MusicApp() {
   return (
@@ -12,6 +13,9 @@ function MusicApp() {
         <Switch>
           <Route exact path="/">
             <Landing />
+          </Route>
+          <Route exact path="/login">
+            <Login />
           </Route>
           <Route exact path="/user_home">
             <UserHome />
