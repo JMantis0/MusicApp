@@ -10,7 +10,7 @@ public interface IUserService {
 
     List<User> findAll();
 
-    User update( User user);
+    User update(User user);
 
     void delete(String id);
 }

@@ -1,10 +1,11 @@
 package com.musicapp.model;
 
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
 @Data
-@Component("album")
+@Document(collection = "albums")
 public class Album {
     String albumId;
     String title;
