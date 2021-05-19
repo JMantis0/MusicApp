@@ -3,6 +3,7 @@ import "./MusicApp.module.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserHome from "./pages/UserHome";
 import Support from "./pages/Support";
+import Landing from "./pages/Landing";
 
 function MusicApp() {
   return (
@@ -10,7 +11,7 @@ function MusicApp() {
       <Router>
         <Switch>
           <Route exact path="/">
-            This is the Landing Page
+            <Landing />
           </Route>
           <Route exact path="/user_home">
             <UserHome />
