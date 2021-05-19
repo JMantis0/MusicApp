@@ -21,3 +21,16 @@
 .blackBackground {
   background-image: linear-gradient(rgba(0, 0, 0, 0.836), black);
 }
+
+
+.white {
+  color: white;
+}
+
+.paperPadding {
+  padding: 0 10px 10px;
+}
+
+.marginTop {
+  margin-top: 10px!important;
+}
