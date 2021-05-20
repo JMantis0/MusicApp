@@ -18,6 +18,7 @@ export interface MusicAppState {
   user: typeof User | null;
   searchInput: string;
   loginForm: { username: string | null; password: string | null };
+  deezerData: object;
 }
 
 const initialState: MusicAppState = {
@@ -28,6 +29,7 @@ const initialState: MusicAppState = {
   user: null,
   searchInput: "",
   loginForm: { username: null, password: null },
+  deezerData: {},
 };
 
 export const musicAppSlice = createSlice({
@@ -67,6 +69,9 @@ export const musicAppSlice = createSlice({
     setSearchInput: (state, action: { payload: string }) => {
       state.searchInput = action.payload;
     },
+    setDeezerData: (state, action: { payload: object }) => {
+      state.deezerData = action.payload;
+    },
   },
 });
 
@@ -80,6 +85,7 @@ export const {
   setLoginForm,
   resetLoginForm,
   setSearchInput,
+  setDeezerData,
 } = musicAppSlice.actions;
 
 export const selectMusicApp = (state: RootState) => state.musicApp;
