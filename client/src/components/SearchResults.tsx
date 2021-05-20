@@ -1,35 +1,40 @@
-import React, {Component} from 'react';
-import axios from 'axios';
+import React, { Component, useMemo } from "react";
+import Button from "@material-ui/core/Button";
+import axios from "axios";
+//  import redux state hooks
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+//  import reducer and state selector
+import { selectMusicApp, setDeezerData } from "../redux/musicAppSlice";
 
-class SearchResults extends Component {
-    constructor(props: {} | Readonly<{}>) {
-        super(props)
+const SearchResults = () => {
+  // This is how to hook into the redux state.
+  const musicAppState = useAppSelector(selectMusicApp);
+  // This is how to hook into the dispatcher.
+  const dispatch = useAppDispatch();
 
-        this.state = {
-            results: []
-        }
-    }
-
-    componentDidMount(){
-        //Test API get
-        //How do we pass the string from the search bar to here?
-        //Ideally it would be axios.get('https://api.deezer.com/search?q={search_bar_input}')
-        //`{musicAppState.searchInputState.replace(" ", "%20")}` perhaps?
-        axios.get('https://api.deezer.com/search?q=I%20Just%20Wanna%20Shine')
-            .then(response => {
-                    console.log(response.data[0].title)
-                    this.setState({results: response.data})
-                })
-            .catch(error => {console.log(error)})
-    }
-
-    render(){
-        return(
-            <div>
-                Search Results:
-            </div>
-        )
-    }
-}
+  //  Define function to call deezerAPI with string from the searchInput.
+  const handleSearch = () => {
+    const queryString = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=${musicAppState.searchInput}`;
+    axios
+      .get(queryString)
+      .then((response) => {
+        console.log("response", response);
+        const deezerData = response.data.data;
+        //  Dispatch the setDeezerData reducer to save data to the state
+        dispatch(setDeezerData(deezerData));
+        //  Check your redux devtools to see the data
+      })
+      .catch((error) => {
+        console.log("There was an error: ", error);
+      });
+  };
+  return (
+    <React.Fragment>
+      <Button color="primary" variant="contained" onClick={handleSearch}>
+        Search Music
+      </Button>
+    </React.Fragment>
+  );
+};
 
 export default SearchResults;
