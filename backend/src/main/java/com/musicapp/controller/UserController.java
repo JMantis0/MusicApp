@@ -15,6 +15,7 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
+    /*
     @GetMapping("/findAll")
     public ResponseEntity<List<User>> findAll() {
         return ResponseEntity.ok(userService.findAll());
@@ -35,7 +36,7 @@ public class UserController {
         userService.delete(request.getUserId());
         return ResponseEntity.ok().build();
     }
-
+    */
     // log in
     @PostMapping("/attempt_login")
     public ResponseEntity<User> logIn(@RequestBody User request) {

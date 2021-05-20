@@ -13,6 +13,7 @@ public class UserService implements IUserService {
 
     private final UserRepository userRepository;
 
+    /*
     @Override
     public User save(User user) {
         return userRepository.save(user);
@@ -31,10 +32,12 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
+
     @Override
     public void delete(String id) {
         userRepository.deleteById(id);
     }
+    */
 
     @Override
     public User logIn(User logInAttempt) {
