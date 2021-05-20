@@ -3,7 +3,7 @@ import SearchInput from "../components/SearchInput";
 import Grid from "@material-ui/core/Grid";
 import style from "../MusicApp.module.css";
 import LogoutButton from "../components/LogoutButton";
-import SearchResults from "../components/SearchResults";
+// import SearchResults from "../components/SearchResults";
 
 const UserHome = () => {
   return (
@@ -26,9 +26,9 @@ const UserHome = () => {
           <Grid className={style.center} item xs={10}>
             <SearchInput />
           </Grid>
-          <Grid className={style.center} item xs={10}>
-            <SearchResults/>
-          </Grid>
+          {/* <Grid className={style.center}>
+            <SearchResults />
+          </Grid> */}
           <Grid className={style.center} item xs={2}>
             side section
           </Grid>
