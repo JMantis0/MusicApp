@@ -1,8 +1,7 @@
-package controller;
+package com.musicapp.controller;
 
 import com.musicapp.controller.UserController;
 import com.musicapp.model.User;
-import com.musicapp.repository.UserRepository;
 import com.musicapp.service.UserService;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;

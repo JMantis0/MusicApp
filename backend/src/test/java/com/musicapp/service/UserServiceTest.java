@@ -1,4 +1,4 @@
-package service;
+package com.musicapp.service;
 
 import com.musicapp.model.User;
 import com.musicapp.repository.UserRepository;
