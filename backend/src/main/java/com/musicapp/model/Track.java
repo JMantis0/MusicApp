@@ -1,12 +1,12 @@
 package com.musicapp.model;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Component;
 
 
+/**
+ * Pojo for track
+ */
 @Data
 @Document(collection = "tracks")
 public class Track {

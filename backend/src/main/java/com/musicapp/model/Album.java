@@ -2,8 +2,9 @@ package com.musicapp.model;
 
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Component;
-
+/**
+ * Pojo for the album object. Simulates an album
+ */
 @Data
 @Document(collection = "albums")
 public class Album {

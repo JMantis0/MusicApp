@@ -2,10 +2,12 @@ package com.musicapp.model;
 
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Pojo for Playlist.
+ */
 @Data
 @Document(collection = "playlists")
 public class Playlist {
