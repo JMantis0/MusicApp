@@ -5,6 +5,7 @@ import UserHome from "./pages/UserHome";
 import Support from "./pages/Support";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
+import Playlists from "./pages/Playlists";
 
 function MusicApp() {
   return (
@@ -19,6 +20,9 @@ function MusicApp() {
           </Route>
           <Route exact path="/user_home">
             <UserHome />
+          </Route>
+          <Route>
+            <Playlists/>
           </Route>
           <Route exact path="/support">
             <Support />
