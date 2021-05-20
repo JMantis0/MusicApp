@@ -13,4 +13,6 @@ public interface IUserService {
     User update(User user);
 
     void delete(String id);
+
+    User logIn(User user);
 }
