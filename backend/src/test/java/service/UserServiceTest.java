@@ -41,4 +41,24 @@ public class UserServiceTest {
 
         Assert.assertEquals(found.getUserId(),user.getUserId());
     }
+
+    @Test
+    public void logInFailure(){
+        User goodUser = new User();
+        goodUser.setPassword("BadPassword");
+        goodUser.setUsername("Username");
+        goodUser.setUserId("1234");
+
+        Mockito.when(userRepository.findByUsername(goodUser.getUsername()))
+                .thenReturn(goodUser);
+
+        User user = new User();
+        user.setUsername("Username");
+        user.setPassword("Password");
+        user.setUserId("1234");
+
+        User found = userService.logIn(user);
+
+        Assert.assertNull(found);
+    }
 }
