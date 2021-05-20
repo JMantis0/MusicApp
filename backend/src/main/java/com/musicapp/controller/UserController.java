@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller for all user requests. Handles logging in a user as well as updating user information.
+ */
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api")
@@ -35,7 +38,11 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
     */
-    // log in
+    /**
+     * Logs in a user. Takes a request and converts it into a pojo
+     * @param request The request converted into a user pojo. Only contains the "username" and "password" fields
+     * @return The response entity of the log in attempt. Will be 200 if successful and 401 if not
+     */
     @PostMapping("/attempt_login")
     public ResponseEntity<User> logIn(@RequestBody User request) {
         User user = userService.logIn(request);
