@@ -1,5 +1,5 @@
 // Pojos to simplify the process of sending data to backend for DB storage.
-class Album {
+export const Album = class Album {
   album: string;
   title: string;
   cover: string;
@@ -8,8 +8,9 @@ class Album {
     this.title = title;
     this.cover = cover;
   }
-}
-class Artist {
+};
+
+export const Artist = class Artist {
   artistId: string;
   name: string;
   picture: string;
@@ -18,25 +19,27 @@ class Artist {
     this.name = name;
     this.picture = picture;
   }
-}
-class Playlist {
-  tracks: Array<Track>;
-  constructor(tracks: Array<Track>) {
+};
+
+export const Playlist = class Playlist {
+  tracks: Array<typeof Track>;
+  constructor(tracks: Array<typeof Track>) {
     this.tracks = tracks;
   }
-}
-class Track {
+};
+
+export const Track = class Track {
   trackId: string;
   title: string;
   preview: string;
   artist: string;
-  album: Album;
+  album: typeof Album;
   constructor(
     trackId: string,
     title: string,
     preview: string,
     artist: string,
-    album: Album
+    album: typeof Album
   ) {
     this.trackId = trackId;
     this.title = title;
@@ -44,8 +47,9 @@ class Track {
     this.artist = artist;
     this.album = album;
   }
-}
-class User {
+};
+
+export const User = class User {
   userId: string;
   firstName: string;
   lastName: string;
@@ -64,6 +68,4 @@ class User {
     this.username = username;
     this.password = password;
   }
-}
-
-export default { Album, Artist, Playlist, Track, User };
+};
