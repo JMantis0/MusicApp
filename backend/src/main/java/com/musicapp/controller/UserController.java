@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * Controller for all user requests. Handles logging in a user as well as updating user information.
  */
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @AllArgsConstructor
 @RequestMapping("/api")
 public class UserController {
@@ -45,9 +46,13 @@ public class UserController {
      */
     @PostMapping("/attempt_login")
     public ResponseEntity<User> logIn(@RequestBody User request) {
+        if (request.getPassword() == null || request.getUsername() == null){
+            return new ResponseEntity<User>(HttpStatus.valueOf(401));
+        }
         User user = userService.logIn(request);
+
         if (user == null) {
-            return new ResponseEntity<User>(user, HttpStatus.valueOf(401));
+            return new ResponseEntity<User>(HttpStatus.valueOf(401));
         }
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
