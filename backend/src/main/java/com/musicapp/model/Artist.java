@@ -2,7 +2,6 @@ package com.musicapp.model;
 
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Component;
 
 @Data
 @Document(collection = "artists")

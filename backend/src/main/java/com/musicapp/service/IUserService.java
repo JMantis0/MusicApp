@@ -2,8 +2,6 @@ package com.musicapp.service;
 
 import com.musicapp.model.User;
 
-import java.util.List;
-
 public interface IUserService {
     /*
     User save(User user);

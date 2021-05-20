@@ -2,7 +2,6 @@ package com.musicapp.service;
 
 import com.musicapp.model.User;
 import com.musicapp.repository.UserRepository;
-import com.musicapp.service.UserService;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
