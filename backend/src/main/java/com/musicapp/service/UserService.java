@@ -10,6 +10,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class UserService implements IUserService {
+
     private final UserRepository userRepository;
 
     @Override
