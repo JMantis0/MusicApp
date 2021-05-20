@@ -4,6 +4,9 @@ import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
+/**
+ * Pojo for track
+ */
 @Data
 @Document(collection = "tracks")
 public class Track {
