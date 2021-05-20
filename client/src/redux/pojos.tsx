@@ -1,3 +1,4 @@
+// Pojos to simplify the process of sending data to backend for DB storage.
 class Album {
   album: string;
   title: string;
