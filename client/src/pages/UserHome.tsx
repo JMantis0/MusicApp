@@ -3,17 +3,17 @@ import SearchInput from "../components/SearchInput";
 import Grid from "@material-ui/core/Grid";
 import style from "../MusicApp.module.css";
 import LogoutButton from "../components/LogoutButton";
-// import SearchResults from "../components/SearchResults";
+import SearchDeezerButton from "../components/SearchDeezerButton";
 
 const UserHome = () => {
   return (
     <div>
       <header>
         <Grid container>
-          <Grid className={style.center} xs={10} item >
+          <Grid className={style.center} xs={10} item>
             <h1>User Home</h1>
           </Grid>
-          <Grid className={style.center} xs={2} item >
+          <Grid className={style.center} xs={2} item>
             <LogoutButton />
           </Grid>
         </Grid>
@@ -21,19 +21,19 @@ const UserHome = () => {
 
       <div className={style.horizontalLine}></div>
 
-      <body>
-        <Grid container >
+      <main>
+        <Grid container>
           <Grid className={style.center} item xs={10}>
             <SearchInput />
           </Grid>
-          {/* <Grid className={style.center}>
-            <SearchResults />
-          </Grid> */}
           <Grid className={style.center} item xs={2}>
             side section
           </Grid>
+          <Grid className={style.center} item xs={10}>
+            <SearchDeezerButton />
+          </Grid>
         </Grid>
-      </body>
+      </main>
     </div>
   );
 };
