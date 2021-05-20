@@ -27,7 +27,7 @@ const Login = () => {
 
   const submitLogin = () => {
     axios
-      .post("/api/attempt_login", musicAppState.loginForm)
+      .post("http://localhost:8080/api/attempt_login", musicAppState.loginForm)
       .then((response) => {
         console.log("The response is: ", response);
         history.push("/user_home");
@@ -53,9 +53,9 @@ const Login = () => {
             className={style.marginTop}
             autoComplete="off"
             type="text"
-            label="User ID"
+            label="Username"
             variant="outlined"
-            name="userID"
+            name="username"
             onChange={formChangeHandler}
           />
           <TextField
