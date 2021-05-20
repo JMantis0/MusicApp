@@ -5,7 +5,9 @@ import com.musicapp.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-
+/**
+ * Service for handling user controller actions
+ */
 @Service
 @AllArgsConstructor
 public class UserService implements IUserService {
@@ -38,6 +40,11 @@ public class UserService implements IUserService {
     }
     */
 
+    /**
+     * Logs in a given user and returns the user or null depending on success
+     * @param logInAttempt The user to attempt to log in
+     * @return The user found, null if none.
+     */
     @Override
     public User logIn(User logInAttempt) {
         User potentialUser = userRepository.findByUsername(logInAttempt.getUsername());
