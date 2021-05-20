@@ -48,6 +48,9 @@ public class UserService implements IUserService {
     @Override
     public User logIn(User logInAttempt) {
         User potentialUser = userRepository.findByUsername(logInAttempt.getUsername());
+        if (potentialUser == null){
+            return null;
+        }
         if (potentialUser.getPassword().equals(logInAttempt.getPassword())){
             return potentialUser;
         }

@@ -24,6 +24,8 @@ public class UserControllerTest {
     @Test
     public void logInSuccess() {
         User goodUser = new User();
+        goodUser.setUsername("ValidUsername");
+        goodUser.setPassword("ValidPassword");
 
         Mockito.when(userService.logIn(goodUser)).thenReturn(goodUser);
 
@@ -35,10 +37,23 @@ public class UserControllerTest {
     @Test
     public void logInFailure(){
         User badUser = new User();
+        badUser.setUsername("badUsername");
+        badUser.setPassword("badPassword");
 
         Mockito.when(userService.logIn(badUser)).thenReturn(null);
 
         ResponseEntity<User> response = userController.logIn(badUser);
+
+        Assert.assertEquals(response.getStatusCode(), HttpStatus.valueOf(401));
+    }
+
+    @Test
+    public void logInNullUser(){
+        User nullUser = new User();
+
+        Mockito.when(userService.logIn(nullUser)).thenReturn(null);
+
+        ResponseEntity<User> response = userController.logIn(nullUser);
 
         Assert.assertEquals(response.getStatusCode(), HttpStatus.valueOf(401));
     }
