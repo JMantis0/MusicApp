@@ -16,7 +16,7 @@ export interface MusicAppState {
   playlist: typeof Playlist | null;
   track: typeof Track | null;
   user: typeof User | null;
-  searchInput: string | null;
+  searchInput: string;
   loginForm: { username: string | null; password: string | null };
 }
 
@@ -26,7 +26,7 @@ const initialState: MusicAppState = {
   playlist: null,
   track: null,
   user: null,
-  searchInput: null,
+  searchInput: "",
   loginForm: { username: null, password: null },
 };
 
