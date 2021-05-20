@@ -4,8 +4,7 @@ import FormLabel from "@material-ui/core/FormLabel";
 import Grid from "@material-ui/core/Grid";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import {
-  setLoginFormState,
-  resetLoginFormState,
+ setLoginForm, resetLoginForm,
   selectMusicApp,
 } from "../redux/musicAppSlice";
 import TextField from "@material-ui/core/TextField";
@@ -23,19 +22,19 @@ const Login = () => {
   const formChangeHandler = (event: any) => {
     const fieldName = event.target.name;
     const value = event.target.value;
-    dispatch(setLoginFormState({ fieldName, value }));
+    dispatch(setLoginForm({ fieldName, value }));
   };
 
   const submitLogin = () => {
     axios
-      .post("/api/attempt_login", musicAppState.loginFormState)
+      .post("/api/attempt_login", musicAppState.loginForm)
       .then((response) => {
         console.log("The response is: ", response);
         history.push("/user_home");
       })
       .catch((err) => {
         console.log("There was an error");
-        dispatch(resetLoginFormState());
+        dispatch(resetLoginForm());
         //  For now a bad login redirects to user home anyways
         history.push("/user_home");
       });
