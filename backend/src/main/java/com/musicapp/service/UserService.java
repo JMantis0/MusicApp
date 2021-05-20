@@ -3,12 +3,8 @@ package com.musicapp.service;
 import com.musicapp.model.User;
 import com.musicapp.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Example;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import javax.xml.ws.spi.http.HttpHandler;
 import java.util.List;
 
 @Service
@@ -17,6 +13,7 @@ public class UserService implements IUserService {
 
     private final UserRepository userRepository;
 
+    /*
     @Override
     public User save(User user) {
         return userRepository.save(user);
@@ -35,19 +32,21 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
+
     @Override
     public void delete(String id) {
         userRepository.deleteById(id);
     }
+    */
 
     @Override
-    public User logIn(User user) {
-        List<User> potentialUsers = userRepository.findByUsername(user.getUsername());
-        for (User potentialUser : potentialUsers){
-            if (potentialUser.getPassword().equals(user.getPassword())){
-                return potentialUser;
-            }
+    public User logIn(User logInAttempt) {
+        User potentialUser = userRepository.findByUsername(logInAttempt.getUsername());
+        if (potentialUser.getPassword().equals(logInAttempt.getPassword())){
+            return potentialUser;
         }
         return null;
     }
+
+
 }
