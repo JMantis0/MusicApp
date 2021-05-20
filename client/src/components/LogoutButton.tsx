@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import { useAppDispatch } from "../redux/hooks";
-import { resetCurrentUserState } from "../redux/musicAppSlice";
+import { logoutUser } from "../redux/musicAppSlice";
 import { useHistory } from "react-router-dom";
 
 const LogoutButton = () => {
@@ -9,7 +9,7 @@ const LogoutButton = () => {
   const history = useHistory();
 
   const logOut = () => {
-    dispatch(resetCurrentUserState());
+    dispatch(logoutUser());
     history.push("/");
   };
   return <Button variant="contained" onClick={logOut}>Log out</Button>;

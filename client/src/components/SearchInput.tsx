@@ -1,5 +1,5 @@
 import React from "react";
-import { selectMusicApp, setSearchInputState } from "../redux/musicAppSlice";
+import { selectMusicApp, setSearchInput } from "../redux/musicAppSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import TextField from "@material-ui/core/TextField";
 
@@ -9,7 +9,7 @@ const SearchInput = () => {
 
   const inputChangeHandler = (event: { target: { name: any; value: any } }) => {
     const newValue = event.target.value;
-    dispatch(setSearchInputState(newValue));
+    dispatch(setSearchInput(newValue));
   };
 
   return (
@@ -19,7 +19,7 @@ const SearchInput = () => {
         variant="outlined"
         helperText="pre-backend"
         name="searchInput"
-        value={musicAppState.searchInputState}
+        value={musicAppState.searchInput}
         onChange={inputChangeHandler}
       />
     </React.Fragment>

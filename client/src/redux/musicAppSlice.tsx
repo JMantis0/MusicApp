@@ -71,10 +71,14 @@ export const musicAppSlice = createSlice({
 });
 
 export const {
-  setLoginForm,
-  resetLoginForm,
+  setAlbum,
+  setArtist,
+  setPlaylist,
+  setTrack,
   setUser,
   logoutUser,
+  setLoginForm,
+  resetLoginForm,
   setSearchInput,
 } = musicAppSlice.actions;
 
