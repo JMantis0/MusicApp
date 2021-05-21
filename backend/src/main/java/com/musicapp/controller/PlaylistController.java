@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 public class PlaylistController {
     private PlaylistService playlistService;
 
-   // @PostMapping("/attempt_login")
-   // public ResponseEntity<Playlist> createPlaylist(@RequestBody Playlist playlist) {
-   // }
+    @PutMapping("/create_playlist")
+    public ResponseEntity<Playlist> createPlaylist(@RequestBody Playlist playlist) {
+        return new ResponseEntity<Playlist>(playlist,HttpStatus.OK);
+    }
 }
