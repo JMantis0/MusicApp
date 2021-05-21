@@ -28,6 +28,7 @@ public class PlaylistModelTest {
         playlist = new Playlist();
 
         playlist.setTracks(tracks);
+        playlist.setOwner("Owner");
     }
 
     @Test
@@ -36,5 +37,11 @@ public class PlaylistModelTest {
         Assert.assertEquals("Id1",foundTracks.get(0).getTrackId());
         Assert.assertEquals("Id2",foundTracks.get(1).getTrackId());
         Assert.assertEquals("Id3",foundTracks.get(2).getTrackId());
+    }
+
+    @Test
+    public void playlistOwnerTest(){
+        String foundOwner = playlist.getOwner();
+        Assert.assertEquals("Owner",foundOwner);
     }
 }
