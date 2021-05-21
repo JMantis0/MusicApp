@@ -13,7 +13,7 @@ import { Album, Artist, Playlist, Track, User } from "./pojos";
 export interface MusicAppState {
   album: typeof Album | null;
   artist: typeof Artist | null;
-  playlist: typeof Playlist | null;
+  playlists: Array<typeof Playlist> | null;
   track: typeof Track | null;
   user: typeof User | null;
   searchInput: string;
@@ -24,7 +24,7 @@ export interface MusicAppState {
 const initialState: MusicAppState = {
   album: null,
   artist: null,
-  playlist: null,
+  playlists: null,
   track: null,
   user: null,
   searchInput: "",
@@ -42,8 +42,8 @@ export const musicAppSlice = createSlice({
     setArtist: (state, action: { payload: typeof Artist }) => {
       state.artist = action.payload;
     },
-    setPlaylist: (state, action: { payload: typeof Playlist }) => {
-      state.playlist = action.payload;
+    setPlaylists: (state, action: { payload: Array<typeof Playlist> }) => {
+      state.playlists = action.payload;
     },
     setTrack: (state, action: { payload: typeof Track }) => {
       state.track = action.payload;
@@ -78,7 +78,7 @@ export const musicAppSlice = createSlice({
 export const {
   setAlbum,
   setArtist,
-  setPlaylist,
+  setPlaylists,
   setTrack,
   setUser,
   logoutUser,
