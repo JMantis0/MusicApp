@@ -28,8 +28,8 @@ public class PlaylistModelTest {
         playlist = new Playlist();
 
         playlist.setSongs(tracks);
-        playlist.setUserId("Id");
-        playlist.setName("Name");
+        playlist.setUsername("Id");
+        playlist.setPlaylistName("Name");
     }
 
     @Test
@@ -42,13 +42,13 @@ public class PlaylistModelTest {
 
     @Test
     public void playlistUserIdTest(){
-        String foundOwner = playlist.getUserId();
+        String foundOwner = playlist.getUsername();
         Assert.assertEquals("Id",foundOwner);
     }
 
     @Test
     public void playlistNameTest(){
-        String foundName = playlist.getName();
+        String foundName = playlist.getUsername();
         Assert.assertEquals("Name",foundName);
     }
 }

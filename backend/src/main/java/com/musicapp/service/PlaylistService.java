@@ -17,8 +17,7 @@ public class PlaylistService implements IPlaylistService{
      * @param playlist The playlist being added
      * @return The playlist returning (TO BE REMOVED)
      */
-    public boolean createPlaylist(Playlist playlist) {
+    public void createPlaylist(Playlist playlist) {
         playlistRepository.save(playlist);
-        return true;
     }
 }
