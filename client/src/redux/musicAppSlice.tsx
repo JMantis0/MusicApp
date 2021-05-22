@@ -8,8 +8,6 @@ import {
   //  AppThunk
 } from "./store";
 
-import { Album, Artist, Playlist, Track, User } from "./pojos";
-
 export interface MusicAppState {
   album: { albumId: string; title: string; cover: string };
   artist: { artistId: string; name: string; picture: string };
