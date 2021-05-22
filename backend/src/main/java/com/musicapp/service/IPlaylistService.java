@@ -9,7 +9,7 @@ import java.util.List;
  * Playlist service interface
  */
 public interface IPlaylistService {
-    void createPlaylist(Playlist playlist);
+    boolean createPlaylist(Playlist playlist);
     List<Playlist> readPlaylist(String username);
     Playlist updatePlaylist(Playlist playlist);
 }
