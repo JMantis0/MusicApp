@@ -28,7 +28,7 @@ export const Playlist = class Playlist {
   tracks: Array<typeof Track>;
   constructor(tracks: Array<typeof Track>, 
               playlistId: string,
-              playlistName: string 
+              playlistName: string,
               username: string) {
     this.tracks = tracks;
     this.playlistId = playlistId;
