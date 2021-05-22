@@ -27,14 +27,28 @@ public class PlaylistModelTest {
 
         playlist = new Playlist();
 
-        playlist.setTracks(tracks);
+        playlist.setSongs(tracks);
+        playlist.setUsername("User");
+        playlist.setPlaylistName("Name");
     }
 
     @Test
-    public void playlistTracksTest(){
-        List<Track> foundTracks = playlist.getTracks();
-        Assert.assertEquals("Id1",foundTracks.get(0).getTrackId());
-        Assert.assertEquals("Id2",foundTracks.get(1).getTrackId());
-        Assert.assertEquals("Id3",foundTracks.get(2).getTrackId());
+    public void playlistSongsTest(){
+        List<Track> foundSongs = playlist.getSongs();
+        Assert.assertEquals("Id1",foundSongs.get(0).getTrackId());
+        Assert.assertEquals("Id2",foundSongs.get(1).getTrackId());
+        Assert.assertEquals("Id3",foundSongs.get(2).getTrackId());
+    }
+
+    @Test
+    public void playlistUserIdTest(){
+        String foundUsername = playlist.getUsername();
+        Assert.assertEquals("User",foundUsername);
+    }
+
+    @Test
+    public void playlistNameTest(){
+        String foundName = playlist.getPlaylistName();
+        Assert.assertEquals("Name",foundName);
     }
 }

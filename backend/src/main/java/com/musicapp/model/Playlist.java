@@ -11,5 +11,7 @@ import java.util.List;
 @Data
 @Document(collection = "playlists")
 public class Playlist {
-    List<Track> tracks;
+    String username;
+    String playlistName;
+    List<Track> songs;
 }
