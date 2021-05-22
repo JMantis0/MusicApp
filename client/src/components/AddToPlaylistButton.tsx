@@ -14,7 +14,7 @@ const AddToPlaylistButton = () => {
     // Perform call to Database here.  Save the Currently Selected song
     // to the current user's favorites.
     const data = {
-      //The properties for the 'favorite' to add go here, to be sent in post request.
+      //  The properties for the 'favorite' to add go here, to be sent in post request.
       //  The favorite is to be saved in the db
     }
     axios
