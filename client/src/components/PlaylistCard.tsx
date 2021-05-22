@@ -25,7 +25,8 @@ const PlaylistCard = () => {
                     <Typography variant="body2" 
                                 color="textSecondary"
                     >
-                        This is a demo card for a play list        
+                        Playlist Name
+                    {/*{playlistName}*/}
                     </Typography>
                 </CardContent>
             </CardActionArea>

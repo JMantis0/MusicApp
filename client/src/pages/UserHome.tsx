@@ -19,7 +19,7 @@ const UserHome = () => {
   const musicAppState = useAppSelector(selectMusicApp);
   // This is how to hook into the dispatcher.
   const dispatch = useAppDispatch();
-  const [playlists, setPlaylists] = useState<Playlist[]>([]);
+  const [playlists, setPlaylists] = useState<typeof Playlist[]>([]);
 
   const getPlaylists = () => {
     const queryString = `https://localhost:8080/read_playlists`;
@@ -29,7 +29,7 @@ const UserHome = () => {
         console.log("response", response);
         const playlistData = response.data.data;
         //  Dispatch the setPlaylistData reducer to save data to the state
-        dispatch(setPlaylists(playlistData));
+        // dispatch(setPlaylists(playlistData));
         //  Check your redux devtools to see the data
       })
       .catch((error) => {
@@ -72,20 +72,13 @@ const UserHome = () => {
           <Grid className={style.center} item xs={2}>
             {/* side section */}
           </Grid>
-          <Grid className={style.center} item xs={10}>
-            <SearchDeezerButton />
-          </Grid>
           <Grid className={style.center} item xs={2}>
             side section
           </Grid>
           <Grid>
-            {playlists.map( (playlist: Playlist) =>
-              <PlaylistCard
-                key={playlist.playlistId}
-                playlistName={playlist.playlistName}
-              />            
+            {playlists.map( (playlist: typeof Playlist) =>
+              <PlaylistCard />            
             )}
-            <PlaylistCard />
           </Grid>
           <Grid className={style.center} item xs={10}></Grid>
           <Grid className="" item xs={10}></Grid>
