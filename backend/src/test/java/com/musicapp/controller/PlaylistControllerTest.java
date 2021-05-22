@@ -1,5 +1,6 @@
 package com.musicapp.controller;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.musicapp.model.Playlist;
 import com.musicapp.model.User;
 import com.musicapp.service.PlaylistService;
@@ -35,5 +36,23 @@ public class PlaylistControllerTest {
         ResponseEntity<List<Playlist>> result = playlistController.readPlaylist(user);
         Assert.assertEquals(result.getStatusCode(),HttpStatus.OK);
 
+    }
+
+    @Test
+    public void updatePlaylistSuccessTest(){
+        Playlist playlist = new Playlist();
+
+        Mockito.when(playlistService.updatePlaylist(playlist)).thenReturn(playlist);
+        ResponseEntity<Playlist> result = playlistController.updatePlaylist(playlist);
+        Assert.assertEquals(result.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    public void updatePlaylistFailureTest(){
+        Playlist playlist = new Playlist();
+
+        Mockito.when(playlistService.updatePlaylist(playlist)).thenReturn(null);
+        ResponseEntity<Playlist> result = playlistController.updatePlaylist(playlist);
+        Assert.assertEquals(result.getStatusCode(),HttpStatus.valueOf(401));
     }
 }
