@@ -3,32 +3,81 @@ import {
   createSlice,
   //  PayloadAction
 } from "@reduxjs/toolkit";
+import Playlists from "../pages/Playlists";
 import {
   RootState,
   //  AppThunk
 } from "./store";
 
-import { Album, Artist, Playlist, Track, User } from "./pojos";
-
 export interface MusicAppState {
-  album: typeof Album | null;
-  artist: typeof Artist | null;
-  playlist: typeof Playlist | null;
-  track: typeof Track | null;
-  user: typeof User | null;
+  album: { albumId: string; title: string; cover: string };
+  artist: { artistId: string; name: string; picture: string };
+  playlists: Array<{
+    username: string;
+    playlistName: string;
+    songs: Array<{
+      trackId: string;
+      title: string;
+      preview: string;
+      artist: { artistId: string; name: string; picture: string };
+      album: { albumId: string; title: string; cover: string };
+    }>;
+  }>;
+  playlist: {
+    username: string;
+    playlistName: string;
+    songs: Array<{
+      trackId: string;
+      title: string;
+      preview: string;
+      artist: { artistId: string; name: string; picture: string };
+      album: { albumId: string; title: string; cover: string };
+    }>;
+  };
+  track: {
+    trackId: string;
+    title: string;
+    preview: string;
+    artist: { artistId: string; name: string; picture: string };
+    album: { albumId: string; title: string; cover: string };
+  };
+  user: {
+    userId: string;
+    firstName: string;
+    lastName: string;
+    username: string;
+    password: string;
+  };
   searchInput: string;
   loginForm: { username: string | null; password: string | null };
   deezerData: object;
 }
 
 const initialState: MusicAppState = {
-  album: null,
-  artist: null,
-  playlist: null,
-  track: null,
-  user: null,
+  album: { albumId: "", title: "", cover: "" },
+  artist: { artistId: "", name: "", picture: "" },
+  playlist: {
+    username: "",
+    playlistName: "",
+    songs: [],
+  },
+  playlists: [],
+  track: {
+    trackId: "",
+    title: "",
+    preview: "",
+    artist: { artistId: "", name: "", picture: "" },
+    album: { albumId: "", title: "", cover: "" },
+  },
+  user: {
+    userId: "testuserid",
+    firstName: "testfirstname",
+    lastName: "testlastname",
+    username: "testusername",
+    password: "testpassword",
+  },
   searchInput: "",
-  loginForm: { username: null, password: null },
+  loginForm: { username: "", password: "" },
   deezerData: {},
 };
 
@@ -36,40 +85,99 @@ export const musicAppSlice = createSlice({
   name: "musicApp",
   initialState,
   reducers: {
-    setAlbum: (state, action: { payload: typeof Album }) => {
+    setAlbum: (
+      state,
+      action: { payload: { albumId: string; title: string; cover: string } }
+    ) => {
+      console.log("Dispatching setAlbum reducer with action: ", action);
       state.album = action.payload;
     },
-    setArtist: (state, action: { payload: typeof Artist }) => {
+    setArtist: (
+      state,
+      action: { payload: { artistId: string; name: string; picture: string } }
+    ) => {
+      console.log("Dispatching setArtist reducer with action: ", action);
       state.artist = action.payload;
     },
-    setPlaylist: (state, action: { payload: typeof Playlist }) => {
-      state.playlist = action.payload;
+    addPlaylist: (
+      state,
+      action: {
+        payload: {
+          username: string;
+          playlistName: string;
+          songs: Array<{
+            trackId: string;
+            title: string;
+            preview: string;
+            artist: { artistId: string; name: string; picture: string };
+            album: { albumId: string; title: string; cover: string };
+          }>;
+        };
+      }
+    ) => {
+      console.log("Dispatching addPlaylist reducer with action: ", action);
+      state.playlists = [...state.playlists, action.payload];
     },
-    setTrack: (state, action: { payload: typeof Track }) => {
+    setTrack: (
+      state,
+      action: {
+        payload: {
+          trackId: string;
+          title: string;
+          preview: string;
+          artist: { artistId: string; name: string; picture: string };
+          album: { albumId: string; title: string; cover: string };
+        };
+      }
+    ) => {
+      console.log("Dispatching setTrack reducer with action: ", action);
       state.track = action.payload;
     },
-    setUser: (state, action: { payload: typeof User }) => {
+    setUser: (
+      state,
+      action: {
+        payload: {
+          userId: string;
+          firstName: string;
+          lastName: string;
+          username: string;
+          password: string;
+        };
+      }
+    ) => {
+      console.log("Dispatching setUser reducer with action: ", action);
       state.user = action.payload;
     },
     logoutUser: (state) => {
-      state.user = null;
+      state.user = {
+        userId: "",
+        firstName: "",
+        lastName: "",
+        username: "",
+        password: "",
+      };
     },
     setLoginForm: (
       state,
       action: { payload: { fieldName: string; value: string } }
     ) => {
+      console.log("Dispatching setLoginForm reducer with action: ", action);
       const fieldName = action.payload.fieldName;
       const value = action.payload.value;
+      console.log(`Setting ${fieldName} to ${value}`);
       state.loginForm = { ...state.loginForm, [fieldName]: value };
     },
     resetLoginForm: (state) => {
+      console.log("Dispatching resetLoginForm reducer with action with no action.");
       state.loginForm.username = null;
       state.loginForm.password = null;
     },
     setSearchInput: (state, action: { payload: string }) => {
+      console.log("Dispatching setSearchInput with action: ", action);
       state.searchInput = action.payload;
     },
     setDeezerData: (state, action: { payload: object }) => {
+      console.log("Dispatching setDeezerData reducer with action: ", action);
       state.deezerData = action.payload;
     },
   },
@@ -78,7 +186,7 @@ export const musicAppSlice = createSlice({
 export const {
   setAlbum,
   setArtist,
-  setPlaylist,
+  addPlaylist,
   setTrack,
   setUser,
   logoutUser,

@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import style from "../MusicApp.module.css";
 import LogoutButton from "../components/LogoutButton";
 import SearchDeezerButton from "../components/SearchDeezerButton";
+import CreateNewPlaylistForm from "../components/CreateNewPlaylistForm";
 import PlaylistCard from "../components/PlaylistCard";
 
 const UserHome = () => {
@@ -24,9 +25,23 @@ const UserHome = () => {
 
       <main>
         <Grid container>
-          <Grid className={style.center} item xs={10}>
-            <SearchInput />
+          <Grid item xs={6}>
+            <Grid container>
+              <Grid className={style.center} item xs={12}>
+                <SearchInput />
+                <SearchDeezerButton />
+              </Grid>
+              <Grid className={style.center} item xs={12}>
+                <CreateNewPlaylistForm />
+              </Grid>
+            </Grid>
           </Grid>
+          <Grid className={style.center} item xs={6}>
+            Display section
+          </Grid>
+          <Grid className={style.center} item xs={10}></Grid>
+          <Grid className={style.center} item xs={2}>
+            {/* side section */}
           <Grid className={style.center} item xs={10}>
             <SearchDeezerButton />
           </Grid>
@@ -36,6 +51,8 @@ const UserHome = () => {
           <Grid>
             <PlaylistCard />
           </Grid>
+          <Grid className={style.center} item xs={10}></Grid>
+          <Grid className="" item xs={10}></Grid>
         </Grid>
       </main>
     </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { selectMusicApp, setPlaylist } from "../redux/musicAppSlice";
+import { selectMusicApp } from "../redux/musicAppSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 const AddToPlaylistButton = () => {
@@ -25,7 +25,7 @@ const AddToPlaylistButton = () => {
         //update the state here to reflect that the favorite was added in backend
         //Something like:
         // ***
-        dispatch(setPlaylist(newFavorite));
+        // addToFave
         // ***
 
       })
