@@ -26,7 +26,7 @@ const initialState: MusicAppState = {
   artist: null,
   playlists: null,
   track: null,
-  user: new User("","","","",""),
+  user: new User("testuserid","testfirstname","testlastname","testusername","testpassword"),
   searchInput: "",
   loginForm: { username: null, password: null },
   deezerData: {},
@@ -52,7 +52,7 @@ export const musicAppSlice = createSlice({
       state.user = action.payload;
     },
     logoutUser: (state) => {
-      state.user =new User("","","","",""),
+      state.user = new User("","","","","");
     },
     setLoginForm: (
       state,
