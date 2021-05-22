@@ -3,6 +3,7 @@ import {
   createSlice,
   //  PayloadAction
 } from "@reduxjs/toolkit";
+import Playlists from "../pages/Playlists";
 import {
   RootState,
   //  AppThunk
@@ -11,22 +12,28 @@ import {
 export interface MusicAppState {
   album: { albumId: string; title: string; cover: string };
   artist: { artistId: string; name: string; picture: string };
-  playlists: Array<
-    Array<{
+  playlists: Array<{
+    username: string;
+    playlistName: string;
+    songs: Array<{
       trackId: string;
       title: string;
       preview: string;
       artist: { artistId: string; name: string; picture: string };
       album: { albumId: string; title: string; cover: string };
-    }>
-  >;
-  playlist: Array<{
-    trackId: string;
-    title: string;
-    preview: string;
-    artist: { artistId: string; name: string; picture: string };
-    album: { albumId: string; title: string; cover: string };
+    }>;
   }>;
+  playlist: {
+    username: string;
+    playlistName: string;
+    songs: Array<{
+      trackId: string;
+      title: string;
+      preview: string;
+      artist: { artistId: string; name: string; picture: string };
+      album: { albumId: string; title: string; cover: string };
+    }>;
+  };
   track: {
     trackId: string;
     title: string;
@@ -49,7 +56,11 @@ export interface MusicAppState {
 const initialState: MusicAppState = {
   album: { albumId: "", title: "", cover: "" },
   artist: { artistId: "", name: "", picture: "" },
-  playlist: [],
+  playlist: {
+    username: "",
+    playlistName: "",
+    songs: [],
+  },
   playlists: [],
   track: {
     trackId: "",
@@ -86,21 +97,23 @@ export const musicAppSlice = createSlice({
     ) => {
       state.artist = action.payload;
     },
-    setPlaylists: (
+    addPlaylist: (
       state,
       action: {
-        payload: Array<
-          Array<{
+        payload: {
+          username: string;
+          playlistName: string;
+          songs: Array<{
             trackId: string;
             title: string;
             preview: string;
             artist: { artistId: string; name: string; picture: string };
             album: { albumId: string; title: string; cover: string };
-          }>
-        >;
+          }>;
+        };
       }
     ) => {
-      state.playlists = action.payload;
+      state.playlists = [...state.playlists, action.payload];
     },
     setTrack: (
       state,
@@ -163,7 +176,7 @@ export const musicAppSlice = createSlice({
 export const {
   setAlbum,
   setArtist,
-  setPlaylists,
+  addPlaylist,
   setTrack,
   setUser,
   logoutUser,
