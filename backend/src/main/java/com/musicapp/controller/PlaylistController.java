@@ -33,12 +33,12 @@ public class PlaylistController {
 
     /**
      * Gets all playlists of a given user
-     * @param user The user to get the playlists of
+     * @param username The user to get the playlists of
      * @return The playlists
      */
     @GetMapping("/read_playlist")
-    public ResponseEntity<List<Playlist>> readPlaylist(@RequestBody User user){
-        List<Playlist> playlists = playlistService.readPlaylist(user);
+    public ResponseEntity<List<Playlist>> readPlaylist(@RequestParam String username){
+        List<Playlist> playlists = playlistService.readPlaylist(username);
         return new ResponseEntity<>(playlists,HttpStatus.OK);
     }
 
