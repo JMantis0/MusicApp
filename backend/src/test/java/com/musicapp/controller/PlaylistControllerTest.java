@@ -6,6 +6,7 @@ import com.musicapp.model.User;
 import com.musicapp.service.PlaylistService;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +21,23 @@ public class PlaylistControllerTest {
     private PlaylistController playlistController = new PlaylistController(playlistService);
 
     @Test
-    public void createPlaylistTest(){
+    public void createPlaylistSuccessTest(){
         Playlist playlist = new Playlist();
+
+        Mockito.when(playlistService.createPlaylist(playlist)).thenReturn(true);
+
         ResponseEntity<Playlist> result = playlistController.createPlaylist(playlist);
-        Assert.assertEquals(result.getStatusCode(), HttpStatus.OK);
+        Assert.assertEquals(result.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    public void createPlaylistFailureTest(){
+        Playlist playlist = new Playlist();
+
+        Mockito.when(playlistService.createPlaylist(playlist)).thenReturn(false);
+
+        ResponseEntity<Playlist> result = playlistController.createPlaylist(playlist);
+        Assert.assertEquals(result.getStatusCode(),HttpStatus.valueOf(401));
     }
 
     @Test

@@ -21,8 +21,13 @@ public class PlaylistService implements IPlaylistService{
      * @return The playlist returning (TO BE REMOVED)
      */
     @Override
-    public void createPlaylist(Playlist playlist) {
-        playlistRepository.save(playlist);
+    public boolean createPlaylist(Playlist playlist) {
+        Playlist foundPlaylist = playlistRepository.findByUsernameAndPlaylistName(playlist.getUsername(), playlist.getPlaylistName());
+        if (foundPlaylist == null){
+            playlistRepository.save(playlist);
+            return true;
+        }
+        return false;
     }
 
     /**
