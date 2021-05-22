@@ -3,11 +3,12 @@ import axios from "axios";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { selectMusicApp, setPlaylists } from "../redux/musicAppSlice";
+import { selectMusicApp, addPlaylist } from "../redux/musicAppSlice";
 
 const CreateNewPlaylistForm = () => {
   const musicAppState = useAppSelector(selectMusicApp);
   const [newPlaylistName, setNewPlaylistName] = useState("");
+  const dispatch = useAppDispatch();
 
   const handleOnChange = (event: { target: { value: string } }) => {
     const newPlaylistName = event.target.value;
@@ -16,17 +17,18 @@ const CreateNewPlaylistForm = () => {
 
   const createPlaylistAndStoreToDBAndSetPlaylistState = (event: any) => {
     console.log("event is: ", event);
-    const data = {
+    const newPlaylist = {
       username: musicAppState.user.username,
       playlistName: newPlaylistName,
       songs: []
     }
-    axios.post("http://localhost:8080/api/create_playlist", data).then(response => {
-      console.log("The esponse is: ", response);
+    axios.post("http://localhost:8080/api/create_playlist", newPlaylist).then(response => {
+      console.log("The Response is: ", response);
       //Here we want to set the state to match the db
+      dispatch(addPlaylist(newPlaylist));
+
     }).catch(error => {
       console.log("There was an error: ", error);
-      //Don't update the state, probably should toast the client
     })
   };
   return (
