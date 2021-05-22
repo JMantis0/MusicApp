@@ -36,8 +36,8 @@ public class PlaylistService implements IPlaylistService{
      * @return The list of playlists of the specified user
      */
     @Override
-    public List<Playlist> readPlaylist(User user) {
-        return playlistRepository.findByUsername(user.getUsername());
+    public List<Playlist> readPlaylist(String username) {
+        return playlistRepository.findByUsername(username);
     }
 
     /**

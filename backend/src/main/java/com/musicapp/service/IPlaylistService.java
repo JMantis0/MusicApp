@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface IPlaylistService {
     boolean createPlaylist(Playlist playlist);
-    List<Playlist> readPlaylist(User user);
+    List<Playlist> readPlaylist(String username);
     Playlist updatePlaylist(Playlist playlist);
 }

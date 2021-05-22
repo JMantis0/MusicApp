@@ -22,9 +22,18 @@ export const Artist = class Artist {
 };
 
 export const Playlist = class Playlist {
+  playlistId: string;
+  playlistName: string;
+  username: string;
   tracks: Array<typeof Track>;
-  constructor(tracks: Array<typeof Track>) {
+  constructor(tracks: Array<typeof Track>, 
+              playlistId: string,
+              playlistName: string,
+              username: string) {
     this.tracks = tracks;
+    this.playlistId = playlistId;
+    this.playlistName = playlistName;
+    this.username = username;
   }
 };
 
