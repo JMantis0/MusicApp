@@ -28,7 +28,7 @@ public class PlaylistController {
     @PostMapping("/create_playlist")
     public ResponseEntity<Playlist> createPlaylist(@RequestBody Playlist playlist) {
         playlistService.createPlaylist(playlist);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(playlist,HttpStatus.OK);
     }
 
     /**
