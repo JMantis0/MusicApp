@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import axios from 'axios';
+import React, { useState, useMemo } from "react";
+import axios from "axios";
 import SearchInput from "../components/SearchInput";
 import Grid from "@material-ui/core/Grid";
 import style from "../MusicApp.module.css";
@@ -11,7 +11,7 @@ import PlaylistCard from "../components/PlaylistCard";
 //  import redux state hooks
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 //  import reducer and state selector
-import {selectMusicApp, setPlaylists} from '../redux/musicAppSlice'
+import { selectMusicApp, setPlaylists, setUser } from "../redux/musicAppSlice";
 import { Playlist } from "../redux/pojos";
 
 const UserHome = () => {
@@ -22,9 +22,16 @@ const UserHome = () => {
   const [playlists, setPlaylists] = useState<typeof Playlist[]>([]);
 
   const getPlaylists = () => {
-    const queryString = `https://localhost:8080/read_playlists`;
+    const queryString = `http://localhost:8080/api/read_playlist`;
+
+    const body = {
+      params: {
+        username: musicAppState.user.username,
+      },
+    };
+
     axios
-      .get(queryString)
+      .get(queryString, body)
       .then((response) => {
         console.log("response", response);
         const playlistData = response.data.data;
@@ -34,8 +41,25 @@ const UserHome = () => {
       })
       .catch((error) => {
         console.log("There was an error: ", error);
+        console.log(error.message);
       });
   };
+  useMemo(() => {
+    // Get the user data for the user that just successfully logged in.
+
+    // axios.get()
+
+    const user = {
+      userId: "",
+      firstName: "",
+      lastName: "",
+      username: musicAppState.loginForm.username,
+      password: "",
+    }
+
+    dispatch(setUser(user));
+    getPlaylists();
+  }, []);
 
   return (
     <div>
@@ -76,9 +100,9 @@ const UserHome = () => {
             side section
           </Grid>
           <Grid>
-            {playlists.map( (playlist: typeof Playlist) =>
-              <PlaylistCard />            
-            )}
+            {playlists.map((playlist: typeof Playlist) => (
+              <PlaylistCard />
+            ))}
           </Grid>
           <Grid className={style.center} item xs={10}></Grid>
           <Grid className="" item xs={10}></Grid>
