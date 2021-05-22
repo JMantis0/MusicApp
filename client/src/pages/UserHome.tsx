@@ -42,6 +42,7 @@ const UserHome = () => {
           <Grid className={style.center} item xs={10}></Grid>
           <Grid className={style.center} item xs={2}>
             {/* side section */}
+          </Grid>
           <Grid className={style.center} item xs={10}>
             <SearchDeezerButton />
           </Grid>

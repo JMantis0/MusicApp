@@ -99,6 +99,25 @@ export const musicAppSlice = createSlice({
       console.log("Dispatching setArtist reducer with action: ", action);
       state.artist = action.payload;
     },
+    setPlaylists: (
+      state,
+      action: {
+        payload: Array<{
+          username: string;
+          playlistName: string;
+          songs: Array<{
+            trackId: string;
+            title: string;
+            preview: string;
+            artist: { artistId: string; name: string; picture: string };
+            album: { albumId: string; title: string; cover: string };
+          }>;
+        }>;
+      }
+    ) => {
+      console.log("Dispatching setPlaylists reducer with action: ", action);
+      state.playlists = action.payload;
+    },
     addPlaylist: (
       state,
       action: {
@@ -168,7 +187,9 @@ export const musicAppSlice = createSlice({
       state.loginForm = { ...state.loginForm, [fieldName]: value };
     },
     resetLoginForm: (state) => {
-      console.log("Dispatching resetLoginForm reducer with action with no action.");
+      console.log(
+        "Dispatching resetLoginForm reducer with action with no action."
+      );
       state.loginForm.username = null;
       state.loginForm.password = null;
     },
