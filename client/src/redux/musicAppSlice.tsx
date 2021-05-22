@@ -49,7 +49,7 @@ export interface MusicAppState {
     password: string;
   };
   searchInput: string;
-  loginForm: { username: string | null; password: string | null };
+  loginForm: { username: string; password: string };
   deezerData: object;
 }
 
@@ -190,8 +190,8 @@ export const musicAppSlice = createSlice({
       console.log(
         "Dispatching resetLoginForm reducer with action with no action."
       );
-      state.loginForm.username = null;
-      state.loginForm.password = null;
+      state.loginForm.username = "";
+      state.loginForm.password = "";
     },
     setSearchInput: (state, action: { payload: string }) => {
       console.log("Dispatching setSearchInput with action: ", action);
