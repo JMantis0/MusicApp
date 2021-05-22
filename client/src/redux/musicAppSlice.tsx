@@ -178,7 +178,7 @@ export const musicAppSlice = createSlice({
     },
     setLoginForm: (
       state,
-      action: { payload: { fieldName: string; value: string } }
+      action: { payload: { fieldName: string; value: string } } 
     ) => {
       console.log("Dispatching setLoginForm reducer with action: ", action);
       const fieldName = action.payload.fieldName;
