@@ -89,12 +89,14 @@ export const musicAppSlice = createSlice({
       state,
       action: { payload: { albumId: string; title: string; cover: string } }
     ) => {
+      console.log("Dispatching setAlbum reducer with action: ", action);
       state.album = action.payload;
     },
     setArtist: (
       state,
       action: { payload: { artistId: string; name: string; picture: string } }
     ) => {
+      console.log("Dispatching setArtist reducer with action: ", action);
       state.artist = action.payload;
     },
     addPlaylist: (
@@ -113,6 +115,7 @@ export const musicAppSlice = createSlice({
         };
       }
     ) => {
+      console.log("Dispatching addPlaylist reducer with action: ", action);
       state.playlists = [...state.playlists, action.payload];
     },
     setTrack: (
@@ -127,6 +130,7 @@ export const musicAppSlice = createSlice({
         };
       }
     ) => {
+      console.log("Dispatching setTrack reducer with action: ", action);
       state.track = action.payload;
     },
     setUser: (
@@ -141,6 +145,7 @@ export const musicAppSlice = createSlice({
         };
       }
     ) => {
+      console.log("Dispatching setUser reducer with action: ", action);
       state.user = action.payload;
     },
     logoutUser: (state) => {
@@ -156,18 +161,23 @@ export const musicAppSlice = createSlice({
       state,
       action: { payload: { fieldName: string; value: string } }
     ) => {
+      console.log("Dispatching setLoginForm reducer with action: ", action);
       const fieldName = action.payload.fieldName;
       const value = action.payload.value;
+      console.log(`Setting ${fieldName} to ${value}`);
       state.loginForm = { ...state.loginForm, [fieldName]: value };
     },
     resetLoginForm: (state) => {
+      console.log("Dispatching resetLoginForm reducer with action with no action.");
       state.loginForm.username = null;
       state.loginForm.password = null;
     },
     setSearchInput: (state, action: { payload: string }) => {
+      console.log("Dispatching setSearchInput with action: ", action);
       state.searchInput = action.payload;
     },
     setDeezerData: (state, action: { payload: object }) => {
+      console.log("Dispatching setDeezerData reducer with action: ", action);
       state.deezerData = action.payload;
     },
   },
