@@ -11,24 +11,64 @@ import {
 import { Album, Artist, Playlist, Track, User } from "./pojos";
 
 export interface MusicAppState {
-  album: typeof Album | null;
-  artist: typeof Artist | null;
-  playlists: Array<typeof Playlist> | null;
-  track: typeof Track | null;
-  user: InstanceType<typeof User>
+  album: { albumId: string; title: string; cover: string };
+  artist: { artistId: string; name: string; picture: string };
+  playlists: Array<
+    Array<{
+      trackId: string;
+      title: string;
+      preview: string;
+      artist: { artistId: string; name: string; picture: string };
+      album: { albumId: string; title: string; cover: string };
+    }>
+  >;
+  playlist: Array<{
+    trackId: string;
+    title: string;
+    preview: string;
+    artist: { artistId: string; name: string; picture: string };
+    album: { albumId: string; title: string; cover: string };
+  }>;
+  track: {
+    trackId: string;
+    title: string;
+    preview: string;
+    artist: { artistId: string; name: string; picture: string };
+    album: { albumId: string; title: string; cover: string };
+  };
+  user: {
+    userId: string;
+    firstName: string;
+    lastName: string;
+    username: string;
+    password: string;
+  };
   searchInput: string;
   loginForm: { username: string | null; password: string | null };
   deezerData: object;
 }
 
 const initialState: MusicAppState = {
-  album: null,
-  artist: null,
-  playlists: null,
-  track: null,
-  user: new User("testuserid","testfirstname","testlastname","testusername","testpassword"),
+  album: { albumId: "", title: "", cover: "" },
+  artist: { artistId: "", name: "", picture: "" },
+  playlist: [],
+  playlists: [],
+  track: {
+    trackId: "",
+    title: "",
+    preview: "",
+    artist: { artistId: "", name: "", picture: "" },
+    album: { albumId: "", title: "", cover: "" },
+  },
+  user: {
+    userId: "testuserid",
+    firstName: "testfirstname",
+    lastName: "testlastname",
+    username: "testusername",
+    password: "testpassword",
+  },
   searchInput: "",
-  loginForm: { username: null, password: null },
+  loginForm: { username: "", password: "" },
   deezerData: {},
 };
 
@@ -36,23 +76,70 @@ export const musicAppSlice = createSlice({
   name: "musicApp",
   initialState,
   reducers: {
-    setAlbum: (state, action: { payload: typeof Album }) => {
+    setAlbum: (
+      state,
+      action: { payload: { albumId: string; title: string; cover: string } }
+    ) => {
       state.album = action.payload;
     },
-    setArtist: (state, action: { payload: typeof Artist }) => {
+    setArtist: (
+      state,
+      action: { payload: { artistId: string; name: string; picture: string } }
+    ) => {
       state.artist = action.payload;
     },
-    setPlaylists: (state, action: { payload: Array<typeof Playlist> }) => {
+    setPlaylists: (
+      state,
+      action: {
+        payload: Array<
+          Array<{
+            trackId: string;
+            title: string;
+            preview: string;
+            artist: { artistId: string; name: string; picture: string };
+            album: { albumId: string; title: string; cover: string };
+          }>
+        >;
+      }
+    ) => {
       state.playlists = action.payload;
     },
-    setTrack: (state, action: { payload: typeof Track }) => {
+    setTrack: (
+      state,
+      action: {
+        payload: {
+          trackId: string;
+          title: string;
+          preview: string;
+          artist: { artistId: string; name: string; picture: string };
+          album: { albumId: string; title: string; cover: string };
+        };
+      }
+    ) => {
       state.track = action.payload;
     },
-    setUser: (state, action: { payload: InstanceType<typeof User> }) => {
+    setUser: (
+      state,
+      action: {
+        payload: {
+          userId: string;
+          firstName: string;
+          lastName: string;
+          username: string;
+          password: string;
+        };
+      }
+    ) => {
       state.user = action.payload;
     },
     logoutUser: (state) => {
-      state.user = new User("","","","","");
+      state.user = {
+        userId: "",
+        firstName: "",
+        lastName: "",
+        username: "",
+        password: "",
+      };
     },
     setLoginForm: (
       state,
