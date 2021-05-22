@@ -47,7 +47,7 @@ public class PlaylistController {
      * @param playlist The playlist containing the updated information
      * @return The playlist and status code
      */
-    @PutMapping("/update_playlist")
+    @PutMapping("/update_playlist_songs")
     public ResponseEntity<Playlist> updatePlaylist(@RequestBody Playlist playlist){
         Playlist updatedPlaylist = playlistService.updatePlaylist(playlist);
         if (updatedPlaylist != null){

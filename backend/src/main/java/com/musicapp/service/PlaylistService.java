@@ -40,10 +40,12 @@ public class PlaylistService implements IPlaylistService{
      * @param playlist The playlist to update, containing updated information
      * @return The playlist to return
      */
+    @Override
     public Playlist updatePlaylist(Playlist playlist) {
         Playlist foundPlaylist = playlistRepository.findByUsernameAndPlaylistName(playlist.getUsername(),playlist.getPlaylistName());
         if (foundPlaylist != null){
-            playlistRepository.save(foundPlaylist);
+            playlistRepository.delete(foundPlaylist);
+            playlistRepository.save(playlist);
         }
         return foundPlaylist;
     }

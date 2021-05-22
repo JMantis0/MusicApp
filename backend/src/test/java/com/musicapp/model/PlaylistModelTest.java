@@ -30,6 +30,7 @@ public class PlaylistModelTest {
         playlist.setSongs(tracks);
         playlist.setUsername("User");
         playlist.setPlaylistName("Name");
+        playlist.setPlaylistId("Id");
     }
 
     @Test
@@ -50,5 +51,11 @@ public class PlaylistModelTest {
     public void playlistNameTest(){
         String foundName = playlist.getPlaylistName();
         Assert.assertEquals("Name",foundName);
+    }
+
+    @Test
+    public void playlistIdTest(){
+        String foundId = playlist.getPlaylistId();
+        Assert.assertEquals("Id",foundId);
     }
 }
