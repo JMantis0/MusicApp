@@ -208,6 +208,7 @@ export const {
   setAlbum,
   setArtist,
   addPlaylist,
+  setPlaylists,
   setTrack,
   setUser,
   logoutUser,
