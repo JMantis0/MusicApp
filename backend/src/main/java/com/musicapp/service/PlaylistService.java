@@ -34,4 +34,17 @@ public class PlaylistService implements IPlaylistService{
     public List<Playlist> readPlaylist(User user) {
         return playlistRepository.findByUsername(user.getUsername());
     }
+
+    /**
+     * Updates a playlist with new information, mostly overwriting the previous
+     * @param playlist The playlist to update, containing updated information
+     * @return The playlist to return
+     */
+    public Playlist updatePlaylist(Playlist playlist) {
+        Playlist foundPlaylist = playlistRepository.findByUsernameAndPlaylistName(playlist.getUsername(),playlist.getPlaylistName());
+        if (foundPlaylist != null){
+            playlistRepository.save(foundPlaylist);
+        }
+        return foundPlaylist;
+    }
 }

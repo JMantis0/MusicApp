@@ -12,4 +12,5 @@ import java.util.List;
 @Repository
 public interface PlaylistRepository extends MongoRepository<Playlist,String> {
     List<Playlist> findByUsername(String username);
+    Playlist findByUsernameAndPlaylistName(String username, String playlistName);
 }

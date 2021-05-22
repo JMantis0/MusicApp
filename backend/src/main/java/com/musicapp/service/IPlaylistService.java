@@ -11,4 +11,5 @@ import java.util.List;
 public interface IPlaylistService {
     void createPlaylist(Playlist playlist);
     List<Playlist> readPlaylist(User user);
+    Playlist updatePlaylist(Playlist playlist);
 }
