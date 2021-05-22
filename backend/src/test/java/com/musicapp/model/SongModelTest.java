@@ -4,9 +4,9 @@ import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class TrackModelTest {
+public class SongModelTest {
 
-    private Track track;
+    private Song song;
 
     @BeforeEach
     public void setUp(){
@@ -16,41 +16,41 @@ public class TrackModelTest {
         Album album = new Album();
         album.setAlbumId("Id");
 
-        track = new Track();
-        track.setTrackId("Id");
-        track.setArtist(artist);
-        track.setAlbum(album);
-        track.setTitle("TT");
-        track.setPreview("PV");
+        song = new Song();
+        song.setSongId("Id");
+        song.setArtist(artist);
+        song.setAlbum(album);
+        song.setTitle("TT");
+        song.setPreview("PV");
     }
 
     @Test
     public void trackIdTest(){
-        String foundId = track.getTrackId();
+        String foundId = song.getSongId();
         Assert.assertEquals("Id",foundId);
     }
 
     @Test
     public void trackArtistTest(){
-        Artist foundArtist = track.getArtist();
+        Artist foundArtist = song.getArtist();
         Assert.assertEquals("Id",foundArtist.getArtistId());
     }
 
     @Test
     public void trackAlbumTest(){
-        Album foundAlbum = track.getAlbum();
+        Album foundAlbum = song.getAlbum();
         Assert.assertEquals("Id",foundAlbum.getAlbumId());
     }
 
     @Test
     public void trackTitleTest(){
-        String foundTitle = track.getTitle();
+        String foundTitle = song.getTitle();
         Assert.assertEquals("TT",foundTitle);
     }
 
     @Test
     public void trackPreviewTest(){
-        String foundPreview = track.getPreview();
+        String foundPreview = song.getPreview();
         Assert.assertEquals("PV",foundPreview);
     }
 }

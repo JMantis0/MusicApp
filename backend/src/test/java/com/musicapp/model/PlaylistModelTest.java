@@ -13,21 +13,21 @@ public class PlaylistModelTest {
 
     @BeforeEach
     public void setUp(){
-        Track track1 = new Track();
-        track1.setTrackId("Id1");
-        Track track2 = new Track();
-        track2.setTrackId("Id2");
-        Track track3 = new Track();
-        track3.setTrackId("Id3");
+        Song track1 = new Song();
+        track1.setSongId("Id1");
+        Song song2 = new Song();
+        song2.setSongId("Id2");
+        Song song3 = new Song();
+        song3.setSongId("Id3");
 
-        List<Track> tracks = new ArrayList<Track>();
-        tracks.add(track1);
-        tracks.add(track2);
-        tracks.add(track3);
+        List<Song> songs = new ArrayList<Song>();
+        songs.add(track1);
+        songs.add(song2);
+        songs.add(song3);
 
         playlist = new Playlist();
 
-        playlist.setSongs(tracks);
+        playlist.setSongs(songs);
         playlist.setUsername("User");
         playlist.setPlaylistName("Name");
         playlist.setPlaylistId("Id");
@@ -35,10 +35,10 @@ public class PlaylistModelTest {
 
     @Test
     public void playlistSongsTest(){
-        List<Track> foundSongs = playlist.getSongs();
-        Assert.assertEquals("Id1",foundSongs.get(0).getTrackId());
-        Assert.assertEquals("Id2",foundSongs.get(1).getTrackId());
-        Assert.assertEquals("Id3",foundSongs.get(2).getTrackId());
+        List<Song> foundSongs = playlist.getSongs();
+        Assert.assertEquals("Id1",foundSongs.get(0).getSongId());
+        Assert.assertEquals("Id2",foundSongs.get(1).getSongId());
+        Assert.assertEquals("Id3",foundSongs.get(2).getSongId());
     }
 
     @Test

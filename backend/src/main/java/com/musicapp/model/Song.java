@@ -9,8 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Data
 @Document(collection = "tracks")
-public class Track {
-    String trackId;
+public class Song {
+    String songId;
     String title;
     /**
      * Link to the MP3 preview of the track.

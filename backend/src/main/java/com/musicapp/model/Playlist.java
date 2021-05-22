@@ -16,5 +16,5 @@ public class Playlist {
     String playlistId;
     String username;
     String playlistName;
-    List<Track> songs;
+    List<Song> songs;
 }
