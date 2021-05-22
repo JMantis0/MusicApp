@@ -15,7 +15,7 @@ export interface MusicAppState {
   artist: typeof Artist | null;
   playlists: Array<typeof Playlist> | null;
   track: typeof Track | null;
-  user: typeof User | null;
+  user: InstanceType<typeof User>
   searchInput: string;
   loginForm: { username: string | null; password: string | null };
   deezerData: object;
@@ -26,7 +26,7 @@ const initialState: MusicAppState = {
   artist: null,
   playlists: null,
   track: null,
-  user: null,
+  user: new User("","","","",""),
   searchInput: "",
   loginForm: { username: null, password: null },
   deezerData: {},
@@ -48,11 +48,11 @@ export const musicAppSlice = createSlice({
     setTrack: (state, action: { payload: typeof Track }) => {
       state.track = action.payload;
     },
-    setUser: (state, action: { payload: typeof User }) => {
+    setUser: (state, action: { payload: InstanceType<typeof User> }) => {
       state.user = action.payload;
     },
     logoutUser: (state) => {
-      state.user = null;
+      state.user =new User("","","","",""),
     },
     setLoginForm: (
       state,
