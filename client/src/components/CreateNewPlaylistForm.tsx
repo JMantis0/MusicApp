@@ -15,16 +15,17 @@ const CreateNewPlaylistForm = () => {
     setNewPlaylistName(newPlaylistName);
   };
 
-  const createPlaylistAndStoreToDBAndSetPlaylistState = (event: any) => {
-    console.log("event is: ", event);
+  const createPlaylistAndStoreToDBAndSetPlaylistState = () => {
     const newPlaylist = {
       username: musicAppState.user.username,
       playlistName: newPlaylistName,
       songs: []
     }
+    console.log("Making post request to /api/create_playlist with data: ", newPlaylist);
     axios.post("http://localhost:8080/api/create_playlist", newPlaylist).then(response => {
       console.log("The Response is: ", response);
-      //Here we want to set the state to match the db
+  
+      console.log("Adding new playlist to redux state");
       dispatch(addPlaylist(newPlaylist));
 
     }).catch(error => {
