@@ -5,6 +5,7 @@ import com.musicapp.model.User;
 import com.musicapp.repository.PlaylistRepository;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -16,9 +17,34 @@ public class PlaylistServiceTest {
     private PlaylistService playlistService = new PlaylistService(playlistRepository);
 
     @Test
-    public void createPlaylistTest(){
+    public void createPlaylistSuccessTest(){
         Playlist playlist = new Playlist();
-        playlistService.createPlaylist(playlist);
+
+        Mockito.when(playlistRepository.findByUsernameAndPlaylistName(
+                playlist.getUsername(),
+                playlist.getPlaylistName()
+            )).thenReturn(
+                playlist);
+
+
+        boolean result = playlistService.createPlaylist(playlist);
+
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void createPlaylistFailureTest(){
+        Playlist playlist = new Playlist();
+
+        Mockito.when(playlistRepository.findByUsernameAndPlaylistName(
+                playlist.getUsername(),
+                playlist.getPlaylistName()
+            )).thenReturn(
+                null);
+
+        boolean result = playlistService.createPlaylist(playlist);
+
+        Assert.assertTrue(result);
     }
 
     @Test

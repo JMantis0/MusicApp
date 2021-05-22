@@ -25,31 +25,31 @@ public class SongModelTest {
     }
 
     @Test
-    public void trackIdTest(){
+    public void songIdTest(){
         String foundId = song.getSongId();
         Assert.assertEquals("Id",foundId);
     }
 
     @Test
-    public void trackArtistTest(){
+    public void songArtistTest(){
         Artist foundArtist = song.getArtist();
         Assert.assertEquals("Id",foundArtist.getArtistId());
     }
 
     @Test
-    public void trackAlbumTest(){
+    public void songAlbumTest(){
         Album foundAlbum = song.getAlbum();
         Assert.assertEquals("Id",foundAlbum.getAlbumId());
     }
 
     @Test
-    public void trackTitleTest(){
+    public void songTitleTest(){
         String foundTitle = song.getTitle();
         Assert.assertEquals("TT",foundTitle);
     }
 
     @Test
-    public void trackPreviewTest(){
+    public void songPreviewTest(){
         String foundPreview = song.getPreview();
         Assert.assertEquals("PV",foundPreview);
     }
