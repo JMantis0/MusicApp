@@ -18,6 +18,11 @@ public class PlaylistServiceTest {
 
     private PlaylistService playlistService = new PlaylistService(playlistRepository);
 
+    /*
+    *
+    * Creation Tests
+    *
+    * */
     @Test
     public void createPlaylistSuccessTest(){
         Playlist playlist = new Playlist();
@@ -49,6 +54,11 @@ public class PlaylistServiceTest {
         Assert.assertTrue(result);
     }
 
+    /*
+    *
+    * Read Tests
+    *
+    * */
     @Test
     public void readPlaylistTest(){
         Playlist playlist = new Playlist();
@@ -86,6 +96,11 @@ public class PlaylistServiceTest {
         Assert.assertNull(foundSongs);
     }
 
+    /*
+    *
+    * Update Tests
+    *
+    * */
     @Test
     public void updatePlaylistSuccessTest(){
         Playlist playlist = new Playlist();
@@ -117,6 +132,63 @@ public class PlaylistServiceTest {
         Assert.assertNull(foundPlaylist);
     }
 
+    @Test
+    public void updatePlaylistSongSuccessTest(){
+        String playlistId = "goodId";
+
+        Song song1 = new Song();
+        Song song2 = new Song();
+        song1.setSongId("s1");
+        song2.setSongId("s2");
+
+        List<Song> songs = new ArrayList<>();
+        songs.add(song1);
+
+        Playlist playlist = new Playlist();
+        playlist.setSongs(songs);
+
+        Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.of(playlist));
+
+        Playlist updatedPlaylist = playlistService.updatePlaylistSongs(playlistId,song2);
+
+        Assert.assertEquals(updatedPlaylist.getSongs().size(),2);
+    }
+
+    @Test
+    public void updatePlaylistSongFailureDoesNotExist(){
+        String playlistId = "badId";
+        Song song = new Song();
+
+        Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.ofNullable(null));
+
+        Playlist updatePlaylist = playlistService.updatePlaylistSongs(playlistId,song);
+
+        Assert.assertNull(updatePlaylist);
+    }
+
+    @Test
+    public void updatePlaylistSongFailureAlreadyExists(){
+        String playlistId = "goodId";
+
+        Song song = new Song();
+
+        List<Song> songs = new ArrayList<>();
+        songs.add(song);
+
+        Playlist playlist = new Playlist();
+        playlist.setSongs(songs);
+
+        Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.of(playlist));
+
+        Playlist updatedPlaylist = playlistService.updatePlaylistSongs(playlistId,song);
+
+        Assert.assertNull(updatedPlaylist);
+    }
+    /*
+    *
+    * Delete Tests
+    *
+    * */
     @Test
     public void deletePlaylistTest(){
         Playlist playlist = new Playlist();
