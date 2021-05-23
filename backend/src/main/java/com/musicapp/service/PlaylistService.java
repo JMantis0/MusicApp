@@ -1,6 +1,7 @@
 package com.musicapp.service;
 
 import com.musicapp.model.Playlist;
+import com.musicapp.model.Song;
 import com.musicapp.model.User;
 import com.musicapp.repository.PlaylistRepository;
 import lombok.AllArgsConstructor;
@@ -58,5 +59,19 @@ public class PlaylistService implements IPlaylistService{
     @Override
     public void deletePlaylist(Playlist playlist) {
         playlistRepository.delete(playlist);
+    }
+
+    /**
+     * Gets the songs on a specified playlist, null otherwise
+     * @param playlistId The id of the playlist to find
+     * @return The list of songs on the playlist
+     */
+    @Override
+    public List<Song> readPlaylistSongsByPlaylistId(String playlistId) {
+        Playlist foundPlaylist = playlistRepository.findById(playlistId).orElse(null);
+        if (foundPlaylist == null){
+            return null;
+        }
+        return foundPlaylist.getSongs();
     }
 }

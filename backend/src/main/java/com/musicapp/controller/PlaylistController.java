@@ -1,7 +1,7 @@
 package com.musicapp.controller;
 
 import com.musicapp.model.Playlist;
-import com.musicapp.model.User;
+import com.musicapp.model.Song;
 import com.musicapp.service.PlaylistService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -43,6 +43,20 @@ public class PlaylistController {
     public ResponseEntity<List<Playlist>> readPlaylist(@RequestParam String username){
         List<Playlist> playlists = playlistService.readPlaylist(username);
         return new ResponseEntity<>(playlists,HttpStatus.OK);
+    }
+
+    /**
+     * Gets a list of all songs in a playlist, determined by playlist Id
+     * @param playlistId The Id of the playlist to find
+     * @return The list of songs in the playlist, 401 status if no playlist found
+     */
+    @GetMapping("/read/playlist/song")
+    public ResponseEntity<List<Song>> readPlaylistSongsByPlaylistId(@RequestParam String playlistId){
+        List<Song> songs = playlistService.readPlaylistSongsByPlaylistId(playlistId);
+        if (songs == null){
+            return new ResponseEntity<>(HttpStatus.valueOf(401));
+        }
+        return new ResponseEntity<>(songs,HttpStatus.OK);
     }
 
     /**
