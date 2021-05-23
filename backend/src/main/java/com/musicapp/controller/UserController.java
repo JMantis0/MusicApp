@@ -45,7 +45,7 @@ public class UserController {
      * @param username The username to find
      * @return The response entity containing the user
      */
-    @GetMapping("/get/User/Username")
+    @GetMapping("/read/user/username")
     public ResponseEntity<User> findUserByUsername(@RequestParam String username){
         User foundUser = userService.findByUsername(username);
         if (foundUser == null){
@@ -53,6 +53,8 @@ public class UserController {
         }
         return new ResponseEntity<>(foundUser,HttpStatus.OK);
     }
+
+
 
     /**
      * Logs in a user. Takes a request and converts it into a pojo
@@ -71,6 +73,5 @@ public class UserController {
         }
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
-
 
 }

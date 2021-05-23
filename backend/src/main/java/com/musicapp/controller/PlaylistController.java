@@ -1,7 +1,7 @@
 package com.musicapp.controller;
 
 import com.musicapp.model.Playlist;
-import com.musicapp.model.User;
+import com.musicapp.model.Song;
 import com.musicapp.service.PlaylistService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -34,6 +34,8 @@ public class PlaylistController {
         return new ResponseEntity<>(HttpStatus.valueOf(401));
     }
 
+
+
     /**
      * Gets all playlists of a given user
      * @param username The user to get the playlists of
@@ -46,11 +48,27 @@ public class PlaylistController {
     }
 
     /**
+     * Gets a list of all songs in a playlist, determined by playlist Id
+     * @param playlistId The Id of the playlist to find
+     * @return The list of songs in the playlist, 401 status if no playlist found
+     */
+    @GetMapping("/read/playlist/song")
+    public ResponseEntity<List<Song>> readPlaylistSongsByPlaylistId(@RequestParam String playlistId){
+        List<Song> songs = playlistService.readPlaylistSongsByPlaylistId(playlistId);
+        if (songs == null){
+            return new ResponseEntity<>(HttpStatus.valueOf(401));
+        }
+        return new ResponseEntity<>(songs,HttpStatus.OK);
+    }
+
+
+
+    /**
      * The playlist updating
      * @param playlist The playlist containing the updated information
      * @return The playlist and status code
      */
-    @PutMapping("/update_playlist_songs")
+    @PutMapping("/update/playlist")
     public ResponseEntity<Playlist> updatePlaylist(@RequestBody Playlist playlist){
         Playlist updatedPlaylist = playlistService.updatePlaylist(playlist);
         if (updatedPlaylist != null){
@@ -58,6 +76,20 @@ public class PlaylistController {
         }
         return new ResponseEntity<>(HttpStatus.valueOf(401));
     }
+
+    /**
+     * Updates a playlist, given with the ID, with the song listed.
+     */
+    @PutMapping("/update/playlist/song")
+    public ResponseEntity<Playlist> updatePlaylistSongs(@RequestParam String playlistId, @RequestBody Song song){
+        Playlist updatedPlaylist = playlistService.updatePlaylistSongs(playlistId,song);
+        if (updatedPlaylist != null){
+            return new ResponseEntity<>(updatedPlaylist,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.valueOf(401));
+    }
+
+
 
     /**
      * Delete a given playlist

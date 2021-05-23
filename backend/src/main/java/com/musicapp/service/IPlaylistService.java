@@ -1,7 +1,7 @@
 package com.musicapp.service;
 
 import com.musicapp.model.Playlist;
-import com.musicapp.model.User;
+import com.musicapp.model.Song;
 
 import java.util.List;
 
@@ -13,4 +13,5 @@ public interface IPlaylistService {
     List<Playlist> readPlaylist(String username);
     Playlist updatePlaylist(Playlist playlist);
     void deletePlaylist(Playlist playlist);
+    List<Song> readPlaylistSongsByPlaylistId(String playlistId);
 }

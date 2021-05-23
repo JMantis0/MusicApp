@@ -2,6 +2,7 @@ package com.musicapp.controller;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.musicapp.model.Playlist;
+import com.musicapp.model.Song;
 import com.musicapp.model.User;
 import com.musicapp.service.PlaylistService;
 import org.junit.Assert;
@@ -53,6 +54,25 @@ public class PlaylistControllerTest {
     }
 
     @Test
+    public void readPlaylistSongsByPlaylistIdSuccessTest(){
+        String playlistId = "good Id";
+        List<Song> songs = new ArrayList<>();
+        Mockito.when(playlistService.readPlaylistSongsByPlaylistId(playlistId)).thenReturn(songs);
+
+        ResponseEntity<List<Song>> result = playlistController.readPlaylistSongsByPlaylistId(playlistId);
+        Assert.assertEquals(result.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    public void readPlaylistSongsByPlaylistIdFailureTest(){
+        String playlistId = "bad Id";
+        Mockito.when(playlistService.readPlaylistSongsByPlaylistId(playlistId)).thenReturn(null);
+
+        ResponseEntity<List<Song>> result = playlistController.readPlaylistSongsByPlaylistId(playlistId);
+        Assert.assertEquals(result.getStatusCode(),HttpStatus.valueOf(401));
+    }
+
+    @Test
     public void updatePlaylistSuccessTest(){
         Playlist playlist = new Playlist();
 
@@ -71,10 +91,36 @@ public class PlaylistControllerTest {
     }
 
     @Test
+    public void updatePlaylistSongsSuccessTest(){
+        String playlistId = "goodId";
+        Song song = new Song();
+        Playlist playlist = new Playlist();
+
+        Mockito.when(playlistService.updatePlaylistSongs(playlistId,song)).thenReturn(playlist);
+
+        ResponseEntity<Playlist> result = playlistController.updatePlaylistSongs(playlistId,song);
+
+        Assert.assertEquals(result.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    public void updatePlaylistSongsFailureTest(){
+        String playlistId = "badId";
+        Song song = new Song();
+
+        Mockito.when(playlistService.updatePlaylistSongs(playlistId,song)).thenReturn(null);
+
+        ResponseEntity<Playlist> result = playlistController.updatePlaylistSongs(playlistId,song);
+
+        Assert.assertEquals(result.getStatusCode(),HttpStatus.valueOf(401));
+;    }
+
+    @Test
     public void deletePlaylistTest(){
         Playlist playlist = new Playlist();
 
         ResponseEntity<Playlist> result = playlistController.deletePlaylist(playlist);
         Assert.assertEquals(result.getStatusCode(),HttpStatus.OK);
     }
+
 }
