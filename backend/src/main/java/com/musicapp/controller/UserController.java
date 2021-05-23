@@ -54,6 +54,8 @@ public class UserController {
         return new ResponseEntity<>(foundUser,HttpStatus.OK);
     }
 
+
+
     /**
      * Logs in a user. Takes a request and converts it into a pojo
      * @param request The request converted into a user pojo. Only contains the "username" and "password" fields
@@ -71,6 +73,5 @@ public class UserController {
         }
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
-
 
 }

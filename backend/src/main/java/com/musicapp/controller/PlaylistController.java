@@ -34,6 +34,8 @@ public class PlaylistController {
         return new ResponseEntity<>(HttpStatus.valueOf(401));
     }
 
+
+
     /**
      * Gets all playlists of a given user
      * @param username The user to get the playlists of
@@ -58,6 +60,8 @@ public class PlaylistController {
         }
         return new ResponseEntity<>(songs,HttpStatus.OK);
     }
+
+
 
     /**
      * The playlist updating
@@ -84,6 +88,8 @@ public class PlaylistController {
         }
         return new ResponseEntity<>(HttpStatus.valueOf(401));
     }
+
+
 
     /**
      * Delete a given playlist

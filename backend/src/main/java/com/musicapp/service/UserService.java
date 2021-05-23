@@ -57,6 +57,8 @@ public class UserService implements IUserService {
         return null;
     }
 
+
+
     /**
      * Method for finding and returning a user depending on the entered username
      * @param username The username of the user to find
