@@ -71,4 +71,13 @@ public class UserServiceTest {
 
         Assert.assertNull(foundUser);
     }
+
+    @Test
+    public void findUserByUsernameTest(){
+        User user = new User();
+        String username = "username";
+        Mockito.when(userRepository.findByUsername(username)).thenReturn(user);
+        User foundUser = userService.findByUsername(username);
+        Assert.assertEquals(user,foundUser);
+    }
 }

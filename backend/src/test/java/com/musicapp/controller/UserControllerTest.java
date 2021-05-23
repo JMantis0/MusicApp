@@ -57,4 +57,22 @@ public class UserControllerTest {
 
         Assert.assertEquals(response.getStatusCode(), HttpStatus.valueOf(401));
     }
+
+    @Test
+    public void findUserByUsernameSuccessTest(){
+        User user = new User();
+        String username = "username";
+        Mockito.when(userService.findByUsername(username)).thenReturn(user);
+        ResponseEntity<User> response = userController.findUserByUsername(username);
+        Assert.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    public void findUserByUsernameFailureTest(){
+        String username = "noSuchName";
+        Mockito.when(userService.findByUsername(username)).thenReturn(null);
+        ResponseEntity<User> response = userController.findUserByUsername(username);
+        Assert.assertEquals(response.getStatusCode(),HttpStatus.valueOf(401));
+    }
+
 }
