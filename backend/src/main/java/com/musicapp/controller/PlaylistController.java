@@ -58,4 +58,15 @@ public class PlaylistController {
         }
         return new ResponseEntity<>(HttpStatus.valueOf(401));
     }
+
+    /**
+     * Delete a given playlist
+     * @param playlist The playlist to delete
+     * @return The status of the delete
+     */
+    @DeleteMapping("/delete/playlist")
+    public ResponseEntity<Playlist> deletePlaylist(@RequestParam Playlist playlist){
+        playlistService.deletePlaylist(playlist);
+        return new ResponseEntity<Playlist>(HttpStatus.OK);
+    }
 }
