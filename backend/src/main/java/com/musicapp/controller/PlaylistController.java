@@ -39,7 +39,7 @@ public class PlaylistController {
      * @param username The user to get the playlists of
      * @return The playlists
      */
-    @GetMapping("/read_playlist")
+    @GetMapping("/read/playlist/user")
     public ResponseEntity<List<Playlist>> readPlaylist(@RequestParam String username){
         List<Playlist> playlists = playlistService.readPlaylist(username);
         return new ResponseEntity<>(playlists,HttpStatus.OK);

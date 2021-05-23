@@ -22,7 +22,7 @@ const UserHome = () => {
   const [playlists, setPlaylists] = useState<typeof Playlist[]>([]);
 
   const getPlaylists = () => {
-    const queryString = `http://localhost:8080/api/read_playlist`;
+    const queryString = `http://localhost:8080/api/read/playlist/user`;
 
     const body = {
       params: {
