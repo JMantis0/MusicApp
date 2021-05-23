@@ -74,4 +74,27 @@ public class PlaylistService implements IPlaylistService{
         }
         return foundPlaylist.getSongs();
     }
+
+    /**
+     * Adds a song to the listed playlist
+     * @param playlistId The playlist to add the song to
+     * @param song The song to be added
+     * @return The updated playlist
+     */
+    public Playlist updatePlaylistSongs(String playlistId, Song song) {
+        Playlist foundPlaylist = playlistRepository.findById(playlistId).orElse(null);
+        //make sure the playlist exists
+        if (foundPlaylist == null) {
+            return null;
+        }
+        List<Song> songs = foundPlaylist.getSongs();
+        //make sure it's not inside of the playlist already
+        if (songs.contains(song)){
+            return null;
+        }
+        songs.add(song);
+        foundPlaylist.setSongs(songs);
+        playlistRepository.save(foundPlaylist);
+        return foundPlaylist;
+    }
 }
