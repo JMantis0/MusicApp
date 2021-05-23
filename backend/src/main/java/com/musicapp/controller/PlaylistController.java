@@ -25,7 +25,7 @@ public class PlaylistController {
      * @param playlist The new playlist
      * @return The status of the attempt
      */
-    @PostMapping("/create_playlist")
+    @PostMapping("/create/playlist")
     public ResponseEntity<Playlist> createPlaylist(@RequestBody Playlist playlist) {
         if (playlistService.createPlaylist(playlist))
         {
@@ -39,7 +39,7 @@ public class PlaylistController {
      * @param username The user to get the playlists of
      * @return The playlists
      */
-    @GetMapping("/read_playlist")
+    @GetMapping("/read/playlist/user")
     public ResponseEntity<List<Playlist>> readPlaylist(@RequestParam String username){
         List<Playlist> playlists = playlistService.readPlaylist(username);
         return new ResponseEntity<>(playlists,HttpStatus.OK);
@@ -57,5 +57,16 @@ public class PlaylistController {
             return new ResponseEntity<>(updatedPlaylist,HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.valueOf(401));
+    }
+
+    /**
+     * Delete a given playlist
+     * @param playlist The playlist to delete
+     * @return The status of the delete
+     */
+    @DeleteMapping("/delete/playlist")
+    public ResponseEntity<Playlist> deletePlaylist(@RequestParam Playlist playlist){
+        playlistService.deletePlaylist(playlist);
+        return new ResponseEntity<Playlist>(HttpStatus.OK);
     }
 }

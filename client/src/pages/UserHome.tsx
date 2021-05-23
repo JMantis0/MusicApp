@@ -20,7 +20,8 @@ const UserHome = () => {
   // This is how to hook into the dispatcher.
   const dispatch = useAppDispatch();
   const getPlaylists = () => {
-    const queryString = `http://localhost:8080/api/read_playlist`;
+    const queryString = `http://localhost:8080/api/read/playlist/user`;
+
     const body = {
       params: {
         username: musicAppState.user.username,

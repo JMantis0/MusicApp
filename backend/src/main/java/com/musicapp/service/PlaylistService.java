@@ -32,7 +32,7 @@ public class PlaylistService implements IPlaylistService{
 
     /**
      * Returns all playlists of a specified user
-     * @param user The user to find the playlists of
+     * @param username The user to find the playlists of
      * @return The list of playlists of the specified user
      */
     @Override
@@ -53,5 +53,10 @@ public class PlaylistService implements IPlaylistService{
             playlistRepository.save(playlist);
         }
         return foundPlaylist;
+    }
+
+    @Override
+    public void deletePlaylist(Playlist playlist) {
+        playlistRepository.delete(playlist);
     }
 }

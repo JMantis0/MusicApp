@@ -12,4 +12,5 @@ public interface IPlaylistService {
     boolean createPlaylist(Playlist playlist);
     List<Playlist> readPlaylist(String username);
     Playlist updatePlaylist(Playlist playlist);
+    void deletePlaylist(Playlist playlist);
 }

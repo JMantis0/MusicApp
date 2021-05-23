@@ -5,6 +5,7 @@ import com.musicapp.model.Playlist;
 import com.musicapp.model.User;
 import com.musicapp.service.PlaylistService;
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -42,12 +43,11 @@ public class PlaylistControllerTest {
 
     @Test
     public void readPlaylistTest(){
-        User user = new User();
         List<Playlist> playlists = new ArrayList<>();
         Playlist playlist1 = new Playlist();
 
-        Mockito.when(playlistService.readPlaylist(user)).thenReturn(playlists);
-        ResponseEntity<List<Playlist>> result = playlistController.readPlaylist(user);
+        Mockito.when(playlistService.readPlaylist("username")).thenReturn(playlists);
+        ResponseEntity<List<Playlist>> result = playlistController.readPlaylist("username");
         Assert.assertEquals(result.getStatusCode(),HttpStatus.OK);
 
     }
@@ -68,5 +68,13 @@ public class PlaylistControllerTest {
         Mockito.when(playlistService.updatePlaylist(playlist)).thenReturn(null);
         ResponseEntity<Playlist> result = playlistController.updatePlaylist(playlist);
         Assert.assertEquals(result.getStatusCode(),HttpStatus.valueOf(401));
+    }
+
+    @Test
+    public void deletePlaylistTest(){
+        Playlist playlist = new Playlist();
+
+        ResponseEntity<Playlist> result = playlistController.deletePlaylist(playlist);
+        Assert.assertEquals(result.getStatusCode(),HttpStatus.OK);
     }
 }
