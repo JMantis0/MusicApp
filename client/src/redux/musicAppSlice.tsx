@@ -3,7 +3,6 @@ import {
   createSlice,
   //  PayloadAction
 } from "@reduxjs/toolkit";
-import Playlists from "../pages/Playlists";
 import {
   RootState,
   //  AppThunk
@@ -16,7 +15,7 @@ export interface MusicAppState {
     username: string;
     playlistName: string;
     songs: Array<{
-      trackId: string;
+      songId: string;
       title: string;
       preview: string;
       artist: { artistId: string; name: string; picture: string };
@@ -27,15 +26,15 @@ export interface MusicAppState {
     username: string;
     playlistName: string;
     songs: Array<{
-      trackId: string;
+      songId: string;
       title: string;
       preview: string;
       artist: { artistId: string; name: string; picture: string };
       album: { albumId: string; title: string; cover: string };
     }>;
   };
-  track: {
-    trackId: string;
+  song: {
+    songId: string;
     title: string;
     preview: string;
     artist: { artistId: string; name: string; picture: string };
@@ -62,8 +61,8 @@ const initialState: MusicAppState = {
     songs: [],
   },
   playlists: [],
-  track: {
-    trackId: "",
+  song: {
+    songId: "",
     title: "",
     preview: "",
     artist: { artistId: "", name: "", picture: "" },
@@ -106,7 +105,7 @@ export const musicAppSlice = createSlice({
           username: string;
           playlistName: string;
           songs: Array<{
-            trackId: string;
+            songId: string;
             title: string;
             preview: string;
             artist: { artistId: string; name: string; picture: string };
@@ -125,7 +124,7 @@ export const musicAppSlice = createSlice({
           username: string;
           playlistName: string;
           songs: Array<{
-            trackId: string;
+            songId: string;
             title: string;
             preview: string;
             artist: { artistId: string; name: string; picture: string };
@@ -137,11 +136,11 @@ export const musicAppSlice = createSlice({
       console.log("Dispatching addPlaylist reducer with action: ", action);
       state.playlists = [...state.playlists, action.payload];
     },
-    setTrack: (
+    setSong: (
       state,
       action: {
         payload: {
-          trackId: string;
+          songId: string;
           title: string;
           preview: string;
           artist: { artistId: string; name: string; picture: string };
@@ -149,8 +148,8 @@ export const musicAppSlice = createSlice({
         };
       }
     ) => {
-      console.log("Dispatching setTrack reducer with action: ", action);
-      state.track = action.payload;
+      console.log("Dispatching setSong reducer with action: ", action);
+      state.song = action.payload;
     },
     setUser: (
       state,
@@ -209,7 +208,7 @@ export const {
   setArtist,
   addPlaylist,
   setPlaylists,
-  setTrack,
+  setSong,
   setUser,
   logoutUser,
   setLoginForm,
