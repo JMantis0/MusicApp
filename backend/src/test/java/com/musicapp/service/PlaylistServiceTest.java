@@ -1,6 +1,7 @@
 package com.musicapp.service;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.musicapp.model.Playlist;
+import com.musicapp.model.Song;
 import com.musicapp.model.User;
 import com.musicapp.repository.PlaylistRepository;
 import org.junit.Assert;
@@ -10,6 +11,7 @@ import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PlaylistServiceTest {
     private PlaylistRepository playlistRepository = Mockito.mock(PlaylistRepository.class);
@@ -59,6 +61,29 @@ public class PlaylistServiceTest {
 
         List<Playlist> foundPlaylists = playlistService.readPlaylist("username");
         Assert.assertEquals("Playlist Name", foundPlaylists.get(0).getPlaylistName());
+    }
+
+    @Test
+    public void readPlaylistSongsByPlaylistIdSuccessTest(){
+        String playlistId = "good id";
+        Playlist playlist = new Playlist();
+        List<Song> songs = new ArrayList<>();
+
+        playlist.setSongs(songs);
+
+        Mockito.when(playlistRepository.findById(playlistId)).thenReturn(java.util.Optional.of(playlist));
+
+        List<Song> foundSongs = playlistService.readPlaylistSongsByPlaylistId(playlistId);
+        Assert.assertEquals(songs,foundSongs);
+    }
+
+    @Test
+    public void readPlaylistSongsByPlaylistIdFailureTest(){
+        String playlistId = "bad Id";
+
+        Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.ofNullable(null));
+        List<Song> foundSongs = playlistService.readPlaylistSongsByPlaylistId(playlistId);
+        Assert.assertNull(foundSongs);
     }
 
     @Test
