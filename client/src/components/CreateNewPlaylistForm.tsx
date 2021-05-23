@@ -22,7 +22,7 @@ const CreateNewPlaylistForm = () => {
       songs: []
     }
     console.log("Making post request to /api/create_playlist with data: ", newPlaylist);
-    axios.post("http://localhost:8080/api/create_playlist", newPlaylist).then(response => {
+    axios.post("http://localhost:8080/api/create/playlist", newPlaylist).then(response => {
       console.log("The Response is: ", response);
   
       console.log("Adding new playlist to redux state");
