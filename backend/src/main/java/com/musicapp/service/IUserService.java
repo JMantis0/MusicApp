@@ -16,4 +16,6 @@ public interface IUserService {
     void delete(String id);
     */
     User logIn(User user);
+
+    User findByUsername(String username);
 }
