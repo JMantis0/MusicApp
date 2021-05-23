@@ -4,8 +4,10 @@ import FormLabel from "@material-ui/core/FormLabel";
 import Grid from "@material-ui/core/Grid";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import {
- setLoginForm, resetLoginForm,
+  setLoginForm,
+  resetLoginForm,
   selectMusicApp,
+  setUser,
 } from "../redux/musicAppSlice";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -30,13 +32,15 @@ const Login = () => {
       .post("http://localhost:8080/api/login", musicAppState.loginForm)
       .then((response) => {
         console.log("The response is: ", response);
+        const currentUser = response.data;
+        dispatch(setUser(currentUser));
         history.push("/user_home");
       })
       .catch((err) => {
-        console.log("There was an error");
+        console.log("There was an error", err);
         dispatch(resetLoginForm());
         //  For now a bad login redirects to user home anyways
-        history.push("/user_home");
+        alert("Invalid Credentials");
       });
   };
 

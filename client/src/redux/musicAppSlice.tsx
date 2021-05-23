@@ -102,7 +102,7 @@ export const musicAppSlice = createSlice({
     setPlaylists: (
       state,
       action: {
-        payload: Array<{
+          payload: Array<{
           username: string;
           playlistName: string;
           songs: Array<{

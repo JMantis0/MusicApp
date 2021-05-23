@@ -27,10 +27,18 @@
   color: white;
 }
 
+.red {
+  background-color: red;
+}
+
 .paperPadding {
   padding: 0 10px 10px;
 }
 
 .marginTop {
   margin-top: 10px!important;
+}
+
+.margin {
+  margin: 10px!important;
 }
