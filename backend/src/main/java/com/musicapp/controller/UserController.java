@@ -39,12 +39,27 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
     */
+
+    /**
+     * Takes a string and finds a particular user with that particular username
+     * @param username The username to find
+     * @return The response entity containing the user
+     */
+    @GetMapping("/get/User/Username")
+    public ResponseEntity<User> findUserByUsername(@RequestParam String username){
+        User foundUser = userService.findByUsername(username);
+        if (foundUser == null){
+            return new ResponseEntity<>(HttpStatus.valueOf(401));
+        }
+        return new ResponseEntity<>(foundUser,HttpStatus.OK);
+    }
+
     /**
      * Logs in a user. Takes a request and converts it into a pojo
      * @param request The request converted into a user pojo. Only contains the "username" and "password" fields
      * @return The response entity of the log in attempt. Will be 200 if successful and 401 if not
      */
-    @PostMapping("/attempt_login")
+    @PostMapping("/login")
     public ResponseEntity<User> logIn(@RequestBody User request) {
         if (request.getPassword() == null || request.getUsername() == null){
             return new ResponseEntity<User>(HttpStatus.valueOf(401));
@@ -56,4 +71,6 @@ public class UserController {
         }
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
+
+
 }
