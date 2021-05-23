@@ -7,7 +7,6 @@ import LogoutButton from "../components/LogoutButton";
 import SearchDeezerButton from "../components/SearchDeezerButton";
 import CreateNewPlaylistForm from "../components/CreateNewPlaylistForm";
 import PlaylistCard from "../components/PlaylistCard";
-import DeezerResultsViewer from "../components/DeezerResultsViewer";
 
 //  import redux state hooks
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -73,7 +72,6 @@ const UserHome = () => {
             </Grid>
           </Grid>
           <Grid className={style.center} item xs={6}>
-            <DeezerResultsViewer />
           </Grid>
           <Grid className={style.center} item xs={10}></Grid>
           <Grid className={style.center} item xs={2}>
