@@ -49,18 +49,15 @@ public class PlaylistServiceTest {
 
     @Test
     public void readPlaylistTest(){
-        User user = new User();
-        user.setUsername("username");
-
         Playlist playlist = new Playlist();
         playlist.setPlaylistName("Playlist Name");
 
         List<Playlist> playlists = new ArrayList<>();
         playlists.add(playlist);
 
-        Mockito.when(playlistRepository.findByUsername(user.getUsername())).thenReturn(playlists);
+        Mockito.when(playlistRepository.findByUsername("username")).thenReturn(playlists);
 
-        List<Playlist> foundPlaylists = playlistService.readPlaylist(user);
+        List<Playlist> foundPlaylists = playlistService.readPlaylist("username");
         Assert.assertEquals("Playlist Name", foundPlaylists.get(0).getPlaylistName());
     }
 
@@ -93,5 +90,12 @@ public class PlaylistServiceTest {
         Playlist foundPlaylist = playlistService.updatePlaylist(playlist);
 
         Assert.assertNull(foundPlaylist);
+    }
+
+    @Test
+    public void deletePlaylistTest(){
+        Playlist playlist = new Playlist();
+
+        playlistService.deletePlaylist(playlist);
     }
 }
