@@ -25,7 +25,7 @@ public class PlaylistController {
      * @param playlist The new playlist
      * @return The status of the attempt
      */
-    @PostMapping("/create_playlist")
+    @PostMapping("/create/playlist")
     public ResponseEntity<Playlist> createPlaylist(@RequestBody Playlist playlist) {
         if (playlistService.createPlaylist(playlist))
         {
