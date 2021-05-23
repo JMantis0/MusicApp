@@ -19,8 +19,6 @@ const UserHome = () => {
   const musicAppState = useAppSelector(selectMusicApp);
   // This is how to hook into the dispatcher.
   const dispatch = useAppDispatch();
-  const [playlists, setPlaylists] = useState<typeof Playlist[]>([]);
-
   const getPlaylists = () => {
     const queryString = `http://localhost:8080/api/read/playlist/user`;
 
@@ -29,35 +27,20 @@ const UserHome = () => {
         username: musicAppState.user.username,
       },
     };
-
     axios
       .get(queryString, body)
       .then((response) => {
         console.log("response", response);
-        const playlistData = response.data.data;
+        const playlistData = response.data;
         //  Dispatch the setPlaylistData reducer to save data to the state
-        // dispatch(setPlaylists(playlistData));
+        dispatch(setPlaylists(playlistData));
         //  Check your redux devtools to see the data
       })
       .catch((error) => {
         console.log("There was an error: ", error);
-        console.log(error.message);
       });
   };
   useMemo(() => {
-    // Get the user data for the user that just successfully logged in.
-
-    // axios.get()
-
-    const user = {
-      userId: "",
-      firstName: "",
-      lastName: "",
-      username: musicAppState.loginForm.username,
-      password: "",
-    }
-
-    dispatch(setUser(user));
     getPlaylists();
   }, []);
 
@@ -90,7 +73,6 @@ const UserHome = () => {
             </Grid>
           </Grid>
           <Grid className={style.center} item xs={6}>
-            Display section
           </Grid>
           <Grid className={style.center} item xs={10}></Grid>
           <Grid className={style.center} item xs={2}>
@@ -100,8 +82,8 @@ const UserHome = () => {
             side section
           </Grid>
           <Grid>
-            {playlists.map((playlist: typeof Playlist) => (
-              <PlaylistCard />
+            {musicAppState.playlists.map((playlist) => (
+              <PlaylistCard playlistName={playlist.playlistName} key={playlist.playlistName} />
             ))}
           </Grid>
           <Grid className={style.center} item xs={10}></Grid>
