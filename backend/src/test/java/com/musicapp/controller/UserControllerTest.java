@@ -2,8 +2,7 @@ package com.musicapp.controller;
 
 import com.musicapp.model.User;
 import com.musicapp.service.UserService;
-import org.junit.Assert;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
@@ -11,15 +10,15 @@ import org.springframework.http.ResponseEntity;
 
 public class UserControllerTest {
 
-    private UserService userService = Mockito.mock(UserService.class);
+    private final UserService userService = Mockito.mock(UserService.class);
 
-    private UserController userController = new UserController(userService);
+    private final UserController userController = new UserController(userService);
 
-    // this is necessary to run effective tests
-    @BeforeEach
-    public void setUp() {
-
-    }
+    /*
+    *
+    * Log in tests
+    *
+    * */
 
     @Test
     public void logInSuccess() {
@@ -31,7 +30,7 @@ public class UserControllerTest {
 
         ResponseEntity<User> response = userController.logIn(goodUser);
 
-        Assert.assertEquals(response.getStatusCode(), HttpStatus.OK);
+        Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
     }
 
     @Test
@@ -44,7 +43,7 @@ public class UserControllerTest {
 
         ResponseEntity<User> response = userController.logIn(badUser);
 
-        Assert.assertEquals(response.getStatusCode(), HttpStatus.valueOf(401));
+        Assertions.assertEquals(response.getStatusCode(), HttpStatus.valueOf(401));
     }
 
     @Test
@@ -55,8 +54,20 @@ public class UserControllerTest {
 
         ResponseEntity<User> response = userController.logIn(nullUser);
 
-        Assert.assertEquals(response.getStatusCode(), HttpStatus.valueOf(401));
+        Assertions.assertEquals(response.getStatusCode(), HttpStatus.valueOf(401));
     }
+
+    /*
+    *
+    * Create tests
+    *
+    * */
+
+    /*
+    *
+    * Read Tests
+    *
+    * */
 
     @Test
     public void findUserByUsernameSuccessTest(){
@@ -64,7 +75,7 @@ public class UserControllerTest {
         String username = "username";
         Mockito.when(userService.findByUsername(username)).thenReturn(user);
         ResponseEntity<User> response = userController.findUserByUsername(username);
-        Assert.assertEquals(response.getStatusCode(),HttpStatus.OK);
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
     }
 
     @Test
@@ -72,7 +83,25 @@ public class UserControllerTest {
         String username = "noSuchName";
         Mockito.when(userService.findByUsername(username)).thenReturn(null);
         ResponseEntity<User> response = userController.findUserByUsername(username);
-        Assert.assertEquals(response.getStatusCode(),HttpStatus.valueOf(401));
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.valueOf(401));
     }
 
+    /*
+    *
+    * Update Tests
+    *
+    * */
+
+    @Test void updateUserTest(){
+        User user = new User();
+        Mockito.when(userService.updateUser(user)).thenReturn(user);
+        ResponseEntity<User> response = userController.update(user);
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
+    /*
+    *
+    * Delete Tests
+    *
+    * */
 }

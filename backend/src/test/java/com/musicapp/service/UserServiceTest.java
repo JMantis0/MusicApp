@@ -2,23 +2,22 @@ package com.musicapp.service;
 
 import com.musicapp.model.User;
 import com.musicapp.repository.UserRepository;
-import org.junit.Assert;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import org.mockito.Mockito;
 
 public class UserServiceTest {
 
-    private UserRepository userRepository = Mockito.mock(UserRepository.class);
+    private final UserRepository userRepository = Mockito.mock(UserRepository.class);
 
-    private UserService userService = new UserService(userRepository);
+    private final UserService userService = new UserService(userRepository);
 
-    // this is necessary to run effective tests
-    @BeforeEach
-    public void setUp() {
-
-    }
+    /*
+     *
+     *  Log in tests
+     *
+     */
 
     @Test
     public void logInSuccess() {
@@ -38,7 +37,7 @@ public class UserServiceTest {
 
         User foundUser = userService.logIn(user);
 
-        Assert.assertEquals(foundUser.getUserId(),user.getUserId());
+        Assertions.assertEquals(foundUser.getUserId(),user.getUserId());
     }
 
     @Test
@@ -58,7 +57,7 @@ public class UserServiceTest {
 
         User foundUser = userService.logIn(user);
 
-        Assert.assertNull(foundUser);
+        Assertions.assertNull(foundUser);
     }
 
     @Test
@@ -69,8 +68,20 @@ public class UserServiceTest {
 
         User foundUser = userService.logIn(nullUser);
 
-        Assert.assertNull(foundUser);
+        Assertions.assertNull(foundUser);
     }
+
+    /*
+    *
+    * Creation tests
+    *
+    * */
+
+    /*
+    *
+    * Read Tests
+    *
+    * */
 
     @Test
     public void findUserByUsernameTest(){
@@ -78,6 +89,40 @@ public class UserServiceTest {
         String username = "username";
         Mockito.when(userRepository.findByUsername(username)).thenReturn(user);
         User foundUser = userService.findByUsername(username);
-        Assert.assertEquals(user,foundUser);
+        Assertions.assertEquals(user,foundUser);
     }
+
+    /*
+    *
+    * Update Tests
+    *
+    * */
+
+    @Test
+    public void updateUserSuccessTest(){
+        User user = new User();
+        user.setUsername("goodUsername");
+
+        Mockito.when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
+
+        User foundUser = userService.updateUser(user);
+        Assertions.assertEquals(user,foundUser);
+    }
+
+    @Test
+    public void updateUserFailureTest(){
+        User user = new User();
+        user.setUsername("badUsername");
+
+        Mockito.when(userRepository.findByUsername(user.getUsername())).thenReturn(null);
+
+        User foundUser = userService.updateUser(user);
+        Assertions.assertNull(foundUser);
+    }
+
+    /*
+    *
+    * Delete Tests
+    *
+    * */
 }

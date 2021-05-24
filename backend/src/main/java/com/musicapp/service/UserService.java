@@ -25,14 +25,6 @@ public class UserService implements IUserService {
         return userRepository.findAll();
     }
 
-    @Override
-    public User update(User user) {
-        userRepository.findById(user.getUserId()).orElseThrow(
-                () -> new IllegalArgumentException("User does not exist")
-        );
-        return userRepository.save(user);
-    }
-
 
     @Override
     public void delete(String id) {
@@ -67,5 +59,23 @@ public class UserService implements IUserService {
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+
+
+    /**
+     * Updates a user in the DB based on their username
+     * @param user The user to update and the updated info
+     * @return The updated user
+     */
+    @Override
+    public User updateUser(User user){
+        User foundUser = userRepository.findByUsername(user.getUsername());
+        if (foundUser == null){
+            return null;
+        }
+        userRepository.deleteById(foundUser.getUserId());
+        userRepository.save(user);
+        return user;
     }
 }

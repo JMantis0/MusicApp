@@ -1,12 +1,9 @@
 package com.musicapp.service;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.musicapp.model.Playlist;
 import com.musicapp.model.Song;
-import com.musicapp.model.User;
 import com.musicapp.repository.PlaylistRepository;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -14,9 +11,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class PlaylistServiceTest {
-    private PlaylistRepository playlistRepository = Mockito.mock(PlaylistRepository.class);
+    private final PlaylistRepository playlistRepository = Mockito.mock(PlaylistRepository.class);
 
-    private PlaylistService playlistService = new PlaylistService(playlistRepository);
+    private final PlaylistService playlistService = new PlaylistService(playlistRepository);
 
     /*
     *
@@ -36,7 +33,7 @@ public class PlaylistServiceTest {
 
         boolean result = playlistService.createPlaylist(playlist);
 
-        Assert.assertFalse(result);
+        Assertions.assertFalse(result);
     }
 
     @Test
@@ -51,7 +48,7 @@ public class PlaylistServiceTest {
 
         boolean result = playlistService.createPlaylist(playlist);
 
-        Assert.assertTrue(result);
+        Assertions.assertTrue(result);
     }
 
     /*
@@ -70,7 +67,7 @@ public class PlaylistServiceTest {
         Mockito.when(playlistRepository.findByUsername("username")).thenReturn(playlists);
 
         List<Playlist> foundPlaylists = playlistService.readPlaylist("username");
-        Assert.assertEquals("Playlist Name", foundPlaylists.get(0).getPlaylistName());
+        Assertions.assertEquals("Playlist Name", foundPlaylists.get(0).getPlaylistName());
     }
 
     @Test
@@ -84,16 +81,16 @@ public class PlaylistServiceTest {
         Mockito.when(playlistRepository.findById(playlistId)).thenReturn(java.util.Optional.of(playlist));
 
         List<Song> foundSongs = playlistService.readPlaylistSongsByPlaylistId(playlistId);
-        Assert.assertEquals(songs,foundSongs);
+        Assertions.assertEquals(songs,foundSongs);
     }
 
     @Test
     public void readPlaylistSongsByPlaylistIdFailureTest(){
         String playlistId = "bad Id";
 
-        Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.ofNullable(null));
+        Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.empty());
         List<Song> foundSongs = playlistService.readPlaylistSongsByPlaylistId(playlistId);
-        Assert.assertNull(foundSongs);
+        Assertions.assertNull(foundSongs);
     }
 
     /*
@@ -113,7 +110,7 @@ public class PlaylistServiceTest {
 
         Playlist foundPlaylist = playlistService.updatePlaylist(playlist);
 
-        Assert.assertEquals(playlist, foundPlaylist);
+        Assertions.assertEquals(playlist, foundPlaylist);
 
     }
 
@@ -129,7 +126,7 @@ public class PlaylistServiceTest {
 
         Playlist foundPlaylist = playlistService.updatePlaylist(playlist);
 
-        Assert.assertNull(foundPlaylist);
+        Assertions.assertNull(foundPlaylist);
     }
 
     @Test
@@ -151,7 +148,7 @@ public class PlaylistServiceTest {
 
         Playlist updatedPlaylist = playlistService.updatePlaylistSongs(playlistId,song2);
 
-        Assert.assertEquals(updatedPlaylist.getSongs().size(),2);
+        Assertions.assertEquals(updatedPlaylist.getSongs().size(),2);
     }
 
     @Test
@@ -159,11 +156,11 @@ public class PlaylistServiceTest {
         String playlistId = "badId";
         Song song = new Song();
 
-        Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.ofNullable(null));
+        Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.empty());
 
         Playlist updatePlaylist = playlistService.updatePlaylistSongs(playlistId,song);
 
-        Assert.assertNull(updatePlaylist);
+        Assertions.assertNull(updatePlaylist);
     }
 
     @Test
@@ -182,7 +179,7 @@ public class PlaylistServiceTest {
 
         Playlist updatedPlaylist = playlistService.updatePlaylistSongs(playlistId,song);
 
-        Assert.assertNull(updatedPlaylist);
+        Assertions.assertNull(updatedPlaylist);
     }
     /*
     *
