@@ -49,7 +49,7 @@ export interface MusicAppState {
   };
   searchInput: string;
   loginForm: { username: string; password: string };
-  deezerData: object;
+  deezerData: any;
 }
 
 const initialState: MusicAppState = {
@@ -77,7 +77,7 @@ const initialState: MusicAppState = {
   },
   searchInput: "",
   loginForm: { username: "", password: "" },
-  deezerData: {},
+  deezerData: [],
 };
 
 export const musicAppSlice = createSlice({
@@ -177,7 +177,7 @@ export const musicAppSlice = createSlice({
     },
     setLoginForm: (
       state,
-      action: { payload: { fieldName: string; value: string } } 
+      action: { payload: { fieldName: string; value: string } }
     ) => {
       console.log("Dispatching setLoginForm reducer with action: ", action);
       const fieldName = action.payload.fieldName;
@@ -196,7 +196,7 @@ export const musicAppSlice = createSlice({
       console.log("Dispatching setSearchInput with action: ", action);
       state.searchInput = action.payload;
     },
-    setDeezerData: (state, action: { payload: object }) => {
+    setDeezerData: (state, action: { payload: any }) => {
       console.log("Dispatching setDeezerData reducer with action: ", action);
       state.deezerData = action.payload;
     },

@@ -7,7 +7,8 @@ import LogoutButton from "../components/LogoutButton";
 import SearchDeezerButton from "../components/SearchDeezerButton";
 import CreateNewPlaylistForm from "../components/CreateNewPlaylistForm";
 import PlaylistCard from "../components/PlaylistCard";
-
+import DeezerResultsViewer from "../components/DeezerResultsViewer";
+import SampleTable from "../components/SampleTable";
 //  import redux state hooks
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 //  import reducer and state selector
@@ -72,9 +73,10 @@ const UserHome = () => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid className={style.center} item xs={6}>
+          <Grid className={style.center} item xs={6}></Grid>
+          <Grid className={style.center} item xs={10}>
+            <DeezerResultsViewer />
           </Grid>
-          <Grid className={style.center} item xs={10}></Grid>
           <Grid className={style.center} item xs={2}>
             {/* side section */}
           </Grid>
@@ -83,11 +85,16 @@ const UserHome = () => {
           </Grid>
           <Grid>
             {musicAppState.playlists.map((playlist) => (
-              <PlaylistCard playlistName={playlist.playlistName} key={playlist.playlistName} />
+              <PlaylistCard
+                playlistName={playlist.playlistName}
+                key={playlist.playlistName}
+              />
             ))}
           </Grid>
           <Grid className={style.center} item xs={10}></Grid>
-          <Grid className="" item xs={10}></Grid>
+          <Grid className="" item xs={10}>
+            {/* <SampleTable />  */}
+          </Grid>
         </Grid>
       </main>
     </div>
