@@ -109,5 +109,30 @@ public class PlaylistService implements IPlaylistService{
     }
 
 
+    /**
+     * Deletes a song from a playlist
+     * @param playlistId The playlist to delete from
+     * @param songId The song id to delete
+     * @return The updated playlist, null if playlistId or songId do not exist in the repo/playlist
+     */
+    @Override
+    public Playlist deletePlaylistSong(String playlistId, String songId) {
+        Playlist foundPlaylist = playlistRepository.findById(playlistId).orElse(null);
+        // if the playlist doesn't exist
+        if (foundPlaylist == null){
+            return null;
+        }
+        List<Song> songs = foundPlaylist.getSongs();
+        // make sure it doesn't exist in the song list
+        for (Song song : songs){
+            if (song.getSongId().equals(songId)){
+                //remove it and return
+                songs.remove(song);
 
+                playlistRepository.save(foundPlaylist);
+                return foundPlaylist;
+            }
+        }
+        return null;
+    }
 }
