@@ -28,11 +28,6 @@ public class UserController {
         return ResponseEntity.ok(userService.save(request));
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<User> update(@RequestBody User request){
-        return ResponseEntity.ok(userService.update(request));
-    }
-
     @DeleteMapping("/delete")
     public ResponseEntity<User> delete(@RequestBody User request){
         userService.delete(request.getUserId());
@@ -74,4 +69,10 @@ public class UserController {
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
+
+
+    @PutMapping("/update/user")
+    public ResponseEntity<User> update(@RequestBody User request){
+        return ResponseEntity.ok(userService.updateUser(request));
+    }
 }

@@ -1,6 +1,6 @@
 package com.musicapp.model;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 public class UserModelTest {
@@ -20,30 +20,30 @@ public class UserModelTest {
     @Test
     public void userIDTest(){
         String foundID = user.getUserId();
-        Assert.assertEquals("Id",foundID);
+        Assertions.assertEquals("Id",foundID);
     }
 
     @Test
     public void userFirstNameTest(){
         String foundFirstName = user.getFirstName();
-        Assert.assertEquals("FN",foundFirstName);
+        Assertions.assertEquals("FN",foundFirstName);
     }
 
     @Test
     public void userLastNameTest(){
         String foundLastName = user.getLastName();
-        Assert.assertEquals("LN",foundLastName);
+        Assertions.assertEquals("LN",foundLastName);
     }
 
     @Test
     public void userUsernameTest(){
         String foundUsername = user.getUsername();
-        Assert.assertEquals("UN",foundUsername);
+        Assertions.assertEquals("UN",foundUsername);
     }
 
     @Test
     public void userPasswordTest(){
         String foundPassword = user.getPassword();
-        Assert.assertEquals("PW",foundPassword);
+        Assertions.assertEquals("PW",foundPassword);
     }
 }

@@ -1,6 +1,6 @@
 package com.musicapp.model;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,18 +18,18 @@ public class AlbumModelTest {
     @Test
     public void albumIdTest(){
         String foundId = album.getAlbumId();
-        Assert.assertEquals("Id",foundId);
+        Assertions.assertEquals("Id",foundId);
     }
 
     @Test
     public void albumCoverTest(){
         String foundCover = album.getCover();
-        Assert.assertEquals("CV",foundCover);
+        Assertions.assertEquals("CV",foundCover);
     }
 
     @Test
     public void albumTitleTest(){
         String foundTitle = album.getTitle();
-        Assert.assertEquals("TT",foundTitle);
+        Assertions.assertEquals("TT",foundTitle);
     }
 }

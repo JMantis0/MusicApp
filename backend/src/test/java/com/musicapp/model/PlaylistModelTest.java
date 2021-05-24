@@ -1,6 +1,6 @@
 package com.musicapp.model;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ public class PlaylistModelTest {
         Song song3 = new Song();
         song3.setSongId("Id3");
 
-        List<Song> songs = new ArrayList<Song>();
+        List<Song> songs = new ArrayList<>();
         songs.add(track1);
         songs.add(song2);
         songs.add(song3);
@@ -36,26 +36,26 @@ public class PlaylistModelTest {
     @Test
     public void playlistSongsTest(){
         List<Song> foundSongs = playlist.getSongs();
-        Assert.assertEquals("Id1",foundSongs.get(0).getSongId());
-        Assert.assertEquals("Id2",foundSongs.get(1).getSongId());
-        Assert.assertEquals("Id3",foundSongs.get(2).getSongId());
+        Assertions.assertEquals("Id1",foundSongs.get(0).getSongId());
+        Assertions.assertEquals("Id2",foundSongs.get(1).getSongId());
+        Assertions.assertEquals("Id3",foundSongs.get(2).getSongId());
     }
 
     @Test
     public void playlistUserIdTest(){
         String foundUsername = playlist.getUsername();
-        Assert.assertEquals("User",foundUsername);
+        Assertions.assertEquals("User",foundUsername);
     }
 
     @Test
     public void playlistNameTest(){
         String foundName = playlist.getPlaylistName();
-        Assert.assertEquals("Name",foundName);
+        Assertions.assertEquals("Name",foundName);
     }
 
     @Test
     public void playlistIdTest(){
         String foundId = playlist.getPlaylistId();
-        Assert.assertEquals("Id",foundId);
+        Assertions.assertEquals("Id",foundId);
     }
 }
