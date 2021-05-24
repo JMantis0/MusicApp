@@ -24,9 +24,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
-//  import redux state hooks
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-//  import reducer and state selector
+import { useAppSelector } from "../redux/hooks";
 import { selectMusicApp } from "../redux/musicAppSlice";
 interface DeezerData {
   songTitle: string;
@@ -363,7 +361,7 @@ const DeezerSearchResultsViewer = () => {
       );
     }
   );
-  console.log(deezerRows);
+  
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
     property: keyof DeezerData

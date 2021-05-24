@@ -8,12 +8,10 @@ import SearchDeezerButton from "../components/SearchDeezerButton";
 import CreateNewPlaylistForm from "../components/CreateNewPlaylistForm";
 import PlaylistCard from "../components/PlaylistCard";
 import DeezerResultsViewer from "../components/DeezerResultsViewer";
-import SampleTable from "../components/SampleTable";
 //  import redux state hooks
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 //  import reducer and state selector
 import { selectMusicApp, setPlaylists, setUser } from "../redux/musicAppSlice";
-import { Playlist } from "../redux/pojos";
 
 const UserHome = () => {
   // This is how to hook into the redux state.
@@ -93,7 +91,6 @@ const UserHome = () => {
           </Grid>
           <Grid className={style.center} item xs={10}></Grid>
           <Grid className="" item xs={10}>
-            {/* <SampleTable />  */}
           </Grid>
         </Grid>
       </main>
