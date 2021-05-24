@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import axios from "axios";
 import clsx from "clsx";
 import {
   createStyles,
@@ -21,6 +22,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Button from "@material-ui/core/Button";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
@@ -62,10 +64,14 @@ const deezerHeadCells: DeezerHeadCell[] = [
   },
   { id: "picture", numeric: true, disablePadding: false, label: "Picture" },
   { id: "artist", numeric: true, disablePadding: false, label: "Artist" },
-  { id: "albumTitle", numeric: true, disablePadding: false, label: "Album Title" },
+  {
+    id: "albumTitle",
+    numeric: true,
+    disablePadding: false,
+    label: "Album Title",
+  },
   { id: "cover", numeric: true, disablePadding: false, label: "Cover Art" },
   { id: "preview", numeric: false, disablePadding: false, label: "Preview" },
-
 ];
 
 interface DeezerTableProps {
@@ -273,6 +279,11 @@ const DeezerSearchResultsViewer = () => {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const musicAppState = useAppSelector(selectMusicApp);
+
+  const logState = () => {
+    console.log("selected: ", selected);
+  };
+
   const createDeezerData = (
     songTitle: string,
     songId: string,
@@ -361,7 +372,7 @@ const DeezerSearchResultsViewer = () => {
       );
     }
   );
-  
+
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
     property: keyof DeezerData
@@ -420,8 +431,32 @@ const DeezerSearchResultsViewer = () => {
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, deezerRows.length - page * rowsPerPage);
 
+  const saveSelectedSongsToPlaylist = () => {
+    if (selected.length !== 0) {
+      const songsToAdd = deezerRows.filter((song) => {
+        return selected.includes(song.songId);
+      });
+      //  Add the selected songs to the playlist, need username, playlistname, songId, songtitle, preview, artist, album  
+      //  
+      axios
+        .post("http://localhost:8080/api/create/playlist", )
+        .then((response) => {
+      
+  
+        })
+        .catch((error) => {
+          console.log("There was an error: ", error);
+        });
+    }
+  };
+
   return (
     <div className={classes.root}>
+      <button
+        onClick={() => {
+          logState();
+        }}
+      ></button>
       <Paper className={classes.paper}>
         <DeezerTableToolbar numSelected={selected.length} />
         <TableContainer>
@@ -498,6 +533,7 @@ const DeezerSearchResultsViewer = () => {
             </TableBody>
           </Table>
         </TableContainer>
+        <Button onClick={saveSelectedSongsToPlaylist}>Save to Playlist</Button>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
