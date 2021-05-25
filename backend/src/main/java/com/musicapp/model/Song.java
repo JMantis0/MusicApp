@@ -16,6 +16,6 @@ public class Song {
      * Link to the MP3 preview of the track.
      */
     String preview;
-    Artist artist;
-    Album album;
+    String artist;
+    String album;
 }
