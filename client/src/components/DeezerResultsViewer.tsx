@@ -436,17 +436,30 @@ const DeezerSearchResultsViewer = () => {
       const songsToAdd = deezerRows.filter((song) => {
         return selected.includes(song.songId);
       });
-      //  Add the selected songs to the playlist, need username, playlistname, songId, songtitle, preview, artist, album  
-      //  
-      axios
-        .post("http://localhost:8080/api/create/playlist", )
-        .then((response) => {
-      
-  
-        })
-        .catch((error) => {
-          console.log("There was an error: ", error);
-        });
+      //  Add the selected songs to the playlist, need username, playlistname, songId, songtitle, preview, artist, album
+      //
+      songsToAdd.forEach((song) => {
+        // replace test param with the playlistId later.
+        const testParam = "60a974518484a27c292a4a0a";
+        const addSongsObject = {
+          songId: song.songId,
+          title: song.songTitle,
+          preview: song.preview,
+          artist: song.artist,
+          album: song.albumTitle,
+        };
+        axios
+          .put(
+            "http://localhost:8080/api/update/playlist/song?playlistId="+ testParam,
+            addSongsObject
+          )
+          .then((response) => {
+            console.log("response is: ", response);
+          })
+          .catch((error) => {
+            console.log("There was an error: ", error);
+          });
+      });
     }
   };
 
