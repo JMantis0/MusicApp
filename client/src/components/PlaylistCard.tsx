@@ -12,15 +12,14 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 //  import reducer and state selector
-import { selectMusicApp, setPlaylists } from "../redux/musicAppSlice";
-
-interface Playlist {}
+import { musicAppSlice, selectMusicApp, setPlaylists } from "../redux/musicAppSlice";
 
 const PlaylistCard = ({ playlist }: any) => {
-  // const PlaylistCard = ( { playlistName }: any, { songs }: any ) => {
-  // const PlaylistCard = ()=> {
+  const songs = playlist.songs;
+  // const musicAppState = useAppSelector(selectMusicApp);
   const [open, setOpen] = React.useState(false);
-  const dispatch = useAppDispatch();
+  // const [playlistSongs, setPlaylistSongs] = React.useState();
+  // const dispatch = useAppDispatch();
   const handleOpen = () => {
     setOpen(true);
   };
@@ -28,6 +27,10 @@ const PlaylistCard = ({ playlist }: any) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  // const handleSongs = (arr: any) => {
+  //   setPlaylistSongs(arr);
+  // }
 
   const deletePlaylist = () => {
     const queryString = `http://localhost:8080/api/delete/playlist`;
@@ -67,7 +70,7 @@ const PlaylistCard = ({ playlist }: any) => {
       marginTop: theme.spacing(1),
     },
   }));
-
+  
   return (
     <Card>
       <CardActionArea>
@@ -90,6 +93,11 @@ const PlaylistCard = ({ playlist }: any) => {
       >
         <div>
           <h3>{playlist.playlistName}</h3>
+        </div>
+        <div>
+          {songs.map((song: any) =>
+            <p>{song.title}</p>            
+            )}
         </div>
         <Button onClick={deletePlaylist}>Delete Playlist</Button>
       </Dialog>
