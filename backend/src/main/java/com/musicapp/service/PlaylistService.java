@@ -17,6 +17,12 @@ public class PlaylistService implements IPlaylistService{
 
     private final PlaylistRepository playlistRepository;
 
+    /*
+    *
+    * Create
+    *
+    * */
+
     /**
      * Creates a playlist in the playlist of the repository with the given user's id
      * @param playlist The playlist being added
@@ -32,7 +38,11 @@ public class PlaylistService implements IPlaylistService{
         return false;
     }
 
-
+    /*
+    *
+    * Read
+    *
+    * */
 
     /**
      * Returns all playlists of a specified user
@@ -58,7 +68,21 @@ public class PlaylistService implements IPlaylistService{
         return foundPlaylist.getSongs();
     }
 
+    /**
+     * Grabs a playlist by Id
+     * @param playlistId  The id of the playlist to grab
+     * @return The playlist, null if doesn't exist.
+     */
+    @Override
+    public Playlist readPlaylistById(String playlistId) {
+        return playlistRepository.findById(playlistId).orElse(null);
+    }
 
+    /*
+    *
+    * Update
+    *
+    * */
 
     /**
      * Updates a playlist with new information, mostly overwriting the previous
@@ -98,6 +122,11 @@ public class PlaylistService implements IPlaylistService{
         return foundPlaylist;
     }
 
+    /*
+    *
+    * Delete
+    *
+    * */
 
     /**
      * Deletes a playlist from the repository
@@ -108,6 +137,30 @@ public class PlaylistService implements IPlaylistService{
         playlistRepository.delete(playlist);
     }
 
+    /**
+     * Deletes a song from a playlist
+     * @param playlistId The playlist to delete from
+     * @param songId The song id to delete
+     * @return The updated playlist, null if playlistId or songId do not exist in the repo/playlist
+     */
+    @Override
+    public Playlist deletePlaylistSong(String playlistId, String songId) {
+        Playlist foundPlaylist = playlistRepository.findById(playlistId).orElse(null);
+        // if the playlist doesn't exist
+        if (foundPlaylist == null){
+            return null;
+        }
+        List<Song> songs = foundPlaylist.getSongs();
+        // make sure it doesn't exist in the song list
+        for (Song song : songs){
+            if (song.getSongId().equals(songId)){
+                //remove it and return
+                songs.remove(song);
 
-
+                playlistRepository.save(foundPlaylist);
+                return foundPlaylist;
+            }
+        }
+        return null;
+    }
 }

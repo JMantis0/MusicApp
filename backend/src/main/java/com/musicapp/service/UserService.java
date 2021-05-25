@@ -15,22 +15,10 @@ public class UserService implements IUserService {
     private final UserRepository userRepository;
 
     /*
-    @Override
-    public User save(User user) {
-        return userRepository.save(user);
-    }
-
-    @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
-    }
-
-
-    @Override
-    public void delete(String id) {
-        userRepository.deleteById(id);
-    }
-    */
+    *
+    * Log in
+    *
+    * */
 
     /**
      * Logs in a given user and returns the user or null depending on success
@@ -49,7 +37,17 @@ public class UserService implements IUserService {
         return null;
     }
 
+    /*
+    *
+    * Create
+    *
+    * */
 
+    /*
+    *
+    * read
+    * 
+    * */
 
     /**
      * Method for finding and returning a user depending on the entered username
@@ -61,7 +59,11 @@ public class UserService implements IUserService {
         return userRepository.findByUsername(username);
     }
 
-
+    /*
+    *
+    * Update
+    *
+    * */
 
     /**
      * Updates a user in the DB based on their username
@@ -78,4 +80,10 @@ public class UserService implements IUserService {
         userRepository.save(user);
         return user;
     }
+
+    /*
+    *
+    * Delete
+    *
+    * */
 }

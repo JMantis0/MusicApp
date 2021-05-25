@@ -18,6 +18,11 @@ public class PlaylistControllerTest {
 
     private final PlaylistController playlistController = new PlaylistController(playlistService);
 
+    /*
+    *
+    * Create tests
+    *
+    * */
     @Test
     public void createPlaylistSuccessTest(){
         Playlist playlist = new Playlist();
@@ -37,6 +42,12 @@ public class PlaylistControllerTest {
         ResponseEntity<Playlist> result = playlistController.createPlaylist(playlist);
         Assertions.assertEquals(result.getStatusCode(),HttpStatus.valueOf(401));
     }
+
+    /*
+    *
+    * Read Tests
+    *
+    * */
 
     @Test
     public void readPlaylistTest(){
@@ -66,6 +77,31 @@ public class PlaylistControllerTest {
         ResponseEntity<List<Song>> result = playlistController.readPlaylistSongsByPlaylistId(playlistId);
         Assertions.assertEquals(result.getStatusCode(),HttpStatus.valueOf(401));
     }
+
+    @Test
+    public void readPlaylistSongsMultipleTest(){
+        String playlistId = "goodId";
+
+        Playlist playlist = new Playlist();
+
+        Song song = new Song();
+
+        List<Song> songs = new ArrayList<>();
+
+        songs.add(song);
+
+        Mockito.when(playlistService.updatePlaylistSongs(playlistId,song)).thenReturn(playlist);
+        Mockito.when(playlistService.readPlaylistById(playlistId)).thenReturn(playlist);
+
+        ResponseEntity<Playlist> response = playlistController.updatePlaylistSongsMultiple(playlistId,songs);
+
+    }
+
+    /*
+    *
+    * Update Tests
+    *
+    * */
 
     @Test
     public void updatePlaylistSuccessTest(){
@@ -110,6 +146,12 @@ public class PlaylistControllerTest {
         Assertions.assertEquals(result.getStatusCode(),HttpStatus.valueOf(401));
     }
 
+    /*
+    *
+    * Delete Tests
+    *
+    * */
+
     @Test
     public void deletePlaylistTest(){
         Playlist playlist = new Playlist();
@@ -118,4 +160,29 @@ public class PlaylistControllerTest {
         Assertions.assertEquals(result.getStatusCode(),HttpStatus.OK);
     }
 
+    @Test
+    public void deletePlaylistSongSuccessTest(){
+        String playlistId = "goodId";
+        String songId = "goodId";
+        Playlist playlist = new Playlist();
+
+        Mockito.when(playlistService.deletePlaylistSong(playlistId,songId)).thenReturn(playlist);
+
+        ResponseEntity<Playlist> response = playlistController.deletePlaylistSong(playlistId,songId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+
+    }
+
+    @Test
+    public void deletePlaylistSongFailureTest(){
+        String playlistId = "badId";
+        String songId = "badId";
+
+        Mockito.when(playlistService.deletePlaylistSong(playlistId,songId)).thenReturn(null);
+
+        ResponseEntity<Playlist> response = playlistController.deletePlaylistSong(playlistId,songId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.valueOf(401));
+    }
 }
