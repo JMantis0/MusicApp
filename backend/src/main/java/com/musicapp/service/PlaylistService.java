@@ -17,6 +17,12 @@ public class PlaylistService implements IPlaylistService{
 
     private final PlaylistRepository playlistRepository;
 
+    /*
+    *
+    * Create
+    *
+    * */
+
     /**
      * Creates a playlist in the playlist of the repository with the given user's id
      * @param playlist The playlist being added
@@ -32,7 +38,11 @@ public class PlaylistService implements IPlaylistService{
         return false;
     }
 
-
+    /*
+    *
+    * Read
+    *
+    * */
 
     /**
      * Returns all playlists of a specified user
@@ -58,7 +68,11 @@ public class PlaylistService implements IPlaylistService{
         return foundPlaylist.getSongs();
     }
 
-
+    /*
+    *
+    * Update
+    *
+    * */
 
     /**
      * Updates a playlist with new information, mostly overwriting the previous
@@ -98,6 +112,11 @@ public class PlaylistService implements IPlaylistService{
         return foundPlaylist;
     }
 
+    /*
+    *
+    * Delete
+    *
+    * */
 
     /**
      * Deletes a playlist from the repository
@@ -107,7 +126,6 @@ public class PlaylistService implements IPlaylistService{
     public void deletePlaylist(Playlist playlist) {
         playlistRepository.delete(playlist);
     }
-
 
     /**
      * Deletes a song from a playlist
