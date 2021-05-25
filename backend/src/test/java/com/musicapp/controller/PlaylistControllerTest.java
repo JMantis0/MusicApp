@@ -154,9 +154,9 @@ public class PlaylistControllerTest {
 
     @Test
     public void deletePlaylistTest(){
-        Playlist playlist = new Playlist();
+        String playlistId = "goodId";
 
-        ResponseEntity<Playlist> result = playlistController.deletePlaylist(playlist);
+        ResponseEntity<Playlist> result = playlistController.deletePlaylist(playlistId);
         Assertions.assertEquals(result.getStatusCode(),HttpStatus.OK);
     }
 

@@ -126,12 +126,12 @@ public class PlaylistController {
 
     /**
      * Delete a given playlist
-     * @param playlist The playlist to delete
+     * @param playlistId The playlist to delete
      * @return The status of the delete
      */
     @DeleteMapping("/delete/playlist")
-    public ResponseEntity<Playlist> deletePlaylist(@RequestParam Playlist playlist){
-        playlistService.deletePlaylist(playlist);
+    public ResponseEntity<Playlist> deletePlaylist(@RequestParam String playlistId){
+        playlistService.deletePlaylist(playlistId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
