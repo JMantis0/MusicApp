@@ -26,8 +26,8 @@ import Button from "@material-ui/core/Button";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import { useAppSelector } from "../redux/hooks";
-import { selectMusicApp } from "../redux/musicAppSlice";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
+import { selectMusicApp, setPlaylists } from "../redux/musicAppSlice";
 interface DeezerData {
   songTitle: string;
   songId: string;
@@ -279,6 +279,7 @@ const DeezerSearchResultsViewer = () => {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const musicAppState = useAppSelector(selectMusicApp);
+  const dispatch = useAppDispatch();
 
   const logState = () => {
     console.log("selected: ", selected);
@@ -436,8 +437,21 @@ const DeezerSearchResultsViewer = () => {
       const songsToAdd = deezerRows.filter((song) => {
         return selected.includes(song.songId);
       });
+
+      //Add Multiple Songs!!!
+      axios.put("http://localhost:8080/api/update/playlist/songs/playlistId=60ad284ff182007a64b59cef").then(response => {
+        console.log("Response is (expecting new Playlist with all songs added): ", response);
+        //
+      }) .catch((error) => {
+        console.log("There was an error: ", error);
+      });
+
+
+
+
+
       //  Add the selected songs to the playlist, need username, playlistname, songId, songtitle, preview, artist, album
-      //
+      console.log("songsToAdd: ", songsToAdd);
       songsToAdd.forEach((song) => {
         // replace test param with the playlistId later.
         const testParam = "60ad284ff182007a64b59cef";
@@ -457,6 +471,10 @@ const DeezerSearchResultsViewer = () => {
           )
           .then((response) => {
             console.log("response is: ", response);
+            //Response.data contains the new playlist with the new song added.
+            //Update the playlists.
+            const updatedPlaylist = response.data;
+            dispatch(setPlaylists(updatedPlaylist));
           })
           .catch((error) => {
             console.log("There was an error: ", error);
