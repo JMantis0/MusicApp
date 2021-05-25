@@ -12,6 +12,7 @@ export interface MusicAppState {
   album: { albumId: string; title: string; cover: string };
   artist: { artistId: string; name: string; picture: string };
   playlists: Array<{
+    playlistId: string;
     username: string;
     playlistName: string;
     songs: Array<{
@@ -23,6 +24,7 @@ export interface MusicAppState {
     }>;
   }>;
   playlist: {
+    playlistId: string
     username: string;
     playlistName: string;
     songs: Array<{
@@ -56,6 +58,7 @@ const initialState: MusicAppState = {
   album: { albumId: "", title: "", cover: "" },
   artist: { artistId: "", name: "", picture: "" },
   playlist: {
+    playlistId: "",
     username: "",
     playlistName: "",
     songs: [],
@@ -102,6 +105,7 @@ export const musicAppSlice = createSlice({
       state,
       action: {
         payload: Array<{
+          playlistId: string;
           username: string;
           playlistName: string;
           songs: Array<{
@@ -121,6 +125,7 @@ export const musicAppSlice = createSlice({
       state,
       action: {
         payload: {
+          playlistId: string;
           username: string;
           playlistName: string;
           songs: Array<{
