@@ -18,7 +18,6 @@ import { selectMusicApp, setPlaylists } from "../redux/musicAppSlice";
 const PlaylistCard = ({ playlistName }: any, { playlistId }: any) => {
   const musicAppState = useAppSelector(selectMusicApp);
   const dispatch = useAppDispatch();
-  const inputRef = React.createRef();
   const [modalStyle] = React.useState(getModalStyle);
  
 
@@ -33,10 +32,10 @@ const PlaylistCard = ({ playlistName }: any, { playlistId }: any) => {
     axios
       .get(queryString, body)
       .then((response) => {
-        console.log("response", response);
-        // const playlistData = response.data;
+        console.log("response", response.data.data);
+        // const playlistSongData = response.data;
         //  Dispatch the setPlaylistData reducer to save data to the state
-        // dispatch(setPlaylists(playlistData));
+        // dispatch(setPlaylistSongData(playlistSongData));
         //  Check your redux devtools to see the data
       })
       .catch((error) => {
