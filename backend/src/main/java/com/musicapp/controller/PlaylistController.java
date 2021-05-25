@@ -40,6 +40,12 @@ public class PlaylistController {
         return new ResponseEntity<>(HttpStatus.valueOf(401));
     }
 
+    /*
+    *
+    * Read
+    *
+    * */
+
     /**
      * Gets all playlists of a given user
      * @param username The user to get the playlists of
@@ -117,8 +123,6 @@ public class PlaylistController {
     * Delete
     *
     * */
-
-
 
     /**
      * Delete a given playlist
