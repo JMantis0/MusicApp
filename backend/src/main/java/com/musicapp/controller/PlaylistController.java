@@ -20,6 +20,12 @@ import java.util.List;
 public class PlaylistController {
     private final PlaylistService playlistService;
 
+    /*
+    *
+    * Create
+    *
+    * */
+
     /**
      * Creates an empty playlist
      * @param playlist The new playlist
@@ -34,7 +40,11 @@ public class PlaylistController {
         return new ResponseEntity<>(HttpStatus.valueOf(401));
     }
 
-
+    /*
+    *
+    * Read
+    *
+    * */
 
     /**
      * Gets all playlists of a given user
@@ -61,7 +71,11 @@ public class PlaylistController {
         return new ResponseEntity<>(songs,HttpStatus.OK);
     }
 
-
+    /*
+    *
+    * Update
+    *
+    * */
 
     /**
      * The playlist updating
@@ -89,7 +103,26 @@ public class PlaylistController {
         return new ResponseEntity<>(HttpStatus.valueOf(401));
     }
 
+    /**
+     * Adds multiple songs to a playlist
+     * @param playlistId The id of the playlist to add to
+     * @param songs The songs on the playlist to add
+     * @return The response entity containing the playlist
+     */
+    @PutMapping("/update/playlist/songs")
+    public ResponseEntity<Playlist> updatePlaylistSongsMultiple(@RequestParam String playlistId, @RequestBody List<Song> songs){
+        for (Song song : songs){
+            updatePlaylistSongs(playlistId,song);
+        }
+        Playlist playlist = playlistService.readPlaylistById(playlistId);
+        return new ResponseEntity<>(playlist,HttpStatus.OK);
+    }
 
+    /*
+    *
+    * Delete
+    *
+    * */
 
     /**
      * Delete a given playlist
@@ -99,6 +132,21 @@ public class PlaylistController {
     @DeleteMapping("/delete/playlist")
     public ResponseEntity<Playlist> deletePlaylist(@RequestParam Playlist playlist){
         playlistService.deletePlaylist(playlist);
-        return new ResponseEntity<Playlist>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /**
+     * Deletes a song from a playlist
+     * @param playlistId The id of the playlist to delete from
+     * @param songId The id of the song to delete
+     * @return The response entity containing the playlist, or a 401 error if the delete failed in some way
+     */
+    @DeleteMapping("/delete/playlist/song")
+    public ResponseEntity<Playlist> deletePlaylistSong(@RequestParam String playlistId, @RequestParam String songId){
+        Playlist updatedPlaylist = playlistService.deletePlaylistSong(playlistId,songId);
+        if (updatedPlaylist != null){
+            return new ResponseEntity<>(updatedPlaylist,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.valueOf(401));
     }
 }
