@@ -20,6 +20,12 @@ import java.util.List;
 public class PlaylistController {
     private final PlaylistService playlistService;
 
+    /*
+    *
+    * Create
+    *
+    * */
+
     /**
      * Creates an empty playlist
      * @param playlist The new playlist
@@ -34,7 +40,11 @@ public class PlaylistController {
         return new ResponseEntity<>(HttpStatus.valueOf(401));
     }
 
-
+    /*
+    *
+    * Read
+    *
+    * */
 
     /**
      * Gets all playlists of a given user
@@ -61,7 +71,11 @@ public class PlaylistController {
         return new ResponseEntity<>(songs,HttpStatus.OK);
     }
 
-
+    /*
+    *
+    * Update
+    *
+    * */
 
     /**
      * The playlist updating
@@ -89,7 +103,11 @@ public class PlaylistController {
         return new ResponseEntity<>(HttpStatus.valueOf(401));
     }
 
-
+    /*
+    *
+    * Delete
+    *
+    * */
 
     /**
      * Delete a given playlist
@@ -99,7 +117,7 @@ public class PlaylistController {
     @DeleteMapping("/delete/playlist")
     public ResponseEntity<Playlist> deletePlaylist(@RequestParam Playlist playlist){
         playlistService.deletePlaylist(playlist);
-        return new ResponseEntity<Playlist>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /**
@@ -112,8 +130,8 @@ public class PlaylistController {
     public ResponseEntity<Playlist> deletePlaylistSong(@RequestParam String playlistId, @RequestParam String songId){
         Playlist updatedPlaylist = playlistService.deletePlaylistSong(playlistId,songId);
         if (updatedPlaylist != null){
-            return new ResponseEntity<Playlist>(updatedPlaylist,HttpStatus.OK);
+            return new ResponseEntity<>(updatedPlaylist,HttpStatus.OK);
         }
-        return new ResponseEntity<Playlist>(HttpStatus.valueOf(401));
+        return new ResponseEntity<>(HttpStatus.valueOf(401));
     }
 }
