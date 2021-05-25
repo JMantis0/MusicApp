@@ -68,6 +68,16 @@ public class PlaylistService implements IPlaylistService{
         return foundPlaylist.getSongs();
     }
 
+    /**
+     * Grabs a playlist by Id
+     * @param playlistId  The id of the playlist to grab
+     * @return The playlist, null if doesn't exist.
+     */
+    @Override
+    public Playlist readPlaylistById(String playlistId) {
+        return playlistRepository.findById(playlistId).orElse(null);
+    }
+
     /*
     *
     * Update

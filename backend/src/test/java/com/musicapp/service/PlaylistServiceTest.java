@@ -86,11 +86,23 @@ public class PlaylistServiceTest {
 
     @Test
     public void readPlaylistSongsByPlaylistIdFailureTest(){
-        String playlistId = "bad Id";
+        String playlistId = "badId";
 
         Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.empty());
         List<Song> foundSongs = playlistService.readPlaylistSongsByPlaylistId(playlistId);
         Assertions.assertNull(foundSongs);
+    }
+
+    @Test
+    public void readPlaylistByIdTest(){
+        String playlistId = "goodId";
+        Playlist playlist = new Playlist();
+
+        Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.of(playlist));
+
+        Playlist foundPlaylist = playlistService.readPlaylistById(playlistId);
+
+        Assertions.assertEquals(playlist,foundPlaylist);
     }
 
     /*

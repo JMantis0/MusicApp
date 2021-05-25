@@ -78,6 +78,25 @@ public class PlaylistControllerTest {
         Assertions.assertEquals(result.getStatusCode(),HttpStatus.valueOf(401));
     }
 
+    @Test
+    public void readPlaylistSongsMultipleTest(){
+        String playlistId = "goodId";
+
+        Playlist playlist = new Playlist();
+
+        Song song = new Song();
+
+        List<Song> songs = new ArrayList<>();
+
+        songs.add(song);
+
+        Mockito.when(playlistService.updatePlaylistSongs(playlistId,song)).thenReturn(playlist);
+        Mockito.when(playlistService.readPlaylistById(playlistId)).thenReturn(playlist);
+
+        ResponseEntity<Playlist> response = playlistController.updatePlaylistSongsMultiple(playlistId,songs);
+
+    }
+
     /*
     *
     * Update Tests
