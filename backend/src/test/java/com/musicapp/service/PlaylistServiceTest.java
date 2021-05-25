@@ -199,10 +199,22 @@ public class PlaylistServiceTest {
     *
     * */
     @Test
-    public void deletePlaylistTest(){
+    public void deletePlaylistSuccessTest(){
+        String playlistId = "goodId";
         Playlist playlist = new Playlist();
 
-        playlistService.deletePlaylist(playlist);
+        Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.of(playlist));
+
+        playlistService.deletePlaylist(playlistId);
+    }
+
+    @Test
+    public void deletePlaylistFailureTest(){
+        String playlistId = "badId";
+
+        Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.empty());
+
+        playlistService.deletePlaylist(playlistId);
     }
 
     @Test
