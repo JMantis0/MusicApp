@@ -86,11 +86,23 @@ public class PlaylistServiceTest {
 
     @Test
     public void readPlaylistSongsByPlaylistIdFailureTest(){
-        String playlistId = "bad Id";
+        String playlistId = "badId";
 
         Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.empty());
         List<Song> foundSongs = playlistService.readPlaylistSongsByPlaylistId(playlistId);
         Assertions.assertNull(foundSongs);
+    }
+
+    @Test
+    public void readPlaylistByIdTest(){
+        String playlistId = "goodId";
+        Playlist playlist = new Playlist();
+
+        Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.of(playlist));
+
+        Playlist foundPlaylist = playlistService.readPlaylistById(playlistId);
+
+        Assertions.assertEquals(playlist,foundPlaylist);
     }
 
     /*
@@ -187,9 +199,76 @@ public class PlaylistServiceTest {
     *
     * */
     @Test
-    public void deletePlaylistTest(){
+    public void deletePlaylistSuccessTest(){
+        String playlistId = "goodId";
         Playlist playlist = new Playlist();
 
-        playlistService.deletePlaylist(playlist);
+        Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.of(playlist));
+
+        playlistService.deletePlaylist(playlistId);
+    }
+
+    @Test
+    public void deletePlaylistFailureTest(){
+        String playlistId = "badId";
+
+        Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.empty());
+
+        playlistService.deletePlaylist(playlistId);
+    }
+
+    @Test
+    public void deletePlaylistSongSuccessTest(){
+        String playlistId = "goodId";
+        String songId = "goodId";
+
+        Song song = new Song();
+        song.setSongId(songId);
+
+        List<Song> songs = new ArrayList<>();
+        songs.add(song);
+
+        Playlist playlist = new Playlist();
+        playlist.setSongs(songs);
+
+        Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.of(playlist));
+
+        Playlist foundPlaylist = playlistService.deletePlaylistSong(playlistId,songId);
+
+        Assertions.assertEquals(foundPlaylist.getSongs().size(),0);
+    }
+
+    @Test
+    public void deletePlaylistSongNoSuchPlaylist(){
+        String playlistId = "badId";
+        String songId = "doesNotMatter";
+
+        Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.empty());
+
+        Playlist foundPlaylist = playlistService.deletePlaylistSong(playlistId,songId);
+
+        Assertions.assertNull(foundPlaylist);
+    }
+
+    @Test
+    public void deletePlaylistSongNoSuchSong(){
+        String playlistId = "goodId";
+        String songIdBad = "badId";
+        String songIdGood = "goodId";
+
+        Song song = new Song();
+        song.setSongId(songIdBad);
+
+        List<Song> songs = new ArrayList<>();
+        songs.add(song);
+
+        Playlist playlist = new Playlist();
+        playlist.setSongs(songs);
+
+        Mockito.when(playlistRepository.findById(playlistId)).thenReturn(Optional.of(playlist));
+
+        Playlist foundPlaylist = playlistService.deletePlaylistSong(playlistId,songIdGood);
+
+        Assertions.assertNull(foundPlaylist);
     }
 }

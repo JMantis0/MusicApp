@@ -18,22 +18,34 @@ public class UserController {
     private final UserService userService;
 
     /*
-    @GetMapping("/findAll")
-    public ResponseEntity<List<User>> findAll() {
-        return ResponseEntity.ok(userService.findAll());
+    *
+    * Log in
+    *
+    * */
+
+    /**
+     * Logs in a user. Takes a request and converts it into a pojo
+     * @param request The request converted into a user pojo. Only contains the "username" and "password" fields
+     * @return The response entity of the log in attempt. Will be 200 if successful and 401 if not
+     */
+    @PostMapping("/login")
+    public ResponseEntity<User> logIn(@RequestBody User request) {
+        if (request.getPassword() == null || request.getUsername() == null){
+            return new ResponseEntity<>(HttpStatus.valueOf(401));
+        }
+        User user = userService.logIn(request);
+
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.valueOf(401));
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<User> save(@RequestBody User request){
-        return ResponseEntity.ok(userService.save(request));
-    }
-
-    @DeleteMapping("/delete")
-    public ResponseEntity<User> delete(@RequestBody User request){
-        userService.delete(request.getUserId());
-        return ResponseEntity.ok().build();
-    }
-    */
+    /*
+    *
+    * Read
+    *
+    * */
 
     /**
      * Takes a string and finds a particular user with that particular username
@@ -49,30 +61,28 @@ public class UserController {
         return new ResponseEntity<>(foundUser,HttpStatus.OK);
     }
 
+    /*
+    *
+    * Create
+    *
+    * */
 
-
-    /**
-     * Logs in a user. Takes a request and converts it into a pojo
-     * @param request The request converted into a user pojo. Only contains the "username" and "password" fields
-     * @return The response entity of the log in attempt. Will be 200 if successful and 401 if not
-     */
-    @PostMapping("/login")
-    public ResponseEntity<User> logIn(@RequestBody User request) {
-        if (request.getPassword() == null || request.getUsername() == null){
-            return new ResponseEntity<User>(HttpStatus.valueOf(401));
-        }
-        User user = userService.logIn(request);
-
-        if (user == null) {
-            return new ResponseEntity<User>(HttpStatus.valueOf(401));
-        }
-        return new ResponseEntity<User>(user, HttpStatus.OK);
-    }
-
-
+    /*
+    *
+    * Update
+    *
+    * */
 
     @PutMapping("/update/user")
     public ResponseEntity<User> update(@RequestBody User request){
         return ResponseEntity.ok(userService.updateUser(request));
     }
+
+    /*
+    *
+    * Delete
+    *
+    * */
+
+
 }
