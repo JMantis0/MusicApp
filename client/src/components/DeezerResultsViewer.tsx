@@ -441,7 +441,7 @@ const DeezerSearchResultsViewer = () => {
       //Add Multiple Songs!!!
       axios
         .put(
-          "http://localhost:8080/api/update/playlist/songs/playlistId=60ad284ff182007a64b59cef"
+          "http://localhost:8080/api/update/playlist/songs/playlistId=60ad284ff182007a64b59cef", songsToAdd
         )
         .then((response) => {
           console.log(

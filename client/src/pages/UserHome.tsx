@@ -43,12 +43,12 @@ const UserHome = () => {
     getPlaylists();
   }, []);
 
-  musicAppState.playlists.map((playlist) => {
-    console.log(playlist.songs)
-    playlist.songs.map((song) => {
-      console.log(song.title)
-    })
-  });
+  // musicAppState.playlists.map((playlist) => {
+  //   console.log(playlist.songs)
+  //   playlist.songs.map((song) => {
+  //     console.log(song.title)
+  //   })
+  // });
 
   return (
     <div>
@@ -93,11 +93,11 @@ const UserHome = () => {
           </Grid>
           <Grid container>
             <Grid className={style.center} item xs={12}>
-              {musicAppState.playlists.map((playlist) => (
+              {/* {musicAppState.playlists.map((playlist) => (
                 <PlaylistCard playlistName={ playlist.playlistName }
-                              // songs = { playlist.songs }   
+                              songs = { playlist.songs }   
                 />
-              ))}
+              ))} */}
             </Grid>
           </Grid>
           <Grid className={style.center} item xs={10}></Grid>

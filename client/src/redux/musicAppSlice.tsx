@@ -121,7 +121,6 @@ export const musicAppSlice = createSlice({
       console.log("Dispatching setPlaylists reducer with action: ", action);
       state.playlists = action.payload;
     },
-
     addPlaylist: (
       state,
       action: {
