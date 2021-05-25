@@ -439,16 +439,22 @@ const DeezerSearchResultsViewer = () => {
       });
 
       //Add Multiple Songs!!!
-      axios.put("http://localhost:8080/api/update/playlist/songs/playlistId=60ad284ff182007a64b59cef").then(response => {
-        console.log("Response is (expecting new Playlist with all songs added): ", response);
-        //
-      }) .catch((error) => {
-        console.log("There was an error: ", error);
-      });
-
-
-
-
+      axios
+        .put(
+          "http://localhost:8080/api/update/playlist/songs/playlistId=60ad284ff182007a64b59cef"
+        )
+        .then((response) => {
+          console.log(
+            "Response is (expecting new Playlist with all songs added): ",
+            response
+          );
+          const updatedPlaylist = response.data;
+          console.log("updatedPlaylist.songs: ", updatedPlaylist.songs);
+          dispatch(setPlaylists(updatedPlaylist));
+        })
+        .catch((error) => {
+          console.log("There was an error: ", error);
+        });
 
       //  Add the selected songs to the playlist, need username, playlistname, songId, songtitle, preview, artist, album
       console.log("songsToAdd: ", songsToAdd);
