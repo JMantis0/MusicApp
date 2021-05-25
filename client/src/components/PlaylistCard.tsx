@@ -10,14 +10,17 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 //  import reducer and state selector
 import { selectMusicApp, setPlaylists } from "../redux/musicAppSlice";
 
+interface Playlist{
+  
+}
 
-const PlaylistCard = ({ playlistName }: any, { songs }: any ) => {
-
+const PlaylistCard = ({playlist}: any) => {
+// const PlaylistCard = ({ playlistName }: any, { songs }: any ) => {
+// const PlaylistCard = ()=> {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -28,6 +31,25 @@ const PlaylistCard = ({ playlistName }: any, { songs }: any ) => {
     setOpen(false);
   };
   
+  const deletePlaylist = () => {
+    const queryString = `http://localhost:8080/api/delete/playlist`
+    const body = {
+      params: {
+        "playlistId": playlist.playlistId
+      },
+    };
+    console.log(body);
+    axios
+      .delete(queryString, body)
+      .then((response) => {
+        console.log("response", response);
+      })
+      .catch((error) => {
+        console.log("There was an error: ", error);
+      });
+  }
+
+
   const useStyles = makeStyles((theme) => ({
     form: {
       display: 'flex',
@@ -44,18 +66,6 @@ const PlaylistCard = ({ playlistName }: any, { songs }: any ) => {
     },
   }));
 
-
-  const classes = useStyles();
-  const body = ( 
-    <div>
-      <h2 id="simple-modal-title">
-        { playlistName }
-      </h2>
-        Track List
-    </div>
-  );
-
-  console.log(songs);
   return (
     <Card>
       <CardActionArea>
@@ -66,7 +76,7 @@ const PlaylistCard = ({ playlistName }: any, { songs }: any ) => {
             color="textSecondary"
             onClick={handleOpen}
           >
-            {playlistName}
+            {playlist.playlistName}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -83,13 +93,11 @@ const PlaylistCard = ({ playlistName }: any, { songs }: any ) => {
           aria-describedby="simple-modal-description"
         >
           <div>
-            <h2>
-              { playlistName }              
-            </h2>
-
-                
+            <h3>
+              {playlist.playlistName}              
+            </h3>  
           </div>
-          <Button>Delete Playlist</Button>
+          <Button onClick={deletePlaylist}>Delete Playlist</Button>
         </Dialog>
     </Card>
   );

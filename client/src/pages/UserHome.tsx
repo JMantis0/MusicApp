@@ -77,9 +77,6 @@ const UserHome = () => {
                 <CreateNewPlaylistForm />
               </Grid>
             </Grid>
-
-
-
           </Grid>
           <Grid className={style.center} item xs={6}></Grid>
           <Grid className={style.center} item xs={10}>
@@ -94,8 +91,10 @@ const UserHome = () => {
           <Grid container>
             <Grid className={style.center} item xs={12}>
               {musicAppState.playlists.map((playlist) => (
-                <PlaylistCard playlistName={ playlist.playlistName }
-                              // songs = { playlist.songs }   
+                <PlaylistCard 
+                  key={playlist.playlistName}
+                  playlist={ playlist }  
+                                                                         
                 />
               ))}
             </Grid>
