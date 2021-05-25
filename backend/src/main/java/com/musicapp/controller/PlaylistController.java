@@ -103,6 +103,21 @@ public class PlaylistController {
         return new ResponseEntity<>(HttpStatus.valueOf(401));
     }
 
+    /**
+     * Adds multiple songs to a playlist
+     * @param playlistId The id of the playlist to add to
+     * @param songs The songs on the playlist to add
+     * @return The response entity containing the playlist
+     */
+    @PutMapping("/update/playlist/songs")
+    public ResponseEntity<Playlist> updatePlaylistSongsMultiple(@RequestParam String playlistId, @RequestBody List<Song> songs){
+        for (Song song : songs){
+            updatePlaylistSongs(playlistId,song);
+        }
+        Playlist playlist = playlistService.readPlaylistById(playlistId);
+        return new ResponseEntity<>(playlist,HttpStatus.OK);
+    }
+
     /*
     *
     * Delete

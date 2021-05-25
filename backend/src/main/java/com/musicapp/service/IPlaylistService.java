@@ -15,4 +15,5 @@ public interface IPlaylistService {
     void deletePlaylist(Playlist playlist);
     List<Song> readPlaylistSongsByPlaylistId(String playlistId);
     Playlist deletePlaylistSong(String playlistId, String SongId);
+    Playlist readPlaylistById(String playlistId);
 }
