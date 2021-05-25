@@ -80,8 +80,6 @@ const UserHome = () => {
               {musicAppState.playlists.map((playlist) => (
                 <PlaylistCard
                   playlist = {playlist}
-                  // playlistName={playlist.playlistName}
-                  // key={playlist.playlistName}
                 />
               ))}
           </Grid>

@@ -41,8 +41,10 @@ const PlaylistCard = ({ playlist }: any) => {
       .delete(queryString, body)
       .then((response) => {
         console.log("response", response);
-        // const playlistData = response.data;
-        // dispatch(setPlaylists(playlistData));
+        if(response.status === 200){
+          // does not refresh the current list of playlists
+          alert("woo hoo!");
+        }
       })
       .catch((error) => {
         console.log("There was an error: ", error);
@@ -80,10 +82,6 @@ const PlaylistCard = ({ playlist }: any) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary"></Button>
-        <Button size="small" color="primary"></Button>
-      </CardActions>
       <Dialog
         open={open}
         onClose={handleClose}
