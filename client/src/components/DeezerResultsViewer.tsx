@@ -440,7 +440,7 @@ const DeezerSearchResultsViewer = () => {
       //
       songsToAdd.forEach((song) => {
         // replace test param with the playlistId later.
-        const testParam = "60a974518484a27c292a4a0a";
+        const testParam = "60ad284ff182007a64b59cef";
         const addSongsObject = {
           songId: song.songId,
           title: song.songTitle,
@@ -448,9 +448,11 @@ const DeezerSearchResultsViewer = () => {
           artist: song.artist,
           album: song.albumTitle,
         };
+        console.log("addSongsObject", addSongsObject);
+        console.log("testParam", testParam);
         axios
           .put(
-            "http://localhost:8080/api/update/playlist/song?playlistId="+ testParam,
+            "http://localhost:8080/api/update/playlist/song?playlistId=60ad284ff182007a64b59cef",
             addSongsObject
           )
           .then((response) => {
