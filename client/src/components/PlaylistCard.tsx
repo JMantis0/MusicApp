@@ -8,21 +8,19 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 //  import reducer and state selector
 import { selectMusicApp, setPlaylists } from "../redux/musicAppSlice";
 
-interface Playlist{
-  
-}
+interface Playlist {}
 
-const PlaylistCard = ({playlist}: any) => {
-// const PlaylistCard = ({ playlistName }: any, { songs }: any ) => {
-// const PlaylistCard = ()=> {
+const PlaylistCard = ({ playlist }: any) => {
+  // const PlaylistCard = ( { playlistName }: any, { songs }: any ) => {
+  // const PlaylistCard = ()=> {
   const [open, setOpen] = React.useState(false);
-
+  const dispatch = useAppDispatch();
   const handleOpen = () => {
     setOpen(true);
   };
@@ -30,12 +28,12 @@ const PlaylistCard = ({playlist}: any) => {
   const handleClose = () => {
     setOpen(false);
   };
-  
+
   const deletePlaylist = () => {
-    const queryString = `http://localhost:8080/api/delete/playlist`
+    const queryString = `http://localhost:8080/api/delete/playlist`;
     const body = {
       params: {
-        "playlistId": playlist.playlistId
+        "playlistId": playlist.playlistId,
       },
     };
     console.log(body);
@@ -43,18 +41,20 @@ const PlaylistCard = ({playlist}: any) => {
       .delete(queryString, body)
       .then((response) => {
         console.log("response", response);
+        // const playlistData = response.data;
+        // dispatch(setPlaylists(playlistData));
       })
       .catch((error) => {
         console.log("There was an error: ", error);
       });
-  }
-
+    handleClose();
+  };
 
   const useStyles = makeStyles((theme) => ({
     form: {
-      display: 'flex',
-      flexDirection: 'column',
-      margin: 'auto',
+      display: "flex",
+      flexDirection: "column",
+      margin: "auto",
       width: 900,
     },
     formControl: {
@@ -81,24 +81,20 @@ const PlaylistCard = ({playlist}: any) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-        </Button>
-        <Button size="small" color="primary">
-        </Button>
+        <Button size="small" color="primary"></Button>
+        <Button size="small" color="primary"></Button>
       </CardActions>
       <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-        >
-          <div>
-            <h3>
-              {playlist.playlistName}              
-            </h3>  
-          </div>
-          <Button onClick={deletePlaylist}>Delete Playlist</Button>
-        </Dialog>
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <div>
+          <h3>{playlist.playlistName}</h3>
+        </div>
+        <Button onClick={deletePlaylist}>Delete Playlist</Button>
+      </Dialog>
     </Card>
   );
 };
