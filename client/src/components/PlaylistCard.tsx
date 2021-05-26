@@ -13,6 +13,13 @@ import Dialog from "@material-ui/core/Dialog";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 //  import reducer and state selector
 import { musicAppSlice, selectMusicApp, setPlaylists } from "../redux/musicAppSlice";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableBody from "@material-ui/core/TableBody";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import { Tab } from "@material-ui/icons";
 
 const PlaylistCard = ({ playlist }: any) => {
   const songs = playlist.songs;
@@ -88,17 +95,38 @@ const PlaylistCard = ({ playlist }: any) => {
       <Dialog
         open={open}
         onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
+        // aria-labelledby="simple-modal-title"
+        // aria-describedby="simple-modal-description"
       >
-        <div>
-          <h3>{playlist.playlistName}</h3>
-        </div>
-        <div>
-          {songs.map((song: any) =>
-            <p>{song.title}</p>            
+        <DialogTitle>{playlist.playlistName}</DialogTitle>
+        <DialogContent>         
+          <TableContainer>
+            <TableBody>
+            {songs.map((song: any) =>
+              <TableRow>
+                <TableCell>
+                  {song.title}
+                </TableCell>
+                <TableCell>
+                  <img src={song.album.cover}></img>
+                </TableCell>
+                {/* <TableCell>
+                  {song.album.title}
+                </TableCell> */}
+                <TableCell>
+                <figure>
+                  <audio controls src={song.preview}>
+                    Your browser does not support the
+                    <code>audio</code> element.
+                  </audio>
+                </figure>
+                </TableCell>
+              </TableRow>
             )}
-        </div>
+            </TableBody>
+          </TableContainer>
+        </DialogContent>
+
         <Button onClick={deletePlaylist}>Delete Playlist</Button>
       </Dialog>
     </Card>
