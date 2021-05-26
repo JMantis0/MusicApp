@@ -95,6 +95,7 @@ public class PlaylistControllerTest {
 
         ResponseEntity<Playlist> response = playlistController.updatePlaylistSongsMultiple(playlistId,songs);
 
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
     }
 
     /*
@@ -156,7 +157,12 @@ public class PlaylistControllerTest {
     public void deletePlaylistTest(){
         String playlistId = "goodId";
 
-        ResponseEntity<Playlist> result = playlistController.deletePlaylist(playlistId);
+        Playlist playlist = new Playlist();
+        playlist.setUsername("goodUser");
+
+        Mockito.when(playlistService.readPlaylistById(playlistId)).thenReturn(playlist);
+
+        ResponseEntity<List<Playlist>> result = playlistController.deletePlaylist(playlistId);
         Assertions.assertEquals(result.getStatusCode(),HttpStatus.OK);
     }
 
