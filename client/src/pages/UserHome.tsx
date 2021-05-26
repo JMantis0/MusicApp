@@ -8,7 +8,6 @@ import SearchDeezerButton from "../components/SearchDeezerButton";
 import CreateNewPlaylistForm from "../components/CreateNewPlaylistForm";
 import PlaylistCard from "../components/PlaylistCard";
 import DeezerResultsViewer from "../components/DeezerResultsViewer";
-import PlaylistSelector from "../components/PlaylistSelector";
 //  import redux state hooks
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 //  import reducer and state selector
@@ -77,7 +76,7 @@ const UserHome = () => {
           <Grid>
             <Grid className={style.center} item xs={12}>
               <CreateNewPlaylistForm />
-              <PlaylistSelector />
+            
             </Grid>
             {musicAppState.playlists.map((playlist) => (
               <PlaylistCard key={playlist.playlistId} playlist={playlist} />
