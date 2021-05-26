@@ -77,6 +77,12 @@ public class UserServiceTest {
     *
     * */
 
+    @Test
+    public void createUserTest(){
+        User user = new User();
+        userService.createUser(user);
+    }
+
     /*
     *
     * Read Tests

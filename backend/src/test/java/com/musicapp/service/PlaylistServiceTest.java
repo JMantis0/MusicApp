@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public class PlaylistServiceTest {
     private final PlaylistRepository playlistRepository = Mockito.mock(PlaylistRepository.class);
-
     private final PlaylistService playlistService = new PlaylistService(playlistRepository);
 
     /*

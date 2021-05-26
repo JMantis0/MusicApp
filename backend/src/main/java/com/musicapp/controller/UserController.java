@@ -48,6 +48,33 @@ public class UserController {
 
     /*
     *
+    * Create
+    *
+    * */
+
+    /**
+     * Creates a new user
+     * @param user Takes a user
+     * @return The new user, 401 if already exists
+     */
+    @PostMapping("/create/user")
+    public ResponseEntity<User> createUser(@RequestBody User user){
+        if (user.getUsername() == null || user.getPassword() == null){
+            log.error("Failure to create User : {}. Username and Password must be filled.",user.getUsername());
+            return new ResponseEntity<>(HttpStatus.valueOf(401));
+        }
+        User foundUser = userService.findByUsername(user.getUsername());
+        if (foundUser != null){
+            log.error("Failure to create User : {}. User already exists",user.getUsername());
+            return new ResponseEntity<>(HttpStatus.valueOf(401));
+        }
+        userService.createUser(user);
+        log.info("Successfully created User : {}.",user.getUsername());
+        return new ResponseEntity<>(user,HttpStatus.OK);
+    }
+
+    /*
+    *
     * Read
     *
     * */
