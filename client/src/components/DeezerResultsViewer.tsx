@@ -28,6 +28,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { selectMusicApp, setPlaylists } from "../redux/musicAppSlice";
+import PlaylistSelector from "../components/PlaylistSelector";
+
 interface DeezerData {
   songTitle: string;
   songId: string;
@@ -437,12 +439,16 @@ const DeezerSearchResultsViewer = () => {
       const songsToAdd = deezerRows.filter((song) => {
         return selected.includes(song.songId);
       });
-      
+
       //  Add the selected songs to the playlist, need username, playlistname, songId, songtitle, preview, artist, album
       console.log("songsToAdd: ", songsToAdd);
+      const selectedPlaylistArr = musicAppState.playlists.filter(
+        (playlist) => playlist.playlistName === musicAppState.playlist
+      );
+      const selectedPlaylistId = selectedPlaylistArr[0].playlistId;
       songsToAdd.forEach((song) => {
         // replace test param with the playlistId later.
-        const testParam = "60ad284ff182007a64b59cef";
+        //get id of playlist to add song to by its name.
         const addSongsObject = {
           songId: song.songId,
           title: song.songTitle,
@@ -451,10 +457,9 @@ const DeezerSearchResultsViewer = () => {
           album: song.albumTitle,
         };
         console.log("addSongsObject", addSongsObject);
-        console.log("testParam", testParam);
         axios
           .put(
-            "http://localhost:8080/api/update/playlist/song?playlistId=60ad589f24e98931e7563a85",
+            `http://localhost:8080/api/update/playlist/song?playlistId=${selectedPlaylistId}`,
             addSongsObject
           )
           .then((response) => {
@@ -554,6 +559,7 @@ const DeezerSearchResultsViewer = () => {
             </TableBody>
           </Table>
         </TableContainer>
+        <PlaylistSelector />
         <Button onClick={saveSelectedSongsToPlaylist}>Save to Playlist</Button>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
