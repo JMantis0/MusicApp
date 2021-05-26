@@ -43,6 +43,13 @@ public class UserService implements IUserService {
     *
     * */
 
+    /**
+     * Creates a user in the DB with the new users information
+     * @param user
+     */
+    public void createUser(User user) {
+        userRepository.save(user);
+    }
     /*
     *
     * read
