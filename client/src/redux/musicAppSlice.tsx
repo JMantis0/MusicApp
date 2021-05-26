@@ -80,7 +80,7 @@ export const musicAppSlice = createSlice({
       state.artist = action.payload;
     },
     setPlaylist: (state, action: { payload: string }) => {
-      console.log("Displatching setPlaylist reducer with action: ", action);
+      console.log("Dispatching setPlaylist reducer with action: ", action);
       state.playlist = action.payload;
     },
     setPlaylists: (
@@ -101,7 +101,7 @@ export const musicAppSlice = createSlice({
       }
     ) => {
       console.log("Dispatching setPlaylists reducer with action: ", action);
-      state.playlists = action.payload;
+      state.playlists = action.payload
     },
     addPlaylist: (
       state,
