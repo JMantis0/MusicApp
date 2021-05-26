@@ -41,7 +41,6 @@ const PlaylistSelector = () => {
             handleChange(event);
           }}
         >
-          <MenuItem value="">Select</MenuItem>
           {musicAppState.playlists.map((playlist) => {
             return (
               <MenuItem key={playlist.playlistId} value={playlist.playlistName}>
