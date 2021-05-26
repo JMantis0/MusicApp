@@ -95,6 +95,7 @@ public class PlaylistControllerTest {
 
         ResponseEntity<Playlist> response = playlistController.updatePlaylistSongsMultiple(playlistId,songs);
 
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
     }
 
     /*
@@ -106,6 +107,7 @@ public class PlaylistControllerTest {
     @Test
     public void updatePlaylistSuccessTest(){
         Playlist playlist = new Playlist();
+        playlist.setPlaylistId("goodId");
 
         Mockito.when(playlistService.updatePlaylist(playlist)).thenReturn(playlist);
         ResponseEntity<Playlist> result = playlistController.updatePlaylist(playlist);
@@ -115,6 +117,7 @@ public class PlaylistControllerTest {
     @Test
     public void updatePlaylistFailureTest(){
         Playlist playlist = new Playlist();
+        playlist.setPlaylistId("badId");
 
         Mockito.when(playlistService.updatePlaylist(playlist)).thenReturn(null);
         ResponseEntity<Playlist> result = playlistController.updatePlaylist(playlist);
@@ -153,11 +156,27 @@ public class PlaylistControllerTest {
     * */
 
     @Test
-    public void deletePlaylistTest(){
-        Playlist playlist = new Playlist();
+    public void deletePlaylistSuccessTest(){
+        String playlistId = "goodId";
 
-        ResponseEntity<Playlist> result = playlistController.deletePlaylist(playlist);
+        Playlist playlist = new Playlist();
+        playlist.setUsername("goodUser");
+
+        Mockito.when(playlistService.readPlaylistById(playlistId)).thenReturn(playlist);
+
+        ResponseEntity<List<Playlist>> result = playlistController.deletePlaylist(playlistId);
         Assertions.assertEquals(result.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    public void deletePlaylistFailureTest(){
+        String playlistId = "badId";
+
+        Mockito.when(playlistService.readPlaylistById(playlistId)).thenReturn(null);
+
+        ResponseEntity<List<Playlist>> result = playlistController.deletePlaylist(playlistId);
+
+        Assertions.assertEquals(result.getStatusCode(),HttpStatus.valueOf(401));
     }
 
     @Test

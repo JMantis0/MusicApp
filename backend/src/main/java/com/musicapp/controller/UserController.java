@@ -3,6 +3,7 @@ package com.musicapp.controller;
 import com.musicapp.model.User;
 import com.musicapp.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @AllArgsConstructor
+@Slf4j
 @RequestMapping("/api")
 public class UserController {
     private final UserService userService;
@@ -31,13 +33,16 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<User> logIn(@RequestBody User request) {
         if (request.getPassword() == null || request.getUsername() == null){
+            log.error("Cannot log in : empty field in username or password");
             return new ResponseEntity<>(HttpStatus.valueOf(401));
         }
         User user = userService.logIn(request);
 
         if (user == null) {
+            log.error("Cannot log in, user does not exist");
             return new ResponseEntity<>(HttpStatus.valueOf(401));
         }
+        log.info("Successfully logged in User : {}",user.getUsername());
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
@@ -56,8 +61,10 @@ public class UserController {
     public ResponseEntity<User> findUserByUsername(@RequestParam String username){
         User foundUser = userService.findByUsername(username);
         if (foundUser == null){
+            log.error("Failed to read User : {}. Does not exist",username);
             return new ResponseEntity<>(HttpStatus.valueOf(401));
         }
+        log.info("Successfully read User : {}",username);
         return new ResponseEntity<>(foundUser,HttpStatus.OK);
     }
 
@@ -74,8 +81,9 @@ public class UserController {
     * */
 
     @PutMapping("/update/user")
-    public ResponseEntity<User> update(@RequestBody User request){
-        return ResponseEntity.ok(userService.updateUser(request));
+    public ResponseEntity<User> update(@RequestBody User user){
+        log.info("Deleted User : {}",user.getUsername());
+        return ResponseEntity.ok(userService.updateUser(user));
     }
 
     /*

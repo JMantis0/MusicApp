@@ -43,13 +43,6 @@ const UserHome = () => {
     getPlaylists();
   }, []);
 
-  // musicAppState.playlists.map((playlist) => {
-  //   console.log(playlist.songs)
-  //   playlist.songs.map((song) => {
-  //     console.log(song.title)
-  //   })
-  // });
-
   return (
     <div>
       <header>
@@ -69,36 +62,26 @@ const UserHome = () => {
         <Grid container>
           <Grid item xs={6}>
             <Grid container>
-              <Grid className={style.center} item xs={12}>
+              <Grid className={style.center} item xs={8}>
                 <SearchInput />
                 <SearchDeezerButton />
               </Grid>
-              <Grid className={style.center} item xs={12}>
-                <CreateNewPlaylistForm />
-              </Grid>
             </Grid>
-
-
-
           </Grid>
           <Grid className={style.center} item xs={6}></Grid>
-          <Grid className={style.center} item xs={10}>
+          <Grid className={style.center} item xs={8}>
             <DeezerResultsViewer />
           </Grid>
-          <Grid className={style.center} item xs={2}>
-            {/* side section */}
-          </Grid>
-          <Grid className={style.center} item xs={2}>
-            side section
-          </Grid>
-          <Grid container>
+          <Grid className={style.center} item xs={2}></Grid>
+          <Grid>
             <Grid className={style.center} item xs={12}>
-              {/* {musicAppState.playlists.map((playlist) => (
-                <PlaylistCard playlistName={ playlist.playlistName }
-                              songs = { playlist.songs }   
-                />
-              ))} */}
+              <CreateNewPlaylistForm />
             </Grid>
+              {musicAppState.playlists.map((playlist) => (
+                <PlaylistCard                
+                  playlist = {playlist}
+                />
+              ))}
           </Grid>
           <Grid className={style.center} item xs={10}></Grid>
           <Grid className="" item xs={10}>
