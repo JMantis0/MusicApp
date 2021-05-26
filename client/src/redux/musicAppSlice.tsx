@@ -9,21 +9,9 @@ import {
 } from "./store";
 
 export interface MusicAppState {
-  album: { albumId: string; title: string; cover: string };
-  artist: { artistId: string; name: string; picture: string };
+  album: string;
+  artist: string;
   playlists: Array<{
-    playlistId: string;
-    username: string;
-    playlistName: string;
-    songs: Array<{
-      songId: string;
-      title: string;
-      preview: string;
-      artist: { artistId: string; name: string; picture: string };
-      album: { albumId: string; title: string; cover: string };
-    }>;
-  }>;
-  playlist: {
     playlistId: string;
     username: string;
     playlistName: string;
@@ -34,13 +22,14 @@ export interface MusicAppState {
       artist: string;
       album: string;
     }>;
-  };
+  }>;
+  playlist: string;
   song: {
     songId: string;
     title: string;
     preview: string;
-    artist: { artistId: string; name: string; picture: string };
-    album: { albumId: string; title: string; cover: string };
+    artist: string;
+    album: string;
   };
   user: {
     userId: string;
@@ -55,21 +44,16 @@ export interface MusicAppState {
 }
 
 const initialState: MusicAppState = {
-  album: { albumId: "", title: "", cover: "" },
-  artist: { artistId: "", name: "", picture: "" },
-  playlist: {
-    playlistId: "",
-    username: "",
-    playlistName: "",
-    songs: [],
-  },
+  album: "",
+  artist: "",
+  playlist: "",
   playlists: [],
   song: {
     songId: "",
     title: "",
     preview: "",
-    artist: { artistId: "", name: "", picture: "" },
-    album: { albumId: "", title: "", cover: "" },
+    artist: "",
+    album: "",
   },
   user: {
     userId: "",
@@ -87,37 +71,16 @@ export const musicAppSlice = createSlice({
   name: "musicApp",
   initialState,
   reducers: {
-    setAlbum: (
-      state,
-      action: { payload: { albumId: string; title: string; cover: string } }
-    ) => {
+    setAlbum: (state, action: { payload: string }) => {
       console.log("Dispatching setAlbum reducer with action: ", action);
       state.album = action.payload;
     },
-    setArtist: (
-      state,
-      action: { payload: { artistId: string; name: string; picture: string } }
-    ) => {
+    setArtist: (state, action: { payload: string }) => {
       console.log("Dispatching setArtist reducer with action: ", action);
       state.artist = action.payload;
     },
-    setPlaylist: (
-      state,
-      action: {
-        payload: {
-          playlistId: string;
-          username: string;
-          playlistName: string;
-          songs: Array<{
-            songId: string;
-            title: string;
-            preview: string;
-            artist: string;
-            album: string;
-          }>;
-        };
-      }
-    ) => {
+    setPlaylist: (state, action: { payload: string }) => {
+      console.log("Displatching setPlaylist reducer with action: ", action);
       state.playlist = action.payload;
     },
     setPlaylists: (
@@ -131,8 +94,8 @@ export const musicAppSlice = createSlice({
             songId: string;
             title: string;
             preview: string;
-            artist: { artistId: string; name: string; picture: string };
-            album: { albumId: string; title: string; cover: string };
+            artist: string;
+            album: string;
           }>;
         }>;
       }
@@ -151,8 +114,8 @@ export const musicAppSlice = createSlice({
             songId: string;
             title: string;
             preview: string;
-            artist: { artistId: string; name: string; picture: string };
-            album: { albumId: string; title: string; cover: string };
+            artist: string;
+            album: string;
           }>;
         };
       }
@@ -167,8 +130,8 @@ export const musicAppSlice = createSlice({
           songId: string;
           title: string;
           preview: string;
-          artist: { artistId: string; name: string; picture: string };
-          album: { albumId: string; title: string; cover: string };
+          artist: string;
+          album: string;
         };
       }
     ) => {
