@@ -121,7 +121,7 @@ public class PlaylistController {
      * @return The response entity containing the playlist
      */
     @PutMapping("/update/playlist/songs")
-    public ResponseEntity<Playlist> updatePlaylistSongsMultiple(@RequestParam String playlistId, @RequestBody List<Song> songs){
+    public ResponseEntity<Playlist> updatePlaylistSongsMultiple(@RequestParam String playlistId, @RequestBody Song[] songs){
         for (Song song : songs){
             updatePlaylistSongs(playlistId,song);
         }

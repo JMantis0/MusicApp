@@ -86,9 +86,7 @@ public class PlaylistControllerTest {
 
         Song song = new Song();
 
-        List<Song> songs = new ArrayList<>();
-
-        songs.add(song);
+        Song[] songs = {song};
 
         Mockito.when(playlistService.updatePlaylistSongs(playlistId,song)).thenReturn(playlist);
         Mockito.when(playlistService.readPlaylistById(playlistId)).thenReturn(playlist);
