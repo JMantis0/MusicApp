@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -20,28 +20,31 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
 const PlaylistSelector = () => {
   const classes = useStyles();
-  const handleChange = (event: React.ChangeEvent<{ value: any }>) => {
-    console.log("event: ", event);
-    const selectedPlaylist = JSON.parse(event.target.value);
-    console.log("selectedPlaylist in redux shall be: ", selectedPlaylist);
-    dispatch(setPlaylist(selectedPlaylist));
-  };
   const musicAppState = useAppSelector(selectMusicApp);
   const dispatch = useAppDispatch();
+  const handleChange = (event: React.ChangeEvent<{ value: any }>) => {
+    console.log("event: ", event);
+    const playlistName = event.target.value;
+    dispatch(setPlaylist(playlistName));
+  };
+
   return (
     <div>
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-label">Select Playlist</InputLabel>
         <Select
-          value={musicAppState.playlist.playlistName}
-          onChange={handleChange}
+          value={musicAppState.playlist}
+          onChange={(event) => {
+            console.log("change");
+            handleChange(event);
+          }}
         >
+          <MenuItem value="">Select</MenuItem>
           {musicAppState.playlists.map((playlist) => {
             return (
-              <MenuItem value={JSON.stringify(playlist)}>
+              <MenuItem key={playlist.playlistId} value={playlist.playlistName}>
                 {playlist.playlistName}
               </MenuItem>
             );
