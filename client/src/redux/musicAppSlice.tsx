@@ -40,6 +40,7 @@ export interface MusicAppState {
   };
   searchInput: string;
   loginForm: { username: string; password: string };
+  userCreateForm: {firstName: string, lastName: string, username: string, password: string}
   deezerData: any;
 }
 
@@ -64,6 +65,7 @@ const initialState: MusicAppState = {
   },
   searchInput: "",
   loginForm: { username: "", password: "" },
+  userCreateForm: {firstName: "", lastName: "", username: "", password: ""},
   deezerData: [],
 };
 
@@ -179,6 +181,24 @@ export const musicAppSlice = createSlice({
       state.loginForm.username = "";
       state.loginForm.password = "";
     },
+    setCreateUserForm: (
+      state,
+      action: { payload: {fieldName: string; value: string} } 
+      ) => {
+        const fieldName = action.payload.fieldName;
+        const value = action.payload.value;
+        console.log(`Setting ${fieldName} to ${value}`);
+        state.userCreateForm = { ...state.userCreateForm, [fieldName]: value };
+      },
+    resetCreateUserForm: (state) => {
+      console.log(
+        "Dispatching resetLoginForm reducer with action with no action."
+      );
+      state.userCreateForm.firstName = "";
+      state.userCreateForm.lastName = "";
+      state.userCreateForm.username = "";
+      state.userCreateForm.password = "";
+    },
     setSearchInput: (state, action: { payload: string }) => {
       console.log("Dispatching setSearchInput with action: ", action);
       state.searchInput = action.payload;
@@ -200,6 +220,8 @@ export const {
   setUser,
   logoutUser,
   setLoginForm,
+  resetCreateUserForm,
+  setCreateUserForm,
   resetLoginForm,
   setSearchInput,
   setDeezerData,
