@@ -39,6 +39,7 @@ const UserHome = () => {
         console.log("There was an error: ", error);
       });
   };
+  
   useMemo(() => {
     getPlaylists();
   }, []);
