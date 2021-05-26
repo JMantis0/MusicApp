@@ -109,17 +109,21 @@ public class PlaylistService implements IPlaylistService{
         Playlist foundPlaylist = playlistRepository.findById(playlistId).orElse(null);
         //make sure the playlist exists
         if (foundPlaylist == null) {
+            System.out.println("no playlist");
             return null;
         }
         List<Song> songs = foundPlaylist.getSongs();
         //make sure it's not inside of the playlist already
         if (songs.contains(song)){
+            System.out.println("already exists");
             return null;
         }
         songs.add(song);
         foundPlaylist.setSongs(songs);
         playlistRepository.save(foundPlaylist);
+        System.out.println("good song");
         return foundPlaylist;
+
     }
 
     /*
@@ -130,11 +134,15 @@ public class PlaylistService implements IPlaylistService{
 
     /**
      * Deletes a playlist from the repository
-     * @param playlist The playlist to delete
+     * @param playlistId The playlist to delete
      */
     @Override
-    public void deletePlaylist(Playlist playlist) {
-        playlistRepository.delete(playlist);
+    public void deletePlaylist(String playlistId) {
+        Playlist foundPlaylist = playlistRepository.findById(playlistId).orElse(null);
+        if (foundPlaylist == null){
+            return;
+        }
+        playlistRepository.delete(foundPlaylist);
     }
 
     /**

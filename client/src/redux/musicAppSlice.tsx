@@ -23,6 +23,7 @@ export interface MusicAppState {
     }>;
   }>;
   playlist: {
+    playlistId: string;
     username: string;
     playlistName: string;
     songs: Array<{
@@ -56,6 +57,7 @@ const initialState: MusicAppState = {
   album: { albumId: "", title: "", cover: "" },
   artist: { artistId: "", name: "", picture: "" },
   playlist: {
+    playlistId: "",
     username: "",
     playlistName: "",
     songs: [],
@@ -117,6 +119,7 @@ export const musicAppSlice = createSlice({
       console.log("Dispatching setPlaylists reducer with action: ", action);
       state.playlists = action.payload;
     },
+
     addPlaylist: (
       state,
       action: {
