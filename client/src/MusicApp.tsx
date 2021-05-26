@@ -6,7 +6,7 @@ import Support from "./pages/Support";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Playlists from "./pages/Playlists";
-
+import UserCreation from "./pages/UserCreation";
 function MusicApp() {
   return (
     <div>
@@ -21,11 +21,14 @@ function MusicApp() {
           <Route exact path="/user_home">
             <UserHome />
           </Route>
-          <Route>
+          {/* <Route>
             <Playlists/>
-          </Route>
+          </Route> */}
           <Route exact path="/support">
             <Support />
+          </Route>
+          <Route exact path="/user_create">
+            <UserCreation />
           </Route>
         </Switch>
       </Router>
