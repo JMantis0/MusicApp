@@ -80,7 +80,7 @@ const UserHome = () => {
               <PlaylistSelector />
             </Grid>
             {musicAppState.playlists.map((playlist) => (
-              <PlaylistCard playlist={playlist} />
+              <PlaylistCard key={playlist.playlistId} playlist={playlist} />
             ))}
           </Grid>
           <Grid className={style.center} item xs={10}></Grid>
