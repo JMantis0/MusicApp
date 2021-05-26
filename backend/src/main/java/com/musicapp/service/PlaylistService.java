@@ -109,19 +109,16 @@ public class PlaylistService implements IPlaylistService{
         Playlist foundPlaylist = playlistRepository.findById(playlistId).orElse(null);
         //make sure the playlist exists
         if (foundPlaylist == null) {
-            System.out.println("no playlist");
             return null;
         }
         List<Song> songs = foundPlaylist.getSongs();
         //make sure it's not inside of the playlist already
         if (songs.contains(song)){
-            System.out.println("already exists");
             return null;
         }
         songs.add(song);
         foundPlaylist.setSongs(songs);
         playlistRepository.save(foundPlaylist);
-        System.out.println("good song");
         return foundPlaylist;
 
     }

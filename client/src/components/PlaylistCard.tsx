@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
+
 //  import reducer and state selector
 import { musicAppSlice, selectMusicApp, setPlaylists } from "../redux/musicAppSlice";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -18,15 +19,16 @@ import DialogContent from "@material-ui/core/DialogContent";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
+import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 import TableCell from "@material-ui/core/TableCell";
 import { Tab } from "@material-ui/icons";
 
 const PlaylistCard = ({ playlist }: any) => {
-  const songs = playlist.songs;
-  // const musicAppState = useAppSelector(selectMusicApp);
+
+  const [songs, setSongs] = React.useState(playlist.songs);
   const [open, setOpen] = React.useState(false);
-  // const [playlistSongs, setPlaylistSongs] = React.useState();
-  // const dispatch = useAppDispatch();
+
+  const dispatch = useAppDispatch();
   const handleOpen = () => {
     setOpen(true);
   };
@@ -34,10 +36,6 @@ const PlaylistCard = ({ playlist }: any) => {
   const handleClose = () => {
     setOpen(false);
   };
-
-  // const handleSongs = (arr: any) => {
-  //   setPlaylistSongs(arr);
-  // }
 
   const deletePlaylist = () => {
     const queryString = `http://localhost:8080/api/delete/playlist`;
@@ -52,8 +50,8 @@ const PlaylistCard = ({ playlist }: any) => {
       .then((response) => {
         console.log("response", response);
         if(response.status === 200){
-          // does not refresh the current list of playlists
-          alert("woo hoo!");
+          const playlistData = response.data;
+          dispatch(setPlaylists(playlistData));
         }
       })
       .catch((error) => {
@@ -61,6 +59,32 @@ const PlaylistCard = ({ playlist }: any) => {
       });
     handleClose();
   };
+
+  const deleteSongFromPlaylist = (event: any, song:any) => {
+    const queryString = `http://localhost:8080/api/delete/playlist/song`;
+    const body = {
+      params: {
+        "playlistId": playlist.playlistId,
+        "songId" : song.songId
+      },
+    };
+    console.log(body);
+    axios
+      .delete(queryString, body)
+      .then((response) => {
+        console.log("response", response);
+        if(response.status === 200){
+          console.log(response.data);
+          const songData = response.data.songs;
+          setSongs(songData);
+        }
+      })
+      .catch((error) => {
+        console.log("There was an error: ", error);
+      });
+  };
+  
+
 
   const useStyles = makeStyles((theme) => ({
     form: {
@@ -95,24 +119,20 @@ const PlaylistCard = ({ playlist }: any) => {
       <Dialog
         open={open}
         onClose={handleClose}
-        // aria-labelledby="simple-modal-title"
-        // aria-describedby="simple-modal-description"
+        maxWidth='lg'
       >
         <DialogTitle>{playlist.playlistName}</DialogTitle>
         <DialogContent>         
           <TableContainer>
             <TableBody>
             {songs.map((song: any) =>
-              <TableRow>
+              <TableRow >
                 <TableCell>
                   {song.title}
                 </TableCell>
                 <TableCell>
                   <img src={song.album.cover}></img>
                 </TableCell>
-                {/* <TableCell>
-                  {song.album.title}
-                </TableCell> */}
                 <TableCell>
                 <figure>
                   <audio controls src={song.preview}>
@@ -120,6 +140,11 @@ const PlaylistCard = ({ playlist }: any) => {
                     <code>audio</code> element.
                   </audio>
                 </figure>
+                </TableCell>
+                <TableCell>
+                  <Button onClick ={ (event) => { deleteSongFromPlaylist(event, song)} }>
+                    <DeleteForeverOutlinedIcon/>
+                  </Button>
                 </TableCell>
               </TableRow>
             )}
