@@ -63,6 +63,41 @@ public class UserControllerTest {
     *
     * */
 
+    @Test
+    public void createUserSuccessTest(){
+        User user = new User();
+        user.setUsername("username");
+        user.setPassword("password");
+
+        Mockito.when(userService.findByUsername(user.getUsername())).thenReturn(null);
+
+        ResponseEntity<User> response = userController.createUser(user);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    public void createUserFailureNullInputTest(){
+        User user = new User();
+        // do not enter username or password. they are empty
+        ResponseEntity<User> response = userController.createUser(user);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.valueOf(401));
+    }
+
+    @Test
+    public void createUserFailureAlreadyExistsTest(){
+        User user = new User();
+        user.setUsername("username");
+        user.setPassword("password");
+
+        Mockito.when(userService.findByUsername(user.getUsername())).thenReturn(user);
+
+        ResponseEntity<User> response = userController.createUser(user);
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.valueOf(401));
+
+    }
+
     /*
     *
     * Read Tests
