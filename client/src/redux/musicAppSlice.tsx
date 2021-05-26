@@ -24,15 +24,15 @@ export interface MusicAppState {
     }>;
   }>;
   playlist: {
-    playlistId: string
+    playlistId: string;
     username: string;
     playlistName: string;
     songs: Array<{
       songId: string;
       title: string;
       preview: string;
-      artist: { artistId: string; name: string; picture: string };
-      album: { albumId: string; title: string; cover: string };
+      artist: string;
+      album: string;
     }>;
   };
   song: {
@@ -100,6 +100,25 @@ export const musicAppSlice = createSlice({
     ) => {
       console.log("Dispatching setArtist reducer with action: ", action);
       state.artist = action.payload;
+    },
+    setPlaylist: (
+      state,
+      action: {
+        payload: {
+          playlistId: string;
+          username: string;
+          playlistName: string;
+          songs: Array<{
+            songId: string;
+            title: string;
+            preview: string;
+            artist: string;
+            album: string;
+          }>;
+        };
+      }
+    ) => {
+      state.playlist = action.payload;
     },
     setPlaylists: (
       state,
@@ -212,6 +231,7 @@ export const {
   setAlbum,
   setArtist,
   addPlaylist,
+  setPlaylist,
   setPlaylists,
   setSong,
   setUser,
