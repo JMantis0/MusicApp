@@ -130,9 +130,13 @@ public class PlaylistController {
      * @return The status of the delete
      */
     @DeleteMapping("/delete/playlist")
-    public ResponseEntity<Playlist> deletePlaylist(@RequestParam String playlistId){
+    public ResponseEntity<List<Playlist>> deletePlaylist(@RequestParam String playlistId){
+        Playlist foundPlaylist = playlistService.readPlaylistById(playlistId);
+        String user = foundPlaylist.getUsername();
+
         playlistService.deletePlaylist(playlistId);
-        return new ResponseEntity<>(HttpStatus.OK);
+
+        return readPlaylist(user);
     }
 
     /**
