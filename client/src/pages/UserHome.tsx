@@ -44,7 +44,7 @@ const UserHome = () => {
   }, []);
 
   return (
-    <div>
+    <div className={style.blackBackground}>
       <header>
         <Grid container>
           <Grid className={style.center} xs={10} item>
@@ -77,15 +77,12 @@ const UserHome = () => {
             <Grid className={style.center} item xs={12}>
               <CreateNewPlaylistForm />
             </Grid>
-              {musicAppState.playlists.map((playlist) => (
-                <PlaylistCard                
-                  playlist = {playlist}
-                />
-              ))}
+            {musicAppState.playlists.map((playlist) => (
+              <PlaylistCard playlist={playlist} />
+            ))}
           </Grid>
           <Grid className={style.center} item xs={10}></Grid>
-          <Grid className="" item xs={10}>
-          </Grid>
+          <Grid className="" item xs={10}></Grid>
         </Grid>
       </main>
     </div>
