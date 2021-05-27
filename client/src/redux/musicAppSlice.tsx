@@ -39,18 +39,9 @@ export interface MusicAppState {
   };
   searchInput: string;
   loginForm: { username: string; password: string };
-<<<<<<< HEAD
-  userCreateForm: {
-    firstName: string;
-    lastName: string;
-    username: string;
-    password: string;
-  };
-=======
   userCreateForm: {firstName: string, lastName: string, username: string, password: string}
   userUpdateForm: {firstName: string, lastName: string, username: string, password: string}
 
->>>>>>> 8f0360eeb1c819084a29ab98fc56ef348ced8199
   deezerData: any;
 }
 
@@ -75,12 +66,8 @@ const initialState: MusicAppState = {
   },
   searchInput: "",
   loginForm: { username: "", password: "" },
-<<<<<<< HEAD
-  userCreateForm: { firstName: "", lastName: "", username: "", password: "" },
-=======
   userCreateForm: {firstName: "", lastName: "", username: "", password: ""},
   userUpdateForm: {firstName: "", lastName: "", username: "", password: ""},
->>>>>>> 8f0360eeb1c819084a29ab98fc56ef348ced8199
   deezerData: [],
 };
 export const musicAppSlice = createSlice({
