@@ -19,40 +19,48 @@ const CreateNewPlaylistForm = () => {
     const newPlaylist = {
       username: musicAppState.user.username,
       playlistName: newPlaylistName,
-      songs: []
-    }
-    console.log("Making post request to /api/create_playlist with data: ", newPlaylist);
-    axios.post("http://localhost:8080/api/create/playlist", newPlaylist).then(response => {
-      console.log("The Response is: ", response);
+      songs: [],
+    };
+    console.log(
+      "Making post request to /api/create_playlist with data: ",
+      newPlaylist
+    );
+    axios
+      .post("http://localhost:8080/api/create/playlist", newPlaylist)
+      .then((response) => {
+        console.log("The Response is: ", response);
 
-      console.log("Adding new playlist to redux state");
-      const addThisPlaylistToState = response.data;
-      console.log("addThisPlaylistToState: ", addThisPlaylistToState);
-      
-      dispatch(addPlaylist(addThisPlaylistToState));
+        console.log("Adding new playlist to redux state");
+        const addThisPlaylistToState = response.data;
+        console.log("addThisPlaylistToState: ", addThisPlaylistToState);
 
-    }).catch(error => {
-      console.log("There was an error: ", error);
-    })
+        dispatch(addPlaylist(addThisPlaylistToState));
+      })
+      .catch((error) => {
+        console.log("There was an error: ", error);
+      });
   };
   return (
     <React.Fragment>
-      <TextField
-        className=""
-        name="newPlaylist"
-        autoComplete="off"
-        type="text"
-        label="Playlist Name"
-        onChange={handleOnChange}
-        onSubmit={createPlaylistAndStoreToDBAndSetPlaylistState}
-      />
-      <Button
-        variant="outlined"
-        color="secondary"
-        onClick={createPlaylistAndStoreToDBAndSetPlaylistState}
-      >
-        Create
-      </Button>
+      <div>
+        <TextField
+          className=""
+          name="newPlaylist"
+          autoComplete="off"
+          type="text"
+          label="New Playlist"
+          onChange={handleOnChange}
+          onSubmit={createPlaylistAndStoreToDBAndSetPlaylistState}
+        />
+          <Button
+            className="Trigger August OCD"
+            variant="contained"
+            color="secondary"
+            onClick={createPlaylistAndStoreToDBAndSetPlaylistState}
+          >
+            Create
+          </Button>
+      </div>
     </React.Fragment>
   );
 };
