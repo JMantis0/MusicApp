@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
 import axios from "axios";
-import SearchInput from "../components/SearchInput";
 import Grid from "@material-ui/core/Grid";
 import style from "../MusicApp.module.css";
 import LogoutButton from "../components/LogoutButton";
+import SearchInput from "../components/SearchInput";
 import SearchDeezerButton from "../components/SearchDeezerButton";
 import CreateNewPlaylistForm from "../components/CreateNewPlaylistForm";
 import PlaylistCard from "../components/PlaylistCard";
@@ -63,14 +63,6 @@ const UserHome = () => {
       <div className={style.horizontalLine}></div>
 
       <main>
-        <Grid container>
-          <Grid item xs={4}></Grid>
-          <Grid className={style.center} item xs={4}>
-            <SearchInput />
-            <SearchDeezerButton />
-          </Grid>
-          <Grid item xs={4}></Grid>
-        </Grid>
         <Grid container>
           <Grid item xs={2}></Grid>
 
