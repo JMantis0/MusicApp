@@ -110,7 +110,7 @@ public class UserController {
     @PutMapping("/update/user")
     public ResponseEntity<User> update(@RequestBody User user){
         log.info("Deleted User : {}",user.getUsername());
-        return ResponseEntity.ok(userService.updateUser(user));
+        return new ResponseEntity<>(userService.updateUser(user),HttpStatus.OK);
     }
 
     /*
