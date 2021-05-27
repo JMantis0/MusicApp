@@ -40,6 +40,8 @@ album: { albumId: string; title: string; cover: string };
   searchInput: string;
   loginForm: { username: string; password: string };
   userCreateForm: {firstName: string, lastName: string, username: string, password: string}
+  userUpdateForm: {firstName: string, lastName: string, username: string, password: string}
+
   deezerData: any;
 }
 
@@ -65,6 +67,7 @@ const initialState: MusicAppState = {
   searchInput: "",
   loginForm: { username: "", password: "" },
   userCreateForm: {firstName: "", lastName: "", username: "", password: ""},
+  userUpdateForm: {firstName: "", lastName: "", username: "", password: ""},
   deezerData: [],
 };
 export const musicAppSlice = createSlice({
@@ -189,6 +192,15 @@ export const musicAppSlice = createSlice({
       state.userCreateForm.username = "";
       state.userCreateForm.password = "";
     },
+    setUpdateUserForm: (
+      state,
+      action: { payload: {fieldName: string; value: string} } 
+      ) => {
+        const fieldName = action.payload.fieldName;
+        const value = action.payload.value;
+        console.log(`Setting ${fieldName} to ${value}`);
+        state.userCreateForm = { ...state.userCreateForm, [fieldName]: value };
+      },
     setSearchInput: (state, action: { payload: string }) => {
       console.log("Dispatching setSearchInput with action: ", action);
       state.searchInput = action.payload;
@@ -210,6 +222,7 @@ export const {
   setLoginForm,
   resetCreateUserForm,
   setCreateUserForm,
+  setUpdateUserForm,
   resetLoginForm,
   setSearchInput,
   setDeezerData,

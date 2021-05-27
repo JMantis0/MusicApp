@@ -52,9 +52,6 @@ const UserHome = () => {
           <Grid className={style.center} xs={10} item>
             <h1>User Home</h1>
           </Grid>
-          {/* <Grid className={style.center} xs={2} item>
-            <LogoutButton />
-          </Grid> */}
           <Grid className={style.center} xs={2} item>
             <UserProfile/>
           </Grid>
