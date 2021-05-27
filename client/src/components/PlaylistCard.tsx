@@ -28,6 +28,7 @@ import TableCell from "@material-ui/core/TableCell";
 
 const PlaylistCard = ({ playlist }: any) => {
   const [songs, setSongs] = React.useState(playlist.songs);
+  
   const [open, setOpen] = React.useState(false);
   const musicAppState = useAppSelector(selectMusicApp);
 
