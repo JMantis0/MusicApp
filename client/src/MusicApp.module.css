@@ -38,3 +38,39 @@
 .block {
   display: block;
 }
+
+.bigV {
+  position: relative;
+  right: 31px;
+  top: 20px;
+  font-size: 100px;
+  font-family: 'Sacramento', cursive;
+  font-weight:800;
+}
+
+.left {
+  font-size: 25px;
+  position: relative;
+  left: 15px;
+  top: 12px;
+  font-style: italic;
+}
+
+.right {
+position: relative;
+top: 2%;
+right: 15%;
+font-size:55px;
+font-family: 'Kaushan Script', cursive;
+text-decoration: underline ;
+text-underline-offset: 5px;
+text-decoration-thickness: 1px;
+}
+
+.music {
+ position: relative;
+ left: 100px;
+ bottom: 45px;
+ font-family: 'Montserrat', sans-serif;
+ font-weight: 600;
+}
