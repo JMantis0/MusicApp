@@ -24,9 +24,12 @@ const CreateNewPlaylistForm = () => {
     console.log("Making post request to /api/create_playlist with data: ", newPlaylist);
     axios.post("http://localhost:8080/api/create/playlist", newPlaylist).then(response => {
       console.log("The Response is: ", response);
-  
+
       console.log("Adding new playlist to redux state");
-      dispatch(addPlaylist(newPlaylist));
+      const addThisPlaylistToState = response.data;
+      console.log("addThisPlaylistToState: ", addThisPlaylistToState);
+      
+      dispatch(addPlaylist(addThisPlaylistToState));
 
     }).catch(error => {
       console.log("There was an error: ", error);

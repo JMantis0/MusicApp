@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import axios from "axios";
 import clsx from "clsx";
 import {
   createStyles,
@@ -21,11 +22,13 @@ import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Button from "@material-ui/core/Button";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import { useAppSelector } from "../redux/hooks";
-import { selectMusicApp } from "../redux/musicAppSlice";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
+import { selectMusicApp, setPlaylists } from "../redux/musicAppSlice";
+import PlaylistSelector from "../components/PlaylistSelector";
 
 interface DeezerData {
   songTitle: string;
@@ -63,10 +66,14 @@ const deezerHeadCells: DeezerHeadCell[] = [
   },
   { id: "picture", numeric: true, disablePadding: false, label: "Picture" },
   { id: "artist", numeric: true, disablePadding: false, label: "Artist" },
-  { id: "albumTitle", numeric: true, disablePadding: false, label: "Album Title" },
+  {
+    id: "albumTitle",
+    numeric: true,
+    disablePadding: false,
+    label: "Album Title",
+  },
   { id: "cover", numeric: true, disablePadding: false, label: "Cover Art" },
   { id: "preview", numeric: false, disablePadding: false, label: "Preview" },
-
 ];
 
 interface DeezerTableProps {
@@ -274,6 +281,8 @@ const DeezerSearchResultsViewer = () => {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const musicAppState = useAppSelector(selectMusicApp);
+  const dispatch = useAppDispatch();
+
   const createDeezerData = (
     songTitle: string,
     songId: string,
@@ -362,7 +371,7 @@ const DeezerSearchResultsViewer = () => {
       );
     }
   );
-  
+
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
     property: keyof DeezerData
@@ -420,6 +429,60 @@ const DeezerSearchResultsViewer = () => {
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, deezerRows.length - page * rowsPerPage);
+
+  const saveSelectedSongsToPlaylist = () => {
+    if (selected.length !== 0) {
+      const songsToAdd = deezerRows.filter((song) => {
+        return selected.includes(song.songId);
+      });
+      const selectedPlaylistArr = musicAppState.playlists.filter(
+        (playlist) => playlist.playlistName === musicAppState.playlist
+      );
+      const selectedPlaylistId = selectedPlaylistArr[0].playlistId;
+      console.log("songsToAdd: ", songsToAdd);
+      const songsToAdd2: any = [];
+      songsToAdd.forEach((song) => {
+        const addSongsObject = {
+          songId: song.songId,
+          title: song.songTitle,
+          preview: song.preview,
+          artist: {
+            artistId: song.artistId,
+            name: song.artist,
+            picture: song.picture,
+          },
+          album: {
+            albumId: song.albumId,
+            title: song.albumTitle,
+            cover: song.cover,
+          },
+
+          //   song.artist,
+          // album: song.albumTitle,
+        };
+        songsToAdd2.push(addSongsObject);
+      });
+      console.log("songsToAdd2", songsToAdd2);
+      //console.log("testParam", testParam);
+      axios
+        .put(
+          `http://localhost:8080/api/update/playlist/songs?playlistId=${selectedPlaylistId}`,
+          songsToAdd2
+        )
+        .then((response) => {
+          console.log("response is: ", response);
+          //Response.data contains the new playlist with the new song added.
+          //Update the playlists.
+          const updatedPlaylists = response.data;
+          dispatch(setPlaylists(updatedPlaylists));
+        })
+        .catch((error) => {
+          console.log("There was an error: ", error);
+        });
+    } else {
+      console.log("No songs selected.");
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -499,6 +562,8 @@ const DeezerSearchResultsViewer = () => {
             </TableBody>
           </Table>
         </TableContainer>
+        <PlaylistSelector />
+        <Button onClick={saveSelectedSongsToPlaylist}>Save to Playlist</Button>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
