@@ -84,14 +84,22 @@ public class PlaylistControllerTest {
 
         Playlist playlist = new Playlist();
 
+        playlist.setUsername("Username");
+        playlist.setPlaylistId(playlistId);
+
+        List<Playlist> playlists = new ArrayList<>();
+        playlists.add(playlist);
+
         Song song = new Song();
+        song.setSongId("songId");
 
         Song[] songs = {song};
 
         Mockito.when(playlistService.updatePlaylistSongs(playlistId,song)).thenReturn(playlist);
         Mockito.when(playlistService.readPlaylistById(playlistId)).thenReturn(playlist);
+        Mockito.when(playlistService.readPlaylist(playlist.getUsername())).thenReturn(playlists);
 
-        ResponseEntity<Playlist> response = playlistController.updatePlaylistSongsMultiple(playlistId,songs);
+        ResponseEntity<List<Playlist>> response = playlistController.updatePlaylistSongsMultiple(playlistId,songs);
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
     }
