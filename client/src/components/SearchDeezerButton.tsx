@@ -30,7 +30,17 @@ const SearchDeezerButton = () => {
   };
   return (
     <React.Fragment>
-      <Button color="primary" variant="contained" onClick={handleSearch}>
+      <Button
+        color="primary"
+        variant="contained"
+        onClick={(event) => {
+          if (musicAppState.searchInput !== "") {
+            handleSearch();
+          } else {
+            console.log("Nothing in search input");
+          }
+        }}
+      >
         Search Music
       </Button>
     </React.Fragment>

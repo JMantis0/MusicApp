@@ -7,22 +7,10 @@ import {
   RootState,
   //  AppThunk
 } from "./store";
-
 export interface MusicAppState {
-  album: { albumId: string; title: string; cover: string };
+album: { albumId: string; title: string; cover: string };
   artist: { artistId: string; name: string; picture: string };
   playlists: Array<{
-    username: string;
-    playlistName: string;
-    songs: Array<{
-      songId: string;
-      title: string;
-      preview: string;
-      artist: { artistId: string; name: string; picture: string };
-      album: { albumId: string; title: string; cover: string };
-    }>;
-  }>;
-  playlist: {
     playlistId: string;
     username: string;
     playlistName: string;
@@ -33,7 +21,8 @@ export interface MusicAppState {
       artist: { artistId: string; name: string; picture: string };
       album: { albumId: string; title: string; cover: string };
     }>;
-  };
+  }>;
+  playlist: string,
   song: {
     songId: string;
     title: string;
@@ -57,12 +46,7 @@ export interface MusicAppState {
 const initialState: MusicAppState = {
   album: { albumId: "", title: "", cover: "" },
   artist: { artistId: "", name: "", picture: "" },
-  playlist: {
-    playlistId: "",
-    username: "",
-    playlistName: "",
-    songs: [],
-  },
+  playlist: "",
   playlists: [],
   song: {
     songId: "",
@@ -83,29 +67,19 @@ const initialState: MusicAppState = {
   userCreateForm: {firstName: "", lastName: "", username: "", password: ""},
   deezerData: [],
 };
-
 export const musicAppSlice = createSlice({
   name: "musicApp",
   initialState,
   reducers: {
-    setAlbum: (
-      state,
-      action: { payload: { albumId: string; title: string; cover: string } }
-    ) => {
-      console.log("Dispatching setAlbum reducer with action: ", action);
-      state.album = action.payload;
-    },
-    setArtist: (
-      state,
-      action: { payload: { artistId: string; name: string; picture: string } }
-    ) => {
-      console.log("Dispatching setArtist reducer with action: ", action);
-      state.artist = action.payload;
+    setPlaylist: (state, action: { payload: string }) => {
+      console.log("Dispatching setPlaylist reducer with action: ", action);
+      state.playlist = action.payload;
     },
     setPlaylists: (
       state,
       action: {
         payload: Array<{
+          playlistId: string;
           username: string;
           playlistName: string;
           songs: Array<{
@@ -113,7 +87,7 @@ export const musicAppSlice = createSlice({
             title: string;
             preview: string;
             artist: { artistId: string; name: string; picture: string };
-            album: { albumId: string; title: string; cover: string };
+            album:  { albumId: string; title: string; cover: string };
           }>;
         }>;
       }
@@ -121,11 +95,11 @@ export const musicAppSlice = createSlice({
       console.log("Dispatching setPlaylists reducer with action: ", action);
       state.playlists = action.payload;
     },
-
     addPlaylist: (
       state,
       action: {
         payload: {
+          playlistId: string;
           username: string;
           playlistName: string;
           songs: Array<{
@@ -133,7 +107,7 @@ export const musicAppSlice = createSlice({
             title: string;
             preview: string;
             artist: { artistId: string; name: string; picture: string };
-            album: { albumId: string; title: string; cover: string };
+            album:  { albumId: string; title: string; cover: string };
           }>;
         };
       }
@@ -148,8 +122,8 @@ export const musicAppSlice = createSlice({
           songId: string;
           title: string;
           preview: string;
-          artist: { artistId: string; name: string; picture: string };
-          album: { albumId: string; title: string; cover: string };
+          artist:{ artistId: string; name: string; picture: string };
+          album:  { albumId: string; title: string; cover: string };
         };
       }
     ) => {
@@ -199,13 +173,13 @@ export const musicAppSlice = createSlice({
     },
     setCreateUserForm: (
       state,
-      action: { payload: {fieldName: string; value: string} } 
-      ) => {
-        const fieldName = action.payload.fieldName;
-        const value = action.payload.value;
-        console.log(`Setting ${fieldName} to ${value}`);
-        state.userCreateForm = { ...state.userCreateForm, [fieldName]: value };
-      },
+      action: { payload: { fieldName: string; value: string } }
+    ) => {
+      const fieldName = action.payload.fieldName;
+      const value = action.payload.value;
+      console.log(`Setting ${fieldName} to ${value}`);
+      state.userCreateForm = { ...state.userCreateForm, [fieldName]: value };
+    },
     resetCreateUserForm: (state) => {
       console.log(
         "Dispatching resetLoginForm reducer with action with no action."
@@ -227,9 +201,8 @@ export const musicAppSlice = createSlice({
 });
 
 export const {
-  setAlbum,
-  setArtist,
   addPlaylist,
+  setPlaylist,
   setPlaylists,
   setSong,
   setUser,

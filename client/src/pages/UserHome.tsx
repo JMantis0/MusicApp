@@ -81,16 +81,14 @@ const UserHome = () => {
           <Grid>
             <Grid className={style.center} item xs={12}>
               <CreateNewPlaylistForm />
+            
             </Grid>
-              {musicAppState.playlists.map((playlist) => (
-                <PlaylistCard                
-                  playlist = {playlist}
-                />
-              ))}
+            {musicAppState.playlists.map((playlist) => (
+              <PlaylistCard key={playlist.playlistId} playlist={playlist} />
+            ))}
           </Grid>
           <Grid className={style.center} item xs={10}></Grid>
-          <Grid className="" item xs={10}>
-          </Grid>
+          <Grid className="" item xs={10}></Grid>
         </Grid>
       </main>
     </div>
