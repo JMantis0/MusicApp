@@ -54,7 +54,14 @@ const Login = () => {
       className={`${style.center} ${style.fitViewHeight} ${style.blackBackground}`}
     >
       <Paper className={style.paperPadding}>
-        <h1 className={style.center}>Music App</h1>
+        <div className={style.titleDiv}>
+          <span className={style.left}>pre-</span>
+          <span className={style.bigV}>V</span>
+          <span className={style.right}>iew</span>
+        </div>
+        <div>
+          <span className={style.music}>MUSIC APP</span>
+        </div>
         <FormControl component="fieldset">
           <FormLabel component="legend">Login</FormLabel>
           <TextField
