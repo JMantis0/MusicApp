@@ -85,7 +85,7 @@ const Login = () => {
           </Button>
         </FormControl>
         <Link
-          className={style.block}
+          className={`${style.block} ${style.marginTop}`}
           component="button"
           variant="body2"
           onClick={goToCreateNewUser}
