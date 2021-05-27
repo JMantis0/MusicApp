@@ -283,10 +283,6 @@ const DeezerSearchResultsViewer = () => {
   const musicAppState = useAppSelector(selectMusicApp);
   const dispatch = useAppDispatch();
 
-  const logState = () => {
-    console.log("selected: ", selected);
-  };
-
   const createDeezerData = (
     songTitle: string,
     songId: string,
@@ -433,60 +429,7 @@ const DeezerSearchResultsViewer = () => {
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, deezerRows.length - page * rowsPerPage);
-
-  const saveSelectedSongsToPlaylistOLD = () => {
-    if (selected.length !== 0) {
-      const songsToAdd = deezerRows.filter((song) => {
-        return selected.includes(song.songId);
-      });
-
-      //  Add the selected songs to the playlist, need username, playlistname, songId, songtitle, preview, artist, album
-      console.log("songsToAdd: ", songsToAdd);
-      const selectedPlaylistArr = musicAppState.playlists.filter(
-        (playlist) => playlist.playlistName === musicAppState.playlist
-      );
-      const selectedPlaylistId = selectedPlaylistArr[0].playlistId;
-      songsToAdd.forEach((song) => {
-        // replace test param with the playlistId later.
-        //get id of playlist to add song to by its name.
-        const addSongsObject = {
-          songId: song.songId,
-          title: song.songTitle,
-          preview: song.preview,
-          artist: song.artist,
-          album: song.albumTitle,
-        };
-        console.log("addSongsObject", addSongsObject);
-        axios
-          .put(
-            `http://localhost:8080/api/update/playlist/song?playlistId=${selectedPlaylistId}&username=${musicAppState.user.}`,
-            addSongsObject
-          )
-          .then((response) => {
-            console.log("response is: ", response);
-            //Response.data contains the new playlist with the new song added.
-            //Update the playlists.
-            const updatedPlaylist = response.data;
-            // replace the musicAppState.playlists playlist with this new playlist.
-            // need the index of this placelist so we know which one to replace
-            const indexOfPlaylistToReplace: number =
-              musicAppState.playlists.indexOf(selectedPlaylist);
-            console.log("indexOfPlaylistToReplace", indexOfPlaylistToReplace);
-
-            let replacementPlaylistArray = musicAppState.playlists;
-            replacementPlaylistArray[indexOfPlaylistToReplace] =
-              updatedPlaylist;
-
-            console.log(replacementPlaylistArray);
-            // dispatch(setPlaylists(replacementPlaylistArray));
-          })
-          .catch((error) => {
-            console.log("There was an error: ", error);
-          });
-      });
-    }
-  };
-
+    
   const saveSelectedSongsToPlaylist = () => {
     if (selected.length !== 0) {
       const songsToAdd = deezerRows.filter((song) => {
@@ -532,11 +475,6 @@ const DeezerSearchResultsViewer = () => {
 
   return (
     <div className={classes.root}>
-      <button
-        onClick={() => {
-          logState();
-        }}
-      ></button>
       <Paper className={classes.paper}>
         <DeezerTableToolbar numSelected={selected.length} />
         <TableContainer>
