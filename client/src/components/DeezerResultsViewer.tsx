@@ -32,6 +32,8 @@ import PlaylistSelector from "../components/PlaylistSelector";
 import Grid from "@material-ui/core/Grid";
 import style from "../MusicApp.module.css";
 import CreateNewPlaylistForm from "../components/CreateNewPlaylistForm";
+import SearchInput from "../components/SearchInput";
+import SearchDeezerButton from "../components/SearchDeezerButton";
 interface DeezerData {
   songTitle: string;
   songId: string;
@@ -491,8 +493,9 @@ const DeezerSearchResultsViewer = () => {
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <Grid className={style.lightGradient} container>
-          <Grid item xs={3}></Grid>
-          <Grid className={style.center} item xs={3}>
+          <Grid className={style.center} item xs={4}><SearchInput />
+            <SearchDeezerButton /></Grid>
+          <Grid className={style.center} item xs={4}>
             <PlaylistSelector />
             <Button
               variant="contained"
@@ -502,11 +505,11 @@ const DeezerSearchResultsViewer = () => {
               Save to Playlist
             </Button>
           </Grid>
-          <Grid className={style.center} item xs={3}>
+          <Grid className={style.center} item xs={4}>
             {" "}
             <CreateNewPlaylistForm />
           </Grid>
-          <Grid item xs={3}></Grid>
+          {/* <Grid item xs={3}></Grid> */}
         </Grid>
         <DeezerTableToolbar numSelected={selected.length} />
         <TableContainer>
