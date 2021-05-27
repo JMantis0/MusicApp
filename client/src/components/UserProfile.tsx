@@ -11,33 +11,37 @@ import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
 import style from "../MusicApp.module.css";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { selectMusicApp, setUpdateUserForm} from "../redux/musicAppSlice";
+import { selectMusicApp, setUpdateUserForm, setUser} from "../redux/musicAppSlice";
 import axios from "axios";
 
 const UserProfile = () => {
     const musicAppState = useAppSelector(selectMusicApp);
     const dispatch = useAppDispatch();
+    const [updateFormState, setUpdateFormState] = useState({
+        firstName: musicAppState.user.firstName,
+        lastName: musicAppState.user.lastName,
+        username: musicAppState.user.username,
+        password: musicAppState.user.password
+    })
 
-    const [firstName, setFirstName] = useState(musicAppState.user.firstName);
-    const [lastName, setLastName] = useState(musicAppState.user.lastName);
-    const [username, setUsername] = useState(musicAppState.user.username);
-    const [password, setPassword] = useState(musicAppState.user.password);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [open, setOpen] = React.useState(false);
     
-
     const formChangeHandler = (event: any) => {
         const fieldName = event.target.name;
         const value = event.target.value;
-        dispatch(setUpdateUserForm({ fieldName, value }));
+        setUpdateFormState({...updateFormState,[fieldName]:value});
     };
 
     const updateUser = () => {
         axios
-        .put(`http://localhost:8080/api/update/user`, musicAppState.userUpdateForm)
+        .put(`http://localhost:8080/api/update/user`, updateFormState)
         .then((response)=> {
             if(response.status === 200) {
                 alert("Successfully updated");
+                console.log("update user response: " + response);
+                const updatedUser = response.data;
+                dispatch(setUser(updatedUser));
             } else {
                 alert("There was an error");
             }}).catch((err)=> {
@@ -99,7 +103,7 @@ const UserProfile = () => {
                         label="First Name"
                         variant="outlined"
                         name="firstName"
-                        value={firstName}
+                        value={updateFormState.firstName}
                         onChange={formChangeHandler}
                     />
                     <TextField
@@ -109,7 +113,7 @@ const UserProfile = () => {
                         label="Last Name"
                         variant="outlined"
                         name="lastName"
-                        value={lastName}
+                        value={updateFormState.lastName}
                         onChange={formChangeHandler}
                     />
                     <TextField
@@ -119,8 +123,7 @@ const UserProfile = () => {
                         label="Username"
                         variant="outlined"
                         name="username"
-                        value={username}
-                        onChange={formChangeHandler}
+                        value={musicAppState.user.username}                        
                     />
                     <TextField
                         className={style.marginTop}
@@ -129,7 +132,7 @@ const UserProfile = () => {
                         label="Password"
                         variant="outlined"
                         name="password"
-                        value={password}
+                        value={updateFormState.password}
                         onChange={formChangeHandler}
                     />
                     <Button

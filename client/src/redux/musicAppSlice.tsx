@@ -199,8 +199,8 @@ export const musicAppSlice = createSlice({
         const fieldName = action.payload.fieldName;
         const value = action.payload.value;
         console.log(`Setting ${fieldName} to ${value}`);
-        state.userCreateForm = { ...state.userCreateForm, [fieldName]: value };
-      },
+        state.userUpdateForm = { ...state.userUpdateForm, [fieldName]: value };
+    },
     setSearchInput: (state, action: { payload: string }) => {
       console.log("Dispatching setSearchInput with action: ", action);
       state.searchInput = action.payload;
