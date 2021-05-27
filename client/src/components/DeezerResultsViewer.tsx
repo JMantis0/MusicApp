@@ -429,7 +429,7 @@ const DeezerSearchResultsViewer = () => {
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, deezerRows.length - page * rowsPerPage);
-    
+
   const saveSelectedSongsToPlaylist = () => {
     if (selected.length !== 0) {
       const songsToAdd = deezerRows.filter((song) => {
@@ -446,8 +446,19 @@ const DeezerSearchResultsViewer = () => {
           songId: song.songId,
           title: song.songTitle,
           preview: song.preview,
-          artist: song.artist,
-          album: song.albumTitle,
+          artist: {
+            artistId: song.artistId,
+            name: song.artist,
+            picture: song.picture,
+          },
+          album: {
+            albumId: song.albumId,
+            title: song.albumTitle,
+            cover: song.cover,
+          },
+
+          //   song.artist,
+          // album: song.albumTitle,
         };
         songsToAdd2.push(addSongsObject);
       });
@@ -455,7 +466,7 @@ const DeezerSearchResultsViewer = () => {
       //console.log("testParam", testParam);
       axios
         .put(
-          `http://localhost:8080/api/update/playlist/song?playlistId=${selectedPlaylistId}`,
+          `http://localhost:8080/api/update/playlist/songs?playlistId=${selectedPlaylistId}`,
           songsToAdd2
         )
         .then((response) => {
