@@ -30,6 +30,7 @@ const UserCreation = () => {
         .then((response) => {
             if(response.status === 200){
                 alert("User successfully created");
+                dispatch(resetCreateUserForm());
                 history.push("/login");
             }
             if (response.status === 401){
