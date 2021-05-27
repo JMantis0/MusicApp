@@ -446,6 +446,7 @@ const DeezerSearchResultsViewer = () => {
         (playlist) => playlist.playlistName === musicAppState.playlist
       );
       const selectedPlaylistId = selectedPlaylistArr[0].playlistId;
+      const songsToAdd2:any = [];
       songsToAdd.forEach((song) => {
         // replace test param with the playlistId later.
         //get id of playlist to add song to by its name.
@@ -456,11 +457,13 @@ const DeezerSearchResultsViewer = () => {
           artist: song.artist,
           album: song.albumTitle,
         };
-        console.log("addSongsObject", addSongsObject);
+	songsToAdd2.push(addSongsObject);
+      });
+        //console.log("addSongsObject", addSongsObject);
         axios
           .put(
-            `http://localhost:8080/api/update/playlist/song?playlistId=${selectedPlaylistId}`,
-            addSongsObject
+            `http://localhost:8080/api/update/playlist/songs?playlistId=${selectedPlaylistId}`,
+            songsToAdd2
           )
           .then((response) => {
             console.log("response is: ", response);
@@ -472,7 +475,6 @@ const DeezerSearchResultsViewer = () => {
           .catch((error) => {
             console.log("There was an error: ", error);
           });
-      });
     }
   };
 
