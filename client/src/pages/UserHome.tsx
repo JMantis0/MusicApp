@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
 import axios from "axios";
-import SearchInput from "../components/SearchInput";
 import Grid from "@material-ui/core/Grid";
 import style from "../MusicApp.module.css";
 import LogoutButton from "../components/LogoutButton";
+import SearchInput from "../components/SearchInput";
 import SearchDeezerButton from "../components/SearchDeezerButton";
 import CreateNewPlaylistForm from "../components/CreateNewPlaylistForm";
 import PlaylistCard from "../components/PlaylistCard";
@@ -13,6 +13,7 @@ import UserProfile from "../components/UserProfile";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 //  import reducer and state selector
 import { selectMusicApp, setPlaylists, setUser } from "../redux/musicAppSlice";
+import { Typography } from "@material-ui/core";
 
 const UserHome = () => {
   // This is how to hook into the redux state.
@@ -40,20 +41,21 @@ const UserHome = () => {
         console.log("There was an error: ", error);
       });
   };
-  
+
   useMemo(() => {
     getPlaylists();
   }, []);
 
   return (
-    <div>
+    <div className={style.greyBackground}>
       <header>
         <Grid container>
-          <Grid className={style.center} xs={10} item>
-            <h1>User Home</h1>
+        <Grid className={style.center} xs={1} item></Grid>
+          <Grid xs={9} item>
+            <h1>Welcome {musicAppState.user.firstName}. </h1>
           </Grid>
           <Grid className={style.center} xs={2} item>
-            <UserProfile/>
+            <UserProfile />
           </Grid>
         </Grid>
       </header>
@@ -62,30 +64,35 @@ const UserHome = () => {
 
       <main>
         <Grid container>
-          <Grid item xs={6}>
-            <Grid container>
-              <Grid className={style.center} item xs={8}>
-                <SearchInput />
-                <SearchDeezerButton />
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid className={style.center} item xs={6}></Grid>
+          <Grid item xs={2}></Grid>
+
           <Grid className={style.center} item xs={8}>
+            <fieldset className={style.fieldSet}>
+              <legend className={style.legend}>
+                {musicAppState.user.firstName}'s Playlists
+              </legend>
+              <Grid container>
+                {musicAppState.playlists.map((playlist) => (
+                  <Grid item xs={2}>
+                    <PlaylistCard
+                      className={style.playlistCard}
+                      key={playlist.playlistId}
+                      playlist={playlist}
+                    />
+                  </Grid>
+                ))}
+              </Grid>
+            </fieldset>
+          </Grid>
+          <Grid item xs={2}></Grid>
+        </Grid>
+        <Grid container>
+          <Grid className={style.center} item xs={1}></Grid>
+
+          <Grid className={style.center} item xs={10}>
             <DeezerResultsViewer />
           </Grid>
-          <Grid className={style.center} item xs={2}></Grid>
-          <Grid>
-            <Grid className={style.center} item xs={12}>
-              <CreateNewPlaylistForm />
-            
-            </Grid>
-            {musicAppState.playlists.map((playlist) => (
-              <PlaylistCard key={playlist.playlistId} playlist={playlist} />
-            ))}
-          </Grid>
-          <Grid className={style.center} item xs={10}></Grid>
-          <Grid className="" item xs={10}></Grid>
+          <Grid className={style.center} item xs={1}></Grid>
         </Grid>
       </main>
     </div>

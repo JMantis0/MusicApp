@@ -12,7 +12,7 @@ const LogoutButton = () => {
     dispatch(logoutUser());
     history.push("/");
   };
-  return <Button variant="contained" onClick={logOut}>Log out</Button>;
+  return <Button color="secondary" variant="contained" onClick={logOut}>Log out</Button>;
 };
 
 export default LogoutButton;

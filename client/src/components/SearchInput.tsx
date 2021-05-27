@@ -15,9 +15,7 @@ const SearchInput = () => {
   return (
     <React.Fragment>
       <TextField
-        label="Search"
-        variant="outlined"
-        helperText="pre-backend"
+        label="Album/Song/Artist"
         name="searchInput"
         value={musicAppState.searchInput}
         onChange={inputChangeHandler}

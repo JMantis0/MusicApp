@@ -29,7 +29,11 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { selectMusicApp, setPlaylists } from "../redux/musicAppSlice";
 import PlaylistSelector from "../components/PlaylistSelector";
-
+import Grid from "@material-ui/core/Grid";
+import style from "../MusicApp.module.css";
+import CreateNewPlaylistForm from "../components/CreateNewPlaylistForm";
+import SearchInput from "../components/SearchInput";
+import SearchDeezerButton from "../components/SearchDeezerButton";
 interface DeezerData {
   songTitle: string;
   songId: string;
@@ -187,7 +191,7 @@ function DeezerTableHead(props: DeezerTableProps) {
 
   return (
     <TableHead>
-      <TableRow>
+      <TableRow className={style.lightGradient}>
         <TableCell padding="checkbox">
           <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
@@ -234,6 +238,7 @@ const DeezerTableToolbar = (props: DeezerTableToolbarProps) => {
     <Toolbar
       className={clsx(classes.root, {
         [classes.highlight]: numSelected > 0,
+        [style.lightGradient]: true,
       })}
     >
       {numSelected > 0 ? (
@@ -247,7 +252,7 @@ const DeezerTableToolbar = (props: DeezerTableToolbarProps) => {
         </Typography>
       ) : (
         <Typography
-          className={classes.title}
+          className={`${classes.title} ${style.center}`}
           variant="h6"
           id="tableTitle"
           component="div"
@@ -487,10 +492,29 @@ const DeezerSearchResultsViewer = () => {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
+        <Grid className={style.lightGradient} container>
+          <Grid className={style.center} item xs={4}><SearchInput />
+            <SearchDeezerButton /></Grid>
+          <Grid className={style.center} item xs={4}>
+            <PlaylistSelector />
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={saveSelectedSongsToPlaylist}
+            >
+              Save to Playlist
+            </Button>
+          </Grid>
+          <Grid className={style.center} item xs={4}>
+            {" "}
+            <CreateNewPlaylistForm />
+          </Grid>
+          {/* <Grid item xs={3}></Grid> */}
+        </Grid>
         <DeezerTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
-            className={classes.table}
+            className={`${classes.table} ${style.lightGradient}`}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
             aria-label="enhanced table"
@@ -519,6 +543,7 @@ const DeezerSearchResultsViewer = () => {
                       tabIndex={-1}
                       key={row.songId}
                       selected={isItemSelected}
+                      className={style.lightGradient}
                     >
                       <TableCell padding="checkbox">
                         <Checkbox
@@ -562,9 +587,11 @@ const DeezerSearchResultsViewer = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        <PlaylistSelector />
-        <Button onClick={saveSelectedSongsToPlaylist}>Save to Playlist</Button>
+
         <TablePagination
+          classes={{
+            root: style.lightGradient,
+          }}
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
           count={deezerRows.length}

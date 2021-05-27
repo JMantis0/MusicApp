@@ -67,7 +67,7 @@ const UserProfile = () => {
 
     return (
         <div>
-            <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+            <Button aria-controls="simple-menu" aria-haspopup="true" variant="contained" color="primary" onClick={handleClick}>
                 Menu
             </Button>
             <Menu
@@ -78,7 +78,7 @@ const UserProfile = () => {
                 onClose={handleClose}
             >
                 <MenuItem>
-                <Button variant="contained" onClick={showProfile}>
+                <Button variant="contained" color="secondary" onClick={showProfile}>
                     User Profile
                 </Button>                              
                 </MenuItem>

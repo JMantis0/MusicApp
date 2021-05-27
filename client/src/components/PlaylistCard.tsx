@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import style from "../MusicApp.module.css";
 
 //  import reducer and state selector
 import {
@@ -28,7 +29,7 @@ import TableCell from "@material-ui/core/TableCell";
 
 const PlaylistCard = ({ playlist }: any) => {
   const [songs, setSongs] = React.useState(playlist.songs);
-  
+
   const [open, setOpen] = React.useState(false);
   const musicAppState = useAppSelector(selectMusicApp);
 
@@ -85,6 +86,25 @@ const PlaylistCard = ({ playlist }: any) => {
           console.log(response.data);
           const songData = response.data.songs;
           setSongs(songData);
+          const queryString = `http://localhost:8080/api/read/playlist/user`;
+
+          const body = {
+            params: {
+              username: musicAppState.user.username,
+            },
+          };
+          axios
+            .get(queryString, body)
+            .then((response) => {
+              console.log("response", response);
+              const playlistData = response.data;
+              //  Dispatch the setPlaylistData reducer to save data to the state
+              dispatch(setPlaylists(playlistData));
+              //  Check your redux devtools to see the data
+            })
+            .catch((error) => {
+              console.log("There was an error: ", error);
+            });
         }
       })
       .catch((error) => {
@@ -93,26 +113,22 @@ const PlaylistCard = ({ playlist }: any) => {
   };
 
   return (
-    <Card>
-      <CardActionArea>
+    <Card className={style.lightGradient}>
+      <CardActionArea onClick={handleOpen} >
         <CardMedia />
         <CardContent>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            onClick={handleOpen}
-          >
-            {playlist.playlistName}
+          <Typography variant="body2" color="textPrimary">
+            {playlist.playlistName}  ({playlist.songs.length} songs)
           </Typography>
         </CardContent>
       </CardActionArea>
       <Dialog open={open} onClose={handleClose} maxWidth="lg">
-        <DialogTitle>{playlist.playlistName}</DialogTitle>
-        <DialogContent>
+        <DialogTitle className={style.lightGradient}>{playlist.playlistName} ({playlist.songs.length} songs)</DialogTitle>
+        <DialogContent className={style.greyBackground} >
           <TableContainer>
             <TableBody>
               {songs.map((song: any) => (
-                <TableRow>
+                <TableRow  className={style.lightGradient}>
                   <TableCell>{song.title}</TableCell>
                   <TableCell>
                     <img src={song.album.cover}></img>
