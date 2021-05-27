@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import axios from "axios";
 import SearchInput from "../components/SearchInput";
 import Grid from "@material-ui/core/Grid";
@@ -8,6 +8,7 @@ import SearchDeezerButton from "../components/SearchDeezerButton";
 import CreateNewPlaylistForm from "../components/CreateNewPlaylistForm";
 import PlaylistCard from "../components/PlaylistCard";
 import DeezerResultsViewer from "../components/DeezerResultsViewer";
+import UserProfile from "../components/UserProfile";
 //  import redux state hooks
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 //  import reducer and state selector
@@ -51,8 +52,11 @@ const UserHome = () => {
           <Grid className={style.center} xs={10} item>
             <h1>User Home</h1>
           </Grid>
-          <Grid className={style.center} xs={2} item>
+          {/* <Grid className={style.center} xs={2} item>
             <LogoutButton />
+          </Grid> */}
+          <Grid className={style.center} xs={2} item>
+            <UserProfile/>
           </Grid>
         </Grid>
       </header>
