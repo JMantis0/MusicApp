@@ -8,7 +8,7 @@ import {
   //  AppThunk
 } from "./store";
 export interface MusicAppState {
-album: { albumId: string; title: string; cover: string };
+  album: { albumId: string; title: string; cover: string };
   artist: { artistId: string; name: string; picture: string };
   playlists: Array<{
     playlistId: string;
@@ -22,7 +22,7 @@ album: { albumId: string; title: string; cover: string };
       album: { albumId: string; title: string; cover: string };
     }>;
   }>;
-  playlist: string,
+  playlist: string;
   song: {
     songId: string;
     title: string;
@@ -90,7 +90,7 @@ export const musicAppSlice = createSlice({
             title: string;
             preview: string;
             artist: { artistId: string; name: string; picture: string };
-            album:  { albumId: string; title: string; cover: string };
+            album: { albumId: string; title: string; cover: string };
           }>;
         }>;
       }
@@ -110,7 +110,7 @@ export const musicAppSlice = createSlice({
             title: string;
             preview: string;
             artist: { artistId: string; name: string; picture: string };
-            album:  { albumId: string; title: string; cover: string };
+            album: { albumId: string; title: string; cover: string };
           }>;
         };
       }
@@ -125,8 +125,8 @@ export const musicAppSlice = createSlice({
           songId: string;
           title: string;
           preview: string;
-          artist:{ artistId: string; name: string; picture: string };
-          album:  { albumId: string; title: string; cover: string };
+          artist: { artistId: string; name: string; picture: string };
+          album: { albumId: string; title: string; cover: string };
         };
       }
     ) => {
@@ -149,6 +149,18 @@ export const musicAppSlice = createSlice({
       state.user = action.payload;
     },
     logoutUser: (state) => {
+      console.log("Dispatching setUser reducer with no action");
+      state.album = { albumId: "", title: "", cover: "" };
+      state.artist = { artistId: "", name: "", picture: "" };
+      state.playlist = "";
+      state.playlists = [];
+      state.song = {
+        songId: "",
+        title: "",
+        preview: "",
+        artist: { artistId: "", name: "", picture: "" },
+        album: { albumId: "", title: "", cover: "" },
+      };
       state.user = {
         userId: "",
         firstName: "",
@@ -156,6 +168,15 @@ export const musicAppSlice = createSlice({
         username: "",
         password: "",
       };
+      state.searchInput = "";
+      state.loginForm = { username: "", password: "" };
+      state.userCreateForm = {
+        firstName: "",
+        lastName: "",
+        username: "",
+        password: "",
+      };
+      state.deezerData = [];
     },
     setLoginForm: (
       state,
