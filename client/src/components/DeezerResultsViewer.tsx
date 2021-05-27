@@ -434,7 +434,7 @@ const DeezerSearchResultsViewer = () => {
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, deezerRows.length - page * rowsPerPage);
 
-  const saveSelectedSongsToPlaylist = () => {
+  const saveSelectedSongsToPlaylistOLD = () => {
     if (selected.length !== 0) {
       const songsToAdd = deezerRows.filter((song) => {
         return selected.includes(song.songId);
@@ -459,7 +459,7 @@ const DeezerSearchResultsViewer = () => {
         console.log("addSongsObject", addSongsObject);
         axios
           .put(
-            `http://localhost:8080/api/update/playlist/song?playlistId=${selectedPlaylistId}`,
+            `http://localhost:8080/api/update/playlist/song?playlistId=${selectedPlaylistId}&username=${musicAppState.user.}`,
             addSongsObject
           )
           .then((response) => {
@@ -467,12 +467,66 @@ const DeezerSearchResultsViewer = () => {
             //Response.data contains the new playlist with the new song added.
             //Update the playlists.
             const updatedPlaylist = response.data;
-            dispatch(setPlaylists(updatedPlaylist));
+            // replace the musicAppState.playlists playlist with this new playlist.
+            // need the index of this placelist so we know which one to replace
+            const indexOfPlaylistToReplace: number =
+              musicAppState.playlists.indexOf(selectedPlaylist);
+            console.log("indexOfPlaylistToReplace", indexOfPlaylistToReplace);
+
+            let replacementPlaylistArray = musicAppState.playlists;
+            replacementPlaylistArray[indexOfPlaylistToReplace] =
+              updatedPlaylist;
+
+            console.log(replacementPlaylistArray);
+            // dispatch(setPlaylists(replacementPlaylistArray));
           })
           .catch((error) => {
             console.log("There was an error: ", error);
           });
       });
+    }
+  };
+
+  const saveSelectedSongsToPlaylist = () => {
+    if (selected.length !== 0) {
+      const songsToAdd = deezerRows.filter((song) => {
+        return selected.includes(song.songId);
+      });
+      const selectedPlaylistArr = musicAppState.playlists.filter(
+        (playlist) => playlist.playlistName === musicAppState.playlist
+      );
+      const selectedPlaylistId = selectedPlaylistArr[0].playlistId;
+      console.log("songsToAdd: ", songsToAdd);
+      const songsToAdd2: any = [];
+      songsToAdd.forEach((song) => {
+        const addSongsObject = {
+          songId: song.songId,
+          title: song.songTitle,
+          preview: song.preview,
+          artist: song.artist,
+          album: song.albumTitle,
+        };
+        songsToAdd2.push(addSongsObject);
+      });
+      console.log("songsToAdd2", songsToAdd2);
+      //console.log("testParam", testParam);
+      axios
+        .put(
+          `http://localhost:8080/api/update/playlist/song?playlistId=${selectedPlaylistId}`,
+          songsToAdd2
+        )
+        .then((response) => {
+          console.log("response is: ", response);
+          //Response.data contains the new playlist with the new song added.
+          //Update the playlists.
+          const updatedPlaylists = response.data;
+          dispatch(setPlaylists(updatedPlaylists));
+        })
+        .catch((error) => {
+          console.log("There was an error: ", error);
+        });
+    } else {
+      console.log("No songs selected.");
     }
   };
 
