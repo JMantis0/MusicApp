@@ -123,12 +123,12 @@ const PlaylistCard = ({ playlist }: any) => {
         </CardContent>
       </CardActionArea>
       <Dialog open={open} onClose={handleClose} maxWidth="lg">
-        <DialogTitle>{playlist.playlistName} ({playlist.songs.length} songs)</DialogTitle>
-        <DialogContent>
+        <DialogTitle className={style.lightGradient}>{playlist.playlistName} ({playlist.songs.length} songs)</DialogTitle>
+        <DialogContent className={style.greyBackground} >
           <TableContainer>
             <TableBody>
               {songs.map((song: any) => (
-                <TableRow>
+                <TableRow  className={style.lightGradient}>
                   <TableCell>{song.title}</TableCell>
                   <TableCell>
                     <img src={song.album.cover}></img>
