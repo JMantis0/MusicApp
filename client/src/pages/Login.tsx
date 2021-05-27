@@ -1,5 +1,5 @@
 import React from "react";
-import Link from '@material-ui/core/Link';
+import Link from "@material-ui/core/Link";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import Grid from "@material-ui/core/Grid";
@@ -46,7 +46,7 @@ const Login = () => {
 
   const goToCreateNewUser = () => {
     history.push("/user_create");
-  }
+  };
 
   return (
     <Grid
@@ -84,14 +84,15 @@ const Login = () => {
             Submit
           </Button>
         </FormControl>
-      </Paper>    
-      <Link
+        <Link
+          className={style.block}
           component="button"
           variant="body2"
           onClick={goToCreateNewUser}
-          >
+        >
           New? Create New User
-      </Link>
+        </Link>
+      </Paper>
     </Grid>
   );
 };
