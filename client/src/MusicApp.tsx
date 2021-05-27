@@ -13,9 +13,9 @@ function MusicApp() {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Landing />
+           <Login />
           </Route>
-          <Route exact path="/login">
+          <Route exact path={"/login"}>
             <Login />
           </Route>
           <Route exact path="/user_home">
