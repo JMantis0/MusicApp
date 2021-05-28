@@ -39,7 +39,7 @@ const Login = () => {
       })
       .catch((err) => {
         console.log("There was an error", err);
-        dispatch(resetLoginForm());
+        // dispatch(resetLoginForm());
         alert("Invalid Credentials");
       });
   };
