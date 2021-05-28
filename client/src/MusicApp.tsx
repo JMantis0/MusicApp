@@ -6,6 +6,7 @@ import Support from "./pages/Support";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import UserCreation from "./pages/UserCreation";
+import style from "./MusicApp.module.css";
 
 function MusicApp() {
   return (
@@ -13,7 +14,7 @@ function MusicApp() {
       <Router>
         <Switch>
           <Route exact path="/">
-           <Login />
+            <Login />
           </Route>
           <Route exact path={"/login"}>
             <Login />
@@ -29,6 +30,14 @@ function MusicApp() {
           </Route>
         </Switch>
       </Router>
+
+      <footer className={style.footer}>
+        <p className={style.bigger}>
+          Designed and developed by Stephen Barnard, Jeremy Cowelchuck, and
+          Jesse Mazur
+        </p>
+        <p className={style.smaller}>Copywrite 2021</p>
+      </footer>
     </div>
   );
 }

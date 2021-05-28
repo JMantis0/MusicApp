@@ -48,7 +48,7 @@ const UserHome = () => {
 
   return (
     <div className={style.greyBackground}>
-      <header>
+      <header className={style.header}>
         <Grid container>
         <Grid className={style.center} xs={1} item></Grid>
           <Grid xs={9} item>
