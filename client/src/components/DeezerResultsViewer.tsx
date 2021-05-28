@@ -454,12 +454,12 @@ const DeezerSearchResultsViewer = () => {
           artist: {
             artistId: song.artistId,
             name: song.artist,
-            picture: song.picture,
+            picture: song.picture_small,
           },
           album: {
             albumId: song.albumId,
             title: song.albumTitle,
-            cover: song.cover,
+            cover: song.cover_small,
           },
 
           //   song.artist,
@@ -569,7 +569,7 @@ const DeezerSearchResultsViewer = () => {
                       </TableCell>
                       <TableCell align="left">
                         <figure>
-                          <figcaption>Play {row.songTitle}</figcaption>
+                          {/* <figcaption>Play {row.songTitle}</figcaption> */}
                           <audio controls src={row.preview}>
                             Your browser does not support the
                             <code>audio</code> element.
